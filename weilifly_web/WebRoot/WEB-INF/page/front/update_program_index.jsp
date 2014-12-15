@@ -25,18 +25,20 @@
 			<div class="main-content" style="border: 0; width: 1000px;">
 				<div class="left-box left-box-1">
 					<div class="m-s-ban1">
-						升级程序
+						升级程序《精品课件》
 					</div>
-					<div class="n-s-nav n-s-nav-1">
-						<div class="s-block"></div>
-						<ul>
-							<s:iterator value="#request.categoryList" var="bean" status="st">
-								<li <s:if test="#request.categoryId==#bean.id">class="cur"</s:if> name="li" >
-									<a href="javascript:productTab(${bean.id});" class="pcp" >${bean.name}</a>
-								</li>
-							</s:iterator>
-						</ul>
-					</div>
+					<%--
+						<div class="n-s-nav n-s-nav-1">
+							<div class="s-block"></div>
+							<ul>
+								<s:iterator value="#request.categoryList" var="bean" status="st">
+									<li <s:if test="#request.categoryId==#bean.id">class="cur"</s:if> name="li" >
+										<a href="javascript:productTab(${bean.id});" class="pcp" >${bean.name}</a>
+									</li>
+								</s:iterator>
+							</ul>
+						</div>
+					--%>
 					<div class="Update-wrap">
 						<div class="Update-box">
 							<ul>

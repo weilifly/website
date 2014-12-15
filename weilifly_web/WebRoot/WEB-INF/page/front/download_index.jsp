@@ -45,9 +45,9 @@
 			<div class="main-content3 clearfix" style="border: 0; width: 1000px;">
 				<div class="left-box left-box-1">
 					
-					<!-- 资料下载《案例下载》开始 -->
+					<!-- 资料下载《精品视频》开始 -->
 					<div class="m-s-ban1">
-						资料下载《案例下载》
+						资料下载《精品视频》
 					</div>
 					
 					<%--	
@@ -83,7 +83,7 @@
 						</ul>
 						</div>
 					</div>
-					<!-- 资料下载《案例下载》结束 -->
+					<!-- 资料下载《精品视频》结束 -->
 					
 					<!-- 下载专区《行业报告》开始 -->
 					<div class="m-s-ban m-s-ban-1">
@@ -136,9 +136,9 @@
 							<a href="queryDownloadHelpInit.do?id=${bean.id}"><img src="${bean.image }" alt="${bean.title}" style="width:264px;height:73px;" /></a>
 						</div>
 					</s:iterator>--%>
-					<!-- 下载专区《精品视频》开始 -->
+					<!-- 下载专区《案例下载》开始 -->
 					<div class="m-s-ban m-s-ban-1">
-						<a href="advertiseIndex.do">more+</a>App专区《精品视频》
+						<a href="advertiseIndex.do">more+</a>App专区《案例下载》
 					</div>
 					<s:iterator value="#request.advertiseList" var="bean" status="st">
 						<div class="ad-video">
@@ -154,7 +154,7 @@
 							</em></span></div>
 							</div>
 					</s:iterator>
-					<!-- 下载专区《精品视频》结束 -->
+					<!-- 下载专区《案例下载》结束 -->
 					
 					
 					

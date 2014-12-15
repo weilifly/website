@@ -18,7 +18,7 @@
 		var thePlayer;
 		$(function(){
 			  videoInit("${paramMap.var}","${paramMap.image}");
-		      $('#slider').slider({
+		      $("#slider").slider({
 		         motion:{
 		            DB_1_1:{left:200,opacity:0,speed:700,delay:600},
 		            DB_1_2:{left:800,opacity:0,speed:1200,delay:500},
@@ -28,12 +28,12 @@
 		          }
 		    });
 		    
-		    $('.roll-arrows1').click(function(){
-				$('html,body').animate({scrollTop:500},800);
+		    $(".roll-arrows1").click(function(){
+				$("html,body").animate({scrollTop:500},800);
 			});
 			 
-			$('.roll-arrows').click(function(){
-			 	$('html,body').animate({scrollTop:1290},800);
+			$(".roll-arrows").click(function(){
+			 	$("html,body").animate({scrollTop:1290},800);
 			});	
 		});
 		
@@ -52,12 +52,12 @@
         }
 			
 		$(function(){ 
-				$('.sp-box span').click(function(){ 
-				$('.video-popup').show(); 
-				$('.video-popup').before("<div id='zz-bg'></div>"); 
+				$(".sp-box span").click(function(){ 
+				$(".video-popup").show(); 
+				$(".video-popup").before("<div id='zz-bg'></div>"); 
 			});	
 			
-			$('.video-popup .close a').click(function(){ 
+			$(".video-popup .close a").click(function(){ 
 				$(this).parents('.video-popup').hide(); 
 				$(this).parents('.video-popup').prev('div').remove(); 
 			}); 
@@ -87,16 +87,16 @@
 	});
 	
 	$(function(){
-	//过两秒显示 showImage(); 内容
-    setTimeout("showImage();",2000);
-    $("#close22").click(function(){
-		$("#adSmall").slideUp();
+		//过两秒显示 showImage(); 内容
+	    setTimeout("showImage();",2000);
+	    $("#close22").click(function(){
+			$("#adSmall").slideUp();
+		});
 	});
-});
 
-function showImage(){
-    $("#adBig").slideUp(1000,function(){$("#adSmall").slideDown(1000);});
-}
+	function showImage(){
+	    $("#adBig").slideUp(1000,function(){$("#adSmall").slideDown(1000);});
+	}
 
 </script>
 </head>

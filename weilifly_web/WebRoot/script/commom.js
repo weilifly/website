@@ -206,9 +206,9 @@ $('.right-raea .fodder-list .pic').each(function(){//素材图片弹出
 	//alert(newsrc)
 	$(this).click(function(){
 		$('.img-bg').show();
-		$('.img-bg').show()
+		$('.img-bg').show();
 		$('.img-bg').before("<div class='shade-bg'></div>");
-		$('.img-bg').find('img').attr('src',newsrc)
+		$('.img-bg').find('img').attr('src',newsrc);
 	
 		});
 	
@@ -263,7 +263,7 @@ var alicc=$('.nav-item .check');
 			 var s_w=$(this).find("a").outerWidth();
 			    sblock.css('width',s_w);
 				position=$(this).position().left;
-			    sblock.css({"width":s_w}).stop(true,false).animate({left:position},300)
+			    sblock.css({"width":s_w}).stop(true,false).animate({left:position},300);
 			    $(this).addClass('cur').siblings().removeClass();
 			});
 		}else{
@@ -276,7 +276,7 @@ var alicc=$('.nav-item .check');
 			    var s_w=$(this).find("a").outerWidth(),
 			       position=$(this).position().left;
 			      // sblock.css({left:position});
-				  sblock.css({"width":s_curW}).stop(true,false).animate({left:curLeft},300)
+				  sblock.css({"width":s_curW}).stop(true,false).animate({left:curLeft},300);
 			});
 		    slia.click(function(){
 			  $(this).addClass('cur').siblings().removeClass();

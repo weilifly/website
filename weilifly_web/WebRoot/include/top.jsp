@@ -69,13 +69,13 @@
 						</li>
 						<li>下载专区
 							<ul>
-								<li><a href="#">精品课件</a>
+								<li><a href="updateProgramIndex.do">精品课件</a>
 								</li>
-								<li><a href="#">精品视频</a>
+								<li><a href="advertiseIndex.do">精品视频</a>
 								</li>
-								<li><a href="#">行业报告</a>
+								<li><a href="updateProgramIndex.do">行业报告</a>
 								</li>
-								<li><a href="#">案例下载</a>
+								<li><a href="materialsIndex.do">案例下载</a>
 								</li>
 							</ul>
 						</li>
