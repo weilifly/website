@@ -2,14 +2,18 @@ package com.weili.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Map;
+
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.shove.Convert;
 import com.shove.base.BaseService;
 import com.shove.data.DataException;
+import com.shove.data.dao.MySQL;
 import com.shove.vo.PageBean;
 import com.weili.dao.ConsumerDao;
 
@@ -46,17 +50,17 @@ public class ConsumerService extends BaseService {
 	}
 	
 	/**
-	 * 根据条件分页查询管理员信息
+	 * 根据条件分页查询潜在用户
 	 * @param userName 用户名
 	 * @param enable 状态
 	 * @param pageBean
 	 * @throws SQLException 
 	 * @throws DataException
 	 */
-	public void queryConsumersPage(StringBuffer condition, PageBean<Map<String,Object>> pageBean) throws SQLException, DataException{
+	public void queryConsumersPage(PageBean<Map<String,Object>> pageBean,StringBuffer condition, String table, String order,String fieldList ) throws SQLException, DataException{
 		Connection conn = connectionManager.getConnection();
 		try {
-			dataPage(conn, pageBean, "v_t_consumers_needs", " * ", "", condition.toString());
+			dataPage(conn, pageBean, table, fieldList, order, condition.toString());
 		} catch (SQLException e) {
 			log.error(e);
 			e.printStackTrace();
@@ -68,5 +72,43 @@ public class ConsumerService extends BaseService {
 		}finally{
 			conn.close();
 		}
+	}
+	
+	
+	//待用1
+	public Map<String,Object> updateConsumer(long id,String title,String source,Long views,String image,String content,Integer status,Integer isRecommended,Integer isIndex,Integer sortIndex,String seoTitle,String seoKeywords,String seoDescription,String addTime) throws Exception{
+		Connection conn = null;
+		
+		long returnId = -1;
+		String error = "修改失败";
+		
+		Map<String,Object> map = new HashMap<String, Object>();
+		try{
+			conn = MySQL.getConnection();
+		//	returnId = consumerDao.update(conn, id, title, source, views, image,  content, status, isRecommended, isIndex, sortIndex, seoTitle, seoKeywords, seoDescription,addTime);
+			if(returnId <= 0){
+				conn.rollback();
+				return map;
+			}
+			
+			conn.commit();
+			error = "修改成功";
+		}catch (Exception e) {
+			if(conn != null){
+				conn.close();
+			}
+			log.error(e);
+			e.printStackTrace();
+			throw e;
+		}finally{
+			if(conn != null){
+				conn.close();
+			}
+			
+			map.put("returnId", returnId);
+			map.put("error", error);
+		}
+		
+		return map;
 	}
 }
