@@ -51,72 +51,72 @@ public class WeiliResearchesDao {
 	
 
 	public long updateWeiliResearch(Connection conn,long id,String title,String source,Long views,String image,String content,Integer status,Integer isRecommended,Integer isIndex,Integer sortIndex,String seoTitle,String seoKeywords,String seoDescription,String addTime) throws SQLException{
-		Dao.Tables.t_weili_research brandNews = new Dao().new Tables().new t_weili_research();
+		Dao.Tables.t_weili_research weiliResearch = new Dao().new Tables().new t_weili_research();
 		
 		if(StringUtils.isNotBlank(title)){
-			brandNews.title.setValue(title);
+			weiliResearch.title.setValue(title);
 		}
 		if(StringUtils.isNotBlank(source)){
-			brandNews.source.setValue(source);
+			weiliResearch.source.setValue(source);
 		}
 		if(StringUtils.isNotBlank(content)){
-			brandNews.content.setValue(content);
+			weiliResearch.content.setValue(content);
 		}
 		if(StringUtils.isNotBlank(image)){
-			brandNews.image.setValue(image);
+			weiliResearch.image.setValue(image);
 		}
 		if(views != null && views > 0){
-			brandNews.views.setValue(views);
+			weiliResearch.views.setValue(views);
 		}
 		if(isRecommended != null && isRecommended > 0){
-			brandNews.isRecommended.setValue(isRecommended);
+			weiliResearch.isRecommended.setValue(isRecommended);
 		}
 		if(isIndex != null && isIndex > 0){
-			brandNews.isIndex.setValue(isIndex);
+			weiliResearch.isIndex.setValue(isIndex);
 		}
 		if(status != null && status > 0){
-			brandNews.status.setValue(status);
+			weiliResearch.status.setValue(status);
 		}
 		if(sortIndex != null && sortIndex > 0){
-			brandNews.sortIndex.setValue(sortIndex);
+			weiliResearch.sortIndex.setValue(sortIndex);
 		}
 		if(StringUtils.isNotBlank(seoTitle)){
-			brandNews.seoTitle.setValue(seoTitle);
+			weiliResearch.seoTitle.setValue(seoTitle);
 		}
 		if(StringUtils.isNotBlank(seoKeywords)){
-			brandNews.seoKeywords.setValue(seoKeywords);
+			weiliResearch.seoKeywords.setValue(seoKeywords);
 		}
 		if(StringUtils.isNotBlank(seoDescription)){
-			brandNews.seoDescription.setValue(seoDescription);
+			weiliResearch.seoDescription.setValue(seoDescription);
 		}
 		if(StringUtils.isNotBlank(addTime)){
-			brandNews.addTime.setValue(addTime);
+			weiliResearch.addTime.setValue(addTime);
 		}
 		
-		return brandNews.update(conn, " id = "+id);
+		return weiliResearch.update(conn, " id = "+id);
 	}
 	
 	public long deleteWeiliResearch(Connection conn,String ids) throws SQLException{
-		Dao.Tables.t_weili_research brandNews = new Dao().new Tables().new t_weili_research();
+		Dao.Tables.t_weili_research weiliResearch = new Dao().new Tables().new t_weili_research();
 		
-		return brandNews.delete(conn, " id in("+ids+") ");
+		return weiliResearch.delete(conn, " id in("+ids+") ");
 	}
 	
-	public Map<String,String> queryBrandNewsById(Connection conn,long id) throws SQLException, DataException{
-		Dao.Tables.t_weili_research brandNews = new Dao().new Tables().new t_weili_research();
+	public Map<String,String> queryWeiliResearchById(Connection conn,long id) throws SQLException, DataException{
+		Dao.Tables.t_weili_research weiliResearch = new Dao().new Tables().new t_weili_research();
 		
-		DataSet ds = brandNews.open(conn, "  ", " id = "+id, "", -1, -1);
+		DataSet ds = weiliResearch.open(conn, "  ", " id = "+id, "", -1, -1);
 		return BeanMapUtils.dataSetToMap(ds);
 	}
 
 	public Map<String,String> queryBrandRecommendedNews(Connection conn,Integer isRecommended) throws SQLException, DataException{
-		Dao.Tables.t_weili_research brandNews = new Dao().new Tables().new t_weili_research();
+		Dao.Tables.t_weili_research weiliResearch = new Dao().new Tables().new t_weili_research();
 		
-		DataSet ds = brandNews.open(conn, "  ", " isRecommended = "+isRecommended, "", -1, -1);
+		DataSet ds = weiliResearch.open(conn, "  ", " isRecommended = "+isRecommended, "", -1, -1);
 		return BeanMapUtils.dataSetToMap(ds);
 	}
 	
-	public List<Map<String, Object>> queryBrandNewsAll(Connection conn,String fieldList,String condition,String order)throws SQLException, DataException {
+	public List<Map<String, Object>> queryWeiliResearchAll(Connection conn,String fieldList,String condition,String order)throws SQLException, DataException {
 		Dao.Tables.t_weili_research demo = new Dao().new Tables().new t_weili_research();
 		
 		DataSet ds = demo.open(conn, fieldList, condition,order, -1, -1);

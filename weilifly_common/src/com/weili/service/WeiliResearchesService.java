@@ -224,7 +224,7 @@ public class WeiliResearchesService extends BaseService {
 		
 		Map<String,String> map = new HashMap<String, String>();
 		try{
-			map = weiliResearchesDao.queryBrandNewsById(conn, id);
+			map = weiliResearchesDao.queryWeiliResearchById(conn, id);
 		}catch (Exception e) {
 			log.error(e);
 			e.printStackTrace();
@@ -315,12 +315,12 @@ public class WeiliResearchesService extends BaseService {
 		return map;
 	}
 	
-	public List<Map<String,Object>> queryBrandNewsAll(String fieldList,String condition,String order) throws Exception{
+	public List<Map<String,Object>> queryWeiliResearchAll(String fieldList,String condition,String order) throws Exception{
 		Connection conn = connectionManager.getConnection();
 		
 		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
 		try{
-			list = weiliResearchesDao.queryBrandNewsAll(conn, fieldList, condition, order);
+			list = weiliResearchesDao.queryWeiliResearchAll(conn, fieldList, condition, order);
 		}catch (Exception e) {
 			log.error(e);
 			e.printStackTrace();
@@ -333,7 +333,7 @@ public class WeiliResearchesService extends BaseService {
 	}
 
 	
-	public List<Map<String,Object>> queryBrandNewsList(String keywords) throws Exception{
+	public List<Map<String,Object>> queryWeiliResearchList(String keywords) throws Exception{
 		Connection conn = connectionManager.getConnection();
 		
 		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
@@ -347,7 +347,7 @@ public class WeiliResearchesService extends BaseService {
 		}
 		
 		try{
-			list = weiliResearchesDao.queryBrandNewsAll(conn, "*", condition.toString(), "addTime desc");
+			list = weiliResearchesDao.queryWeiliResearchAll(conn, "*", condition.toString(), "addTime desc");
 		}catch (Exception e) {
 			log.error(e);
 			e.printStackTrace();
@@ -362,7 +362,7 @@ public class WeiliResearchesService extends BaseService {
 	
 	
 	
-	public List<Map<String,Object>> queryBrandNewsIndex(Integer isIndex) throws Exception{
+	public List<Map<String,Object>> queryWeiliResearchIndex(Integer isIndex) throws Exception{
 		Connection conn = connectionManager.getConnection();
 		
 		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
@@ -392,7 +392,7 @@ public class WeiliResearchesService extends BaseService {
 		return list;
 	}
 	
-	public void queryBrandNewsPage(PageBean<Map<String,Object>> pageBean,String fieldList,StringBuffer condition,String order,String table) throws Exception{
+	public void queryWeiliResearchPage(PageBean<Map<String,Object>> pageBean,String fieldList,StringBuffer condition,String order,String table) throws Exception{
 		Connection conn = connectionManager.getConnection();
 		try{
 			dataPage(conn, pageBean, table, fieldList, order, condition.toString());
@@ -405,7 +405,7 @@ public class WeiliResearchesService extends BaseService {
 		}
 	}
 
-	public void queryBrandNewsPageFront(PageBean<Map<String,Object>> pageBean,Integer status) throws Exception{
+	public void queryWeiliResearchPageFront(PageBean<Map<String,Object>> pageBean,Integer status) throws Exception{
 		Connection conn = connectionManager.getConnection();
 		StringBuffer condition = new StringBuffer();
 		if(status != null&&status > 0){
