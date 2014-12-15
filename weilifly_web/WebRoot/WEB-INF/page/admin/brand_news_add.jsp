@@ -77,10 +77,10 @@
 					param["status"] = $("input[name=paramMap.status]:checked").val();
 					param["isRecommended"] = $("input[name=paramMap.isRecommended]:checked").val();
 					param["isIndex"] = $("input[name=paramMap.isIndex]:checked").val();
-					$.shovePost("addBrandNews.do",param,function(data){
+					$.shovePost("addWeiliResearch.do",param,function(data){
 						alert(data.error);
 						if(data.returnId>0){
-							window.location.href = "queryBrandNewsInit.do";
+							window.location.href = "queryWeiliResearchInit.do";
 							return;
 							
 						}
@@ -102,13 +102,13 @@
 							<tr>
 								<td width="100" height="28" align="center" bgcolor="#8594A9"
 									class="white12">
-									<a href="queryBrandNewsInit.do">品牌资讯列表</a>
+									<a href="queryWeiliResearchInit.do">品牌资讯列表</a>
 								</td>
 								<td width="2">
 									&nbsp;
 								</td>
 								<td width="100" align="center" bgcolor="#CC0000" class="white12">
-									<a href="addBrandNewsInit.do">添加品牌资讯</a>
+									<a href="addWeiliResearchInit.do">添加品牌资讯</a>
 								</td>
 								<td>
 									&nbsp;

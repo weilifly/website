@@ -68,7 +68,7 @@ public class FrontBrandAction extends BaseFrontAction {
 			pageBean.setPageSize(12);
 			int pageNum = Convert.strToInt(request("curPage"), 1);
 			pageBean.setPageNum(pageNum);
-			weiliResearchesService.queryBrandNewsPageFront(pageBean, IConstants.STATUS_ON);
+			weiliResearchesService.queryWeiliResearchPageFront(pageBean, IConstants.STATUS_ON);
 			Map<String,String> newMap = weiliResearchesService.queryBrandRecommendedNews(IConstants.RECOMMEND_ON);
 			String regEx_html = "<[^>]+>";
 			String content = newMap.get("content");
@@ -122,7 +122,7 @@ public class FrontBrandAction extends BaseFrontAction {
 		return "idea";
 	}
 	
-	public String brandNewsDetail() throws Exception{
+	public String weiliResearchDetail() throws Exception{
 		Long id = Convert.strToLong(request("id"), -1);
 		
 		weiliResearchesService.updateNewsViews(id);//增加浏览数
@@ -172,11 +172,11 @@ public class FrontBrandAction extends BaseFrontAction {
 	public String sendToUs() throws Exception{
 		JSONObject obj = new JSONObject();
 		
-		String cName = paramMap.get("cName");
-		String cTelephone = paramMap.get("cTelephone");
-		String address = paramMap.get("address");
-		String needContent = paramMap.get("needContent");
-		Integer needId = Convert.strToInt(paramMap.get("needId"), -1);
+		String cName = request("cName"); //paramMap.get
+		String cTelephone = request("cTelephone");
+		String address = request("address");
+		String needContent = request("needContent");
+		Integer needId = Convert.strToInt(request("needId"), -1);
 		
 		long returnId =-1;
 		returnId = consumerService.addConsumers(cName,cTelephone,address,needContent,needId);//增加潜在用户
@@ -186,7 +186,8 @@ public class FrontBrandAction extends BaseFrontAction {
 		obj.put("returnId", returnId);
 		JSONUtils.printObject(obj);
 		
-		return null;
+		//return null;
+		return SUCCESS;
 	}
 
 	public void setBrandService(BrandService brandService) {

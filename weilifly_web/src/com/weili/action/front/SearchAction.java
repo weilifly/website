@@ -46,7 +46,7 @@ public class SearchAction extends BaseFrontAction {
 			keyWords  = URLDecoder.decode(keyWords, "utf-8");
 			
 			List<Map<String, Object>> questionList=questionService.queryQuestionList(keyWords);//常见问题
-			List<Map<String, Object>> bnList=WeiliResearchesService.queryBrandNewsList(keyWords); //品牌资讯
+			List<Map<String, Object>> bnList=WeiliResearchesService.queryWeiliResearchList(keyWords); //品牌资讯
 			List<Map<String, Object>> brandList=brandService.queryBrandList(keyWords); //品牌
 			List<Map<String, Object>> productCategoryList=productCategoryService.queryProductCategoryList(keyWords);  //产品类型
 			List<Map<String, Object>> downHelpList=downloadHelpService.queryDownloadHelpList(keyWords);  //下载帮助
@@ -77,7 +77,7 @@ public class SearchAction extends BaseFrontAction {
 					totalNum ++ ;
 					Map<String,String> rMap = new HashMap<String, String>();
 					rMap.put("title", map.get("title")+"");
-					rMap.put("url", "brandNewsDetail.do?id="+map.get("id"));
+					rMap.put("url", "weiliResearchDetail.do?id="+map.get("id"));
 					allResultList.add(rMap);
 				}
 			}

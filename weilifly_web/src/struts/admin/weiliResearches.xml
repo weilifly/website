@@ -30,5 +30,14 @@
 		<action name="deleteWeiliResearch" class="weiliResearchAction" method="deleteWeiliResearch">
 		</action>
 		
+		<!-- 潜在用户信息展示 -->
+		<action name="queryConsumersInit" class="weiliResearchAction" method="queryConsumersInit">
+			<result name="success">/WEB-INF/page/admin/consumers/consumers_index.jsp</result>
+		</action>
+		
+		<action name="queryConsumersInfo" class="weiliResearchAction" method="queryConsumersInfo">
+			<result name="success">/WEB-INF/page/admin/consumers/consumers_index_info.jsp</result>
+		</action>
+		
 	</package>
 </struts>

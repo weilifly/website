@@ -31,7 +31,7 @@
 				praData["startDate"] = $("#startDate").val();
 				praData["endDate"] = $("#endDate").val();
 				
-		 		$.shovePost("queryBrandNewsInfo.do",praData,initCallBack);
+		 		$.shovePost("queryWeiliResearchInfo.do",praData,initCallBack);
 		 	}
 		 	
 		 	function initCallBack(data){
@@ -70,7 +70,7 @@
    			}
    			
    			function delObjs(ids){
-   				$.shovePost("deleteBrandNews.do",{id:ids},function(data){
+   				$.shovePost("deleteWeiliResearch.do",{id:ids},function(data){
    					if(data.msg==1){
    						alert("删除成功！");
    						window.location.href = window.location.href;
@@ -93,13 +93,13 @@
 						<tr>
 							<td width="100" height="28" align="center" bgcolor="#CC0000"
 								class="white12">
-								<a href="queryBrandNewsInit.do">品牌资讯列表</a>
+								<a href="queryWeiliResearchInit.do">品牌资讯列表</a>
 							</td>
 							<td width="2">
 								&nbsp;
 							</td>
 							<td width="100" align="center" bgcolor="#8594A9" class="white12">
-								<a href="addBrandNewsInit.do">添加品牌资讯</a>
+								<a href="addWeiliResearchInit.do">添加品牌资讯</a>
 							</td>
 							<td>
 								&nbsp;

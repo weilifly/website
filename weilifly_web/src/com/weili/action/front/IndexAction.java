@@ -18,7 +18,7 @@ public class IndexAction extends BaseFrontAction {
 
 	public String index() throws Exception {
 		
-		List<Map<String, Object>> newList = weiliResearchesService.queryBrandNewsIndex(IConstants.STATUS_ON);
+		List<Map<String, Object>> newList = weiliResearchesService.queryWeiliResearchIndex(IConstants.STATUS_ON);
 		
 		List<Map<String,Object>> productList = getConfigService().queryProductConfigByType(IConstants.CONFIG_TYPE_PRODUCT);
 		

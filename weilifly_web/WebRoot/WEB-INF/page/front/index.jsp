@@ -9,10 +9,11 @@
 		<meta name="description" content="${seoMap.seoDescription}" />
 		<link href="css/Common.css" type="text/css" rel="stylesheet" />
 		<script src="script/jquery.min.js"></script>
-		<script src="script/jquery.shove-1.0.js"></script>
 		<script src="script/slider.js"></script>
 		<script type="text/javascript"
 			src="kindeditor/plugins/jwplayer/jwplayer.js"></script>
+		<script src="script/easing.js"></script>
+		<script src="script/commom.js"></script>
 		<script type="text/javascript">
 		var thePlayer;
 		$(function(){
@@ -25,7 +26,7 @@
 		            DB_2_2:{left:800,opacity:0,speed:1200,delay:500},
 		            end:null
 		          }
-		    })
+		    });
 		    
 		    $('.roll-arrows1').click(function(){
 				$('html,body').animate({scrollTop:500},800);
@@ -280,7 +281,4 @@ function showImage(){
 		<jsp:include page="/include/footer.jsp"></jsp:include>
 		<!--底部结束-->
 	</body>
-
-	<script src="script/easing.js"></script>
-	<script src="script/commom.js"></script>
 </html>

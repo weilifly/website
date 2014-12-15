@@ -32,7 +32,7 @@
 				praData["startDate"] = $("#startDate").val();
 				praData["endDate"] = $("#endDate").val();
 				
-		 		$.shovePost("queryWeiliResearch.do",praData,initCallBack);
+		 		$.shovePost("queryWeiliResearchInfo.do",praData,initCallBack);
 		 	}
 		 	
 		 	function initCallBack(data){

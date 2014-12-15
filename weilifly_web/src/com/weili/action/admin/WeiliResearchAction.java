@@ -4,6 +4,7 @@ import com.shove.Convert;
 import com.shove.util.StringCommon;
 import com.shove.web.action.BasePageAction;
 import com.shove.web.util.JSONUtils;
+import com.weili.service.ConsumerService;
 import com.weili.service.WeiliResearchesService;
 
 import java.util.List;
@@ -17,13 +18,72 @@ public class WeiliResearchAction extends BasePageAction
 {
   public static Log log = LogFactory.getLog(WeiliResearchAction.class);
   private WeiliResearchesService weiliResearchesService;
+  private ConsumerService consumerService;
 
+  
+  /**
+   * 查询潜在用户初始化
+   * @author weili
+   * @return success
+   * 2014-12-15
+   * */
+  public String queryConsumersInit()
+  {
+    return SUCCESS;
+  }
+  /**
+   * 查询潜在用户
+   * @author weili
+   * @return success
+   * 2014-12-15
+   * */
+  public String queryConsumersInfo() throws Exception
+  {
+    String cName = request("cName");
+    String cTelephone = request("cTelephone");
+    String address = request("address");
+    Integer needStatus = Integer.valueOf(Convert.strToInt(request("needStatus"), -1));
+    String needContent = request("needContent");
+    String startDate = request("startDate");
+    String endDate = request("endDate");
+    
+    String fieldList = "*";
+    String order = "order by addTime desc";
+    String table = "v_t_consumers_needs";
+
+    StringBuffer condition = new StringBuffer();
+
+    if (StringUtils.isNotBlank(cName)) {
+      condition.append(" and `cName` LIKE CONCAT('%','" + cName.trim() + "','%')");
+    }
+    if (StringUtils.isNotBlank(cTelephone)) {
+        condition.append(" and `cTelephone` LIKE CONCAT('%','" + cTelephone.trim() + "','%')");
+      }
+    if (StringUtils.isNotBlank(address)) {
+        condition.append(" and `address` LIKE CONCAT('%','" + address.trim() + "','%')");
+      }
+    if (StringUtils.isNotBlank(needContent)) {
+        condition.append(" and `needContent` LIKE CONCAT('%','" + needContent.trim() + "','%')");
+      }
+    if ((needStatus != null) && (needStatus.intValue() > 0)) {
+      condition.append(" and `needStatus` = " + needStatus);
+    }
+    if (StringUtils.isNotBlank(startDate))
+      condition.append(" and date_format(addTime,'%Y-%m-%d') >= '" + startDate + "'");
+    if (StringUtils.isNotBlank(endDate)) {
+      condition.append(" and date_format(addTime,'%Y-%m-%d') <= '" + endDate + "'");
+    }
+
+    this.consumerService.queryConsumersPage(this.pageBean, condition, table,order, fieldList);
+    return SUCCESS;
+  }
+  
   public String queryWeiliResearchInit()
   {
     return "success";
   }
 
-  public String queryWeiliResearch() throws Exception
+  public String queryWeiliResearchInfo() throws Exception
   {
     String title = request("title");
     Integer status = Integer.valueOf(Convert.strToInt(request("status"), -1));
@@ -48,7 +108,7 @@ public class WeiliResearchAction extends BasePageAction
       condition.append(" and date_format(addTime,'%Y-%m-%d') <= '" + endDate + "'");
     }
 
-    this.weiliResearchesService.queryBrandNewsPage(this.pageBean, fieldList, condition, order, table);
+    this.weiliResearchesService.queryWeiliResearchPage(this.pageBean, fieldList, condition, order, table);
     return "success";
   }
 
@@ -156,4 +216,9 @@ public class WeiliResearchAction extends BasePageAction
   {
     this.weiliResearchesService = weiliResearchesService;
   }
+  public void setConsumerService(ConsumerService consumerService) {
+	this.consumerService = consumerService;
+  }
+  
+  
 }

@@ -139,8 +139,9 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 		<property name="brandAdvertiseService" ref="brandAdvertiseService" />
 	</bean>
 	
-	<bean id="brandNewsAction" class="com.weili.action.admin.BrandNewsAction" scope="prototype">
+	<bean id="weiliResearchAction" class="com.weili.action.admin.WeiliResearchAction" scope="prototype">
 		<property name="weiliResearchesService" ref="weiliResearchesService" />
+		<property name="consumerService" ref="consumerService" />
 	</bean>
 	
 	<bean id="developmentAction" class="com.weili.action.admin.DevelopmentAction" scope="prototype">

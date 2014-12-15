@@ -64,7 +64,7 @@
 								<s:date name="#bean.addTime" format="yyyy-MM-dd HH:mm:ss" />
 							</td>
 							<td>
-								<a href="updateBrandNewsInit.do?id=${bean.id }" target="main">
+								<a href="updateWeiliResearchInit.do?id=${bean.id }" target="main">
 								修改
 								</a>
 								&nbsp;&nbsp;
