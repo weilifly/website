@@ -34,7 +34,7 @@ public class ConsumerService extends BaseService {
 	 * @throws SQLException 
 	 * @throws DataException
 	 */
-	public Map addConsumers(String cName,String cTelephone,String address,String needContent,Integer needId) throws SQLException{
+	public long addConsumers(String cName,String cTelephone,String address,String needContent,Integer needId) throws SQLException{
 		Connection conn = connectionManager.getConnection();
 		long returnId = -1;
 		try {
