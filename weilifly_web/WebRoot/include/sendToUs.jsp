@@ -3,11 +3,9 @@
 <%@ include file="/include/taglib.jsp"%>
 <link rel="stylesheet" href="css/screen.css" media="screen" />
 	<script type="text/javascript" src="script/jquery.shove-1.0.js"></script>
-
-<%--<script type="text/javascript" src="../script/jquery.shove-1.0.js"></script>
-	<script type="text/javascript" src="/script/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="script/jquery-1.4.2.min.js"></script>
 	
---%>
+
 <div id="container">
 	<script type="text/javascript">
 		$(function(){$("#b_send").click(function(param) {

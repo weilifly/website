@@ -43,26 +43,15 @@
 			<result name="msg" >/WEB-INF/page/message.jsp</result>
 		</action>
 		
-		<!-- 精品课件下载courseware -->
-		<action name="materialsIndex" class="frontDownloadAction" method="materialsIndex">
-			<result name="success" >/WEB-INF/page/front/materials_index.jsp</result>
-		</action>
 		
-		<!-- 精品视频下载 -->
-		<action name="materialsList" class="frontDownloadAction" method="materialsList">
-			<result name="success" >/WEB-INF/page/front/materials_list.jsp</result>
-		</action>
-		<!-- 行业报告下载 -->
-		<action name="downloadMaterials" class="frontDownloadAction" method="downloadMaterials">
-			<result name="msg" >/WEB-INF/page/message.jsp</result>
-		</action>
-		<!-- 案例下载 -->
-		<action name="downloadIosMaterials" class="frontDownloadAction" method="downloadIosMaterials">
-			<result name="msg" >/WEB-INF/page/message.jsp</result>
-		</action>
-		<action name="downloadAndroidMaterials" class="frontDownloadAction" method="downloadAndroidMaterials">
-			<result name="msg" >/WEB-INF/page/message.jsp</result>
-		</action>
+		<!-- 精品课件下载courseware -->
+		
+		<!-- 精品视频下载 video-->
+		
+		<!-- 行业报告下载industryReport -->
+		
+		<!-- 案例下载 case-->
+		
 		
 		
 		
