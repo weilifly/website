@@ -177,9 +177,10 @@ public class FrontBrandAction extends BaseFrontAction {
 		String needContent = paramMap.get("needContent");
 		Integer needId = Convert.strToInt(paramMap.get("needId"), -1);
 		
+		long returnId =-1;
+		returnId = consumerService.addConsumers(cName,cTelephone,address,needContent,needId);//增加潜在用户
 		
-		
-		obj.putAll(consumerService.addConsumers(cName,cTelephone,address,needContent,needId));//增加潜在用户
+		//obj.putAll(consumerService.addConsumers(cName,cTelephone,address,needContent,needId));//增加潜在用户
 		
 		obj.put("returnId", returnId);
 		JSONUtils.printObject(obj);
