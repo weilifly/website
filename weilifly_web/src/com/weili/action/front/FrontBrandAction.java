@@ -171,6 +171,7 @@ public class FrontBrandAction extends BaseFrontAction {
 	 * */
 	public String sendToUs() throws Exception{
 		JSONObject obj = new JSONObject();
+		
 		String cName = paramMap.get("cName");
 		String cTelephone = paramMap.get("cTelephone");
 		String address = paramMap.get("address");

@@ -63,7 +63,7 @@
 			$(this).parents('.video-popup').prev('div').remove(); 
 			}); 
 			
-			}) 
+			}) ;
 		</script>
 		<script type="text/javascript">
 	function search_mybtn(){
