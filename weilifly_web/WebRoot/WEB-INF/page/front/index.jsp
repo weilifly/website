@@ -9,6 +9,7 @@
 		<meta name="description" content="${seoMap.seoDescription}" />
 		<link href="css/Common.css" type="text/css" rel="stylesheet" />
 		<script src="script/jquery.min.js"></script>
+		<script src="script/jquery.shove-1.0.js"></script>
 		<script src="script/slider.js"></script>
 		<script type="text/javascript"
 			src="kindeditor/plugins/jwplayer/jwplayer.js"></script>

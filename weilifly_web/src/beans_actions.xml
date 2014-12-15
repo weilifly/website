@@ -209,6 +209,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 	<!-- 品牌-->
 	<bean id="frontBrandAction" class="com.weili.action.front.FrontBrandAction" scope="prototype" parent="baseFrontAction">
 		<property name="brandService" ref="brandService" />
+		<property name="consumerService" ref="consumerService" />
 		<property name="newspaperService" ref="newspaperService" />
 		<property name="weiliResearchesService" ref="weiliResearchesService" />
 		<property name="kydReportService" ref="kydReportService" />

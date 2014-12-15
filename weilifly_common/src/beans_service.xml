@@ -204,7 +204,7 @@
    	</bean>
    	
    		<!-- 访问用户管理 -->
-   	<bean id="consumerSerivce" class="com.weili.service.ConsumerService" parent="baseService">
+   	<bean id="consumerService" class="com.weili.service.ConsumerService" parent="baseService">
    	   <property name="consumerDao" ref="consumerDao"/> 
    	</bean>
 </beans>

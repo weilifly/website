@@ -193,6 +193,7 @@ public class FrontBrandAction extends BaseFrontAction {
 	}
 
 	
+	
 	public void setConsumerService(ConsumerService consumerService) {
 		this.consumerService = consumerService;
 	}

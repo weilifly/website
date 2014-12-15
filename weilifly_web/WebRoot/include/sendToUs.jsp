@@ -3,10 +3,10 @@
 <%@ include file="/include/taglib.jsp"%>
 	<link rel="stylesheet" href="css/screen.css" media="screen" />
 	
-	<script type="text/javascript" src="../script/jquery.shove-1.0.js"></script>
-	<script type="text/javascript" src="../script/jquery-1.4.2.min.js"></script>
+	<%--<script type="text/javascript" src="../script/jquery.shove-1.0.js"></script>
+	<script type="text/javascript" src="/script/jquery-1.4.2.min.js"></script>
 	
-<div id="container">
+--%><div id="container">
 <script type="text/javascript">
 
 $(function(){
@@ -18,6 +18,8 @@ $(function(){
 		param["paramMap.address"] = $("#address").val();
 		param["paramMap.needId"] = $("#needId").val();
 		param["paramMap.needContent"] = $("#needContent").val();
+		alert("jjjjjjjjjjjjjjjjjjjj");
+		
 		$.shovePost("sendToUs.do",param,function(data){
 			alert("jjjjjjjjjjjjjjjjjjjj");
 			if(data.returnId>0){
