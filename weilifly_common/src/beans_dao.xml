@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+    
+   <bean id="adminDao" class="com.weili.dao.AdminDao" />
+   <bean id="regionDao" class="com.weili.dao.RegionDao" />
+   <bean id="rightsDao" class="com.weili.dao.RightsDao" />
+   <bean id="roleDao" class="com.weili.dao.RoleDao" />
+   <bean id="roleRightsDao" class="com.weili.dao.RoleRightsDao" />
+   <bean id="productCategoryDao" class="com.weili.dao.ProductCategoryDao" />
+   <bean id="parameterDao" class="com.weili.dao.ParameterDao" />
+   <bean id="questionDao" class="com.weili.dao.QuestionDao" />  
+   <bean id="configDao" class="com.weili.dao.ConfigDao" /> 
+   <bean id="productDao" class="com.weili.dao.ProductDao" />
+   <bean id="productParameterDao" class="com.weili.dao.ProductParameterDao" />
+   <bean id="attributeDao" class="com.weili.dao.AttributeDao" />
+   <bean id="materialsDao" class="com.weili.dao.MaterialsDao" />
+   <bean id="materialsAttributeDao" class="com.weili.dao.MaterialsAttributeDao" />
+   <bean id="updateProgramDao" class="com.weili.dao.UpdateProgramDao" />
+   <bean id="downloadHelpDao" class="com.weili.dao.DownloadHelpDao" />
+   <bean id="webDistributeDao" class="com.weili.dao.WebDistributeDao" />
+   <bean id="advertisementerDao" class="com.weili.dao.AdvertisementerDao" />
+   <bean id="userDao" class="com.weili.dao.UserDao" /> 
+   <bean id="brandDao" class="com.weili.dao.BrandDao" /> 
+   <bean id="newspaperDao" class="com.weili.dao.NewspaperDao" /> 
+  <bean id="designCategoryDao" class="com.weili.dao.DesignCategoryDao" /> 
+  <bean id="designDao" class="com.weili.dao.DesignDao" />
+  <bean id="kydReportDao" class="com.weili.dao.KydReportDao" /> 
+  <bean id="brandAdvertiseDao" class="com.weili.dao.BrandAdvertiseDao" /> 
+  <bean id="weiliResearchesDao" class="com.weili.dao.WeiliResearchesDao" /> 
+  <bean id="developmentDao" class="com.weili.dao.DevelopmentDao" /> 
+  <bean id="recruitDao" class="com.weili.dao.RecruitDao" />
+  <bean id="infoDao" class="com.weili.dao.InfoDao" />
+  <bean id="reportDao" class="com.weili.dao.ReportDao" /> 
+  <bean id="infoContentDao" class="com.weili.dao.InfoContentDao" />
+  <bean id="bannerDao" class="com.weili.dao.BannerDao" /> 
+  <bean id="seoPageDao" class="com.weili.dao.SeoPageDao" /> 
+  <bean id="productDetailDao" class="com.weili.dao.ProductDetailDao" /> 
+  <bean id="serviceTypeDao" class="com.weili.dao.ServiceTypeDao" /> 
+  <bean id="imgListDao" class="com.weili.dao.ImgListDao" /> 
+  <bean id="webDistributeTypeDao" class="com.weili.dao.WebDistributeTypeDao" />
+  <bean id="recruitTypeDao" class="com.weili.dao.RecruitTypeDao" /> 
+  <bean id="consumerDao" class="com.weili.dao.ConsumerDao" /> 
+</beans>

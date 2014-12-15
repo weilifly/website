@@ -1,0 +1,33 @@
+R=0 height=24 width=24 align=TOP></a><a href="jsp2/jspattribute/jspattribute.html">Source</a></td>
+</tr>
+
+<tr valign=TOP>
+<td>Shuffle Example</td>
+<td valign=TOP width="30%"><a href="jsp2/jspattribute/shuffle.jsp"><img src="images/execute.gif" hspace=4 border=0  align=top></a><a href="jsp2/jspattribute/shuffle.jsp">Execute</a></td>
+
+<td width="30%"><a href="jsp2/jspattribute/shuffle.html"><img SRC="images/code.gif" HSPACE=4 BORDER=0 height=24 width=24 align=TOP></a><a href="jsp2/jspattribute/shuffle.html">Source</a></td>
+</tr>
+
+<tr valign=TOP>
+<td>Attributes With Dynamic Names</td>
+<td valign=TOP width="30%"><a href="jsp2/misc/dynamicattrs.jsp"><img src="images/execute.gif" hspace=4 border=0  align=top></a><a href="jsp2/misc/dynamicattrs.jsp">Execute</a></td>
+
+<td width="30%"><a href="jsp2/misc/dynamicattrs.html"><img SRC="images/code.gif" HSPACE=4 BORDER=0 height=24 width=24 align=TOP></a><a href="jsp2/misc/dynamicattrs.html">Source</a></td>
+</tr>
+
+<tr valign=TOP>
+<td>JSP Configuration</td>
+<td valign=TOP width="30%"><a href="jsp2/misc/config.jsp"><img src="images/execute.gif" hspace=4 border=0  align=top></a><a href="jsp2/misc/config.jsp">Execute</a></td>
+
+<td width="30%"><a href="jsp2/misc/config.html"><img SRC="images/code.gif" HSPACE=4 BORDER=0 height=24 width=24 align=TOP></a><a href="jsp2/misc/config.html">Source</a></td>
+</tr>
+
+</table>
+
+<br>
+<b><u><font size="+1">JSP 1.2 Examples</font></u></b><br>
+<table BORDER=0 CELLSPACING=5 WIDTH="85%" >
+<tr VALIGN=TOP>
+<td>Numberguess&nbsp;</td>
+
+<td VAL

@@ -1,0 +1,59 @@
+ight     	60
+			    y_coord    	0
+			    Nested     	FALSE)
+			Focus_Of_Control 	(object Focus_Of_Control "" @566
+			    location   	(2064, 1808)
+			    line_color 	3342489
+			    InterObjView 	@564
+			    height     	312
+			    y_coord    	252
+			    Nested     	FALSE)
+			Focus_Of_Control 	(object Focus_Of_Control "" @567
+			    location   	(2064, 1872)
+			    line_color 	3342489
+			    InterObjView 	@564
+			    height     	60
+			    y_coord    	0
+			    Nested     	TRUE))
+		    (object InterMessView "" @568
+			location   	(336, 400)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object SegLabel @569
+			    Parent_View 	@568
+			    location   	(319, 356)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    quidu      	"3DFE48BE0268"
+			    anchor_loc 	1
+			    nlines     	1
+			    max_width  	147
+			    justify    	0
+			    label      	"invoke()"
+			    pctDist    	0.500000
+			    height     	45
+			    orientation 	0)
+			line_color 	3342489
+			client     	@546
+			supplier   	@548
+			Focus_Src  	@547
+			Focus_Entry 	@549
+			origin     	(175, 400)
+			terminus   	(464, 400)
+			ordinal    	0)
+		    (object InterMessView "" @570
+			location   	(16,

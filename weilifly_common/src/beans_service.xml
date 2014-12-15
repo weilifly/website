@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+    
+	<aop:config>  
+        <aop:aspect id="sqlAspect" ref="projectAspect">  
+            <aop:pointcut id="businessService"  
+                expression="execution(* com.*.service.*.*(..))" />  
+            <aop:around  pointcut-ref="businessService" method="doFilteSqlInfusionAround"/>  
+        </aop:aspect>  
+    </aop:config>
+    <bean id="projectAspect" class="com.shove.util.ProjectAspect" />
+    <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<property name="corePoolSize" value="10"/>
+		<property name="maxPoolSize" value="30"/>
+	</bean>
+	
+    <bean id="sendMailService" class="com.weili.service.SendMailService">
+		<property name="taskExecutor" ref="taskExecutor" />
+	</bean>
+	
+	<bean id="sendPhoneService" class="com.weili.service.SendPhoneService">
+		<property name="taskExecutor" ref="taskExecutor" />
+	</bean>
+   
+    <!-- 管理员管理 -->
+    <bean id="adminService" class="com.weili.service.AdminService" parent="baseService">
+    	<property name="adminDao" ref="adminDao" />
+   	</bean>
+   	
+    <bean id="regionService" class="com.weili.service.RegionService" parent="baseService">
+    	<property name="regionDao" ref="regionDao" />
+   	</bean>
+   	
+   	<!-- 角色管理 -->
+   	<bean id="roleService" class="com.weili.service.RoleService" parent="baseService">
+   	   <property name="roleDao" ref="roleDao"/>
+   	   <property name="roleRightsDao" ref="roleRightsDao"/>
+   	</bean>
+   	
+   	<!-- 角色管理 -->
+   	<bean id="roleRightsService" class="com.weili.service.RoleRightsService" parent="baseService">
+   	   <property name="roleRightsDao" ref="roleRightsDao"/>
+   	</bean>
+   	
+   	<!-- 角色管理 -->
+   	<bean id="rightsService" class="com.weili.service.RightsService" parent="baseService">
+   	   <property name="rightsDao" ref="rightsDao"/>
+   	</bean>
+   	<!-- 产品系列 -->
+   	<bean id="productCategoryService" class="com.weili.service.ProductCategoryService" parent="baseService">
+   	   <property name="productCategoryDao" ref="productCategoryDao"/>
+   	</bean>
+   	
+   	<!-- 常见问题管理 -->
+   	<bean id="questionService" class="com.weili.service.QuestionService" parent="baseService">
+   	   <property name="questionDao" ref="questionDao"/>
+   	</bean>
+   	
+   		<!-- 网点分布管理 -->
+	<bean id="webDistributeService"
+		class="com.weili.service.WebDistributeService"
+		parent="baseService">
+		<property name="webDistributeDao" ref="webDistributeDao" />
+	</bean>
+   	
+   		<!-- 配置管理 -->
+   	<bean id="configService" class="com.weili.service.ConfigService" parent="baseService">
+   	   <property name="configDao" ref="configDao"/>
+   	</bean>
+   	
+   	<!-- 参数 -->
+   	<bean id="parameterService" class="com.weili.service.ParameterService" parent="baseService">
+   	   <property name="parameterDao" ref="parameterDao"/>
+   	</bean>
+   	
+   	<!-- 产品详情 -->
+   	<bean id="productDetailService" class="com.weili.service.ProductDetailService" parent="baseService">
+   	   <property name="productDetailDao" ref="productDetailDao"/>
+   	</bean>
+		
+   	<!-- 产品 -->
+   	<bean id="productService" class="com.weili.service.ProductService" parent="baseService">
+   	   <property name="productDao" ref="productDao"/>
+   	   <property name="productParameterDao" ref="productParameterDao"/>
+   	   <property name="productDetailDao" ref="productDetailDao"/>
+   	</bean>
+   	
+   	<!-- 参数 -->
+   	<bean id="productParameterService" class="com.weili.service.ProductParameterService" parent="baseService">
+   	   <property name="productParameterDao" ref="productParameterDao"/>
+   	   <property name="parameterDao" ref="parameterDao"/>
+   	</bean>
+   	<!-- 属性管理 -->
+   	<bean id="attributeService" class="com.weili.service.AttributeService" parent="baseService">
+   	   <property name="attributeDao" ref="attributeDao"/>
+   	</bean>
+   	<!-- 资料管理 -->
+   	<bean id="materialsService" class="com.weili.service.MaterialsService" parent="baseService">
+   	   <property name="materialsDao" ref="materialsDao"/>
+   	   <property name="materialsAttributeDao" ref="materialsAttributeDao"/>
+   	   <property name="attributeDao" ref="attributeDao"/>
+   	</bean>
+   	<!-- 资料属性管理 -->
+   	<bean id="materialsAttributeService" class="com.weili.service.MaterialsAttributeService" parent="baseService">
+   	   <property name="materialsAttributeDao" ref="materialsAttributeDao"/>
+   	   <property name="attributeDao" ref="attributeDao"/>
+   	</bean>
+   	<!-- 升级程序管理 -->
+   	<bean id="updateProgramService" class="com.weili.service.UpdateProgramService" parent="baseService">
+   	   <property name="updateProgramDao" ref="updateProgramDao"/>
+   	</bean>
+   	<!-- 下载帮助管理 -->
+   	<bean id="downloadHelpService" class="com.weili.service.DownloadHelpService" parent="baseService">
+   	   <property name="downloadHelpDao" ref="downloadHelpDao"/>
+   	</bean>
+   	<!-- 广告片管理 -->
+   	<bean id="advertisementService" class="com.weili.service.AdvertisementService" parent="baseService">
+   	   <property name="advertisementerDao" ref="advertisementerDao"/>
+   	</bean>
+    <!-- 代理商管理 -->
+   	<bean id="userService" class="com.weili.service.UserService" parent="baseService">
+   	   <property name="userDao" ref="userDao"/>
+   	</bean>
+   	<!-- 设计素材分类管理 -->
+   	<bean id="designCategoryService" class="com.weili.service.DesignCategoryService" parent="baseService">
+   	   <property name="designCategoryDao" ref="designCategoryDao"/>
+   	</bean>
+   	<!-- 设计素材管理 -->
+   	<bean id="designService" class="com.weili.service.DesignService" parent="baseService">
+   	   <property name="designDao" ref="designDao"/>
+   	</bean>
+   	<!-- 质检报告管理 -->
+   	<bean id="reportService" class="com.weili.service.ReportService" parent="baseService">
+   	   <property name="reportDao" ref="reportDao"/>
+   	</bean>
+   	<!-- 人才招聘管理 -->
+   	<bean id="recruitService" class="com.weili.service.RecruitService" parent="baseService">
+   	   <property name="recruitDao" ref="recruitDao"/>
+   	</bean>
+   	<!-- 底部信息类型管理 -->
+   	<bean id="infoService" class="com.weili.service.InfoService" parent="baseService">
+   	   <property name="infoDao" ref="infoDao"/>
+   	</bean>
+   	<!-- 底部信息管理 -->
+   	<bean id="infoContentService" class="com.weili.service.InfoContentService" parent="baseService">
+   	   <property name="infoContentDao" ref="infoContentDao"/>
+   	</bean>
+   	<!-- 品牌管理 -->
+   	<bean id="brandService" class="com.weili.service.BrandService" parent="baseService">
+   	   <property name="brandDao" ref="brandDao"/>
+   	</bean>
+   	<!-- 华普报管理 -->
+   	<bean id="newspaperService" class="com.weili.service.NewspaperService" parent="baseService">
+   	   <property name="newspaperDao" ref="newspaperDao"/>
+   	</bean>
+   	<!-- 微力科技报道管理 -->
+   	<bean id="kydReportService" class="com.weili.service.KydReportService" parent="baseService">
+   	   <property name="kydReportDao" ref="kydReportDao"/>
+   	</bean>  
+   	<!-- 品牌广告管理 -->
+   	<bean id="brandAdvertiseService" class="com.weili.service.BrandAdvertiseService" parent="baseService">
+   	   <property name="brandAdvertiseDao" ref="brandAdvertiseDao"/>
+   	</bean>  
+   	<!-- 发展历程管理 -->
+   	<bean id="developmentService" class="com.weili.service.DevelopmentService" parent="baseService">
+   	   <property name="developmentDao" ref="developmentDao"/>
+   	</bean>  
+   	<!-- 微力研究学院管理 -->
+   	<bean id="weiliResearchesService" class="com.weili.service.WeiliResearchesService" parent="baseService">
+   	   <property name="weiliResearchesDao" ref="weiliResearchesDao"/>
+   	</bean> 
+   		<!--Banner管理 -->
+   	<bean id="bannerService" class="com.weili.service.BannerService" parent="baseService">
+   	   <property name="bannerDao" ref="bannerDao"/>
+   	</bean>
+   	<!--SEO管理 -->
+   	<bean id="seoPageService" class="com.weili.service.SeoPageService" parent="baseService">
+   	   <property name="seoPageDao" ref="seoPageDao"/>
+   	</bean>
+   		<!--服务类型管理 -->
+   	<bean id="serviceTypeService" class="com.weili.service.ServiceTypeService" parent="baseService">
+   	   <property name="serviceTypeDao" ref="serviceTypeDao"/>
+   	</bean>
+   	<!-- 图片列表 -->
+   	<bean id="imgListService" class="com.weili.service.ImgListService" parent="baseService">
+   	   <property name="imgListDao" ref="imgListDao"/>
+   	</bean>
+   	 	<!-- 网点分布类型 -->
+   	<bean id="webDistributeTypeService" class="com.weili.service.WebDistributeTypeService" parent="baseService">
+   	   <property name="webDistributeTypeDao" ref="webDistributeTypeDao"/>
+   	</bean>
+   	   	 	<!-- 人才招聘类型 -->
+   	<bean id="recruitTypeService" class="com.weili.service.RecruitTypeService" parent="baseService">
+   	   <property name="recruitTypeDao" ref="recruitTypeDao"/>
+   	</bean>
+   	
+   		<!-- 访问用户管理 -->
+   	<bean id="consumerSerivce" class="com.weili.service.ConsumerService" parent="baseService">
+   	   <property name="consumerDao" ref="consumerDao"/> 
+   	</bean>
+</beans>
