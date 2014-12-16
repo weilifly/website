@@ -149,7 +149,7 @@ public String queryDownloadHelpInit() throws Exception{
 public String  downloadFile() throws Exception{
 	Long id = Convert.strToLong(request("id"), -1L);
 	Map<String,String> map = new HashMap<String, String>();
-	map = downloadHelpService.queryUpdateProgramById(id);
+	map = downloadHelpService.queryCoursewareById(id);
 	String path  = FindWebPath.getWebRootPath();
 	if(map!=null){
 		String file_path = map.get("path") ;

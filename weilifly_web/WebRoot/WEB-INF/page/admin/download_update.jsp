@@ -75,6 +75,7 @@
 				$("#btn_save").click(function(){
 					var even = $(this);
 					even.hide();
+					param["id"] = "${paramMap.id}";
 					param["name"] = $("#name").val();
 					param["categoryId"] = $("#categoryId").val();
 					/*param["seoTitle"] = $("#seoTitle").val();
@@ -83,10 +84,10 @@
 					param["path"] = $("#path").val();
 					param["image"] = $("#image").val();
 					param["status"] = $("input[name=paramMap.status]:checked").val();
-					$.shovePost("addUpdateProgram.do",param,function(data){
+					$.shovePost("updateCourseware.do",param,function(data){
 						alert(data.error);
 						if(data.returnId>0){
-							window.location.href = "queryUpdateProgramInit.do";
+							window.location.href = "queryDownloadInit.do";
 							return;
 							
 						}
@@ -108,13 +109,13 @@
 							<tr>
 								<td width="100" height="28" align="center" bgcolor="#8594A9"
 									class="white12">
-									<a href="queryUpdateProgramInit.do">升级程序列表</a>
+									<a href="queryDownloadInit.do">下载资料序列表</a>
 								</td>
 								<td width="2">
 									&nbsp;
 								</td>
 								<td width="100" align="center" bgcolor="#CC0000" class="white12">
-									<a href="addUpdateProgramInit.do">添加升级程序</a>
+									修改下载资料
 								</td>
 								<td>
 									&nbsp;
@@ -129,7 +130,7 @@
 							<tr>
 								<td style="width: 100px; height: 25px;" align="right"
 									class="blue12">
-									名称：
+									资料名称：
 								</td>
 								<td align="left" class="f66">
 									<s:textfield id="name" name="paramMap.name"
@@ -140,11 +141,11 @@
 							<tr>
 								<td style="width: 100px; height: 25px;" align="right"
 									class="blue12">
-									系列：
+									资料类型：
 								</td>
 								<td align="left" class="f66">
 									<s:select id="categoryId" theme="simple" name="paramMap.categoryId"
-											list="categoryList" listKey="id" listValue="name" headerKey="-1" headerValue="-请选择-">
+											list="categoryList" listKey="id" listValue="category_name" headerKey="-1" headerValue="-请选择-">
 									</s:select>
 									<span class="require-field">*<s:fielderror fieldName="paramMap.categoryId"></s:fielderror></span>
 								</td>
@@ -155,7 +156,7 @@
 									是否显示：
 								</td>
 								<td align="left" class="f66">
-									<s:radio name="paramMap.status" id="status" theme="simple" value="1"
+									<s:radio name="paramMap.status" id="status" theme="simple"
 										list="#{1:'是',2:'否'}"/>
 									<span class="require-field">*<s:fielderror fieldName="paramMap.status"></s:fielderror></span>
 								</td>
@@ -167,7 +168,7 @@
 									上传资料：
 								</td>
 								<td align="left" class="f66">
-									<input class="in_text_2" id="path" name="paramMap.path"
+									<input class="in_text_2" id="path" name="paramMap.path" value="${paramMap.path}"
 										type="text" style="width: 350px; height: 20px;" />
 									<input style="display: none;" id="uploadButton" value="浏览"
 										type="button" />

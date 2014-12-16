@@ -3,7 +3,7 @@
 
 $(function(){
 	$(window).scroll(function() {
-		if($(window).scrollTop()>=200){
+		if($(window).scrollTop()>=30){
 			$('.back-top').show();
 			 $('.suspend-box').show();
 		}else{

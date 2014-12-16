@@ -79,9 +79,9 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 		<property name="materialsService" ref="materialsService" />
 	</bean>
 	
-	<bean id="updateProgramAction" class="com.weili.action.admin.UpdateProgramAction" scope="prototype">
-		<property name="updateProgramService" ref="updateProgramService" />
-		<property name="productCategoryService" ref="productCategoryService" />
+	<!-- 下载资料管理  -->
+	<bean id="downloadAction" class="com.weili.action.admin.DownloadAction" scope="prototype">
+		<property name="downloadService" ref="downloadService" />
 	</bean>
 	
 	<bean id="downloadHelpAction" class="com.weili.action.admin.DownloadHelpAction" scope="prototype">
@@ -258,7 +258,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 	<bean id="frontDownloadAction" class="com.weili.action.front.FrontDownloadAction" scope="prototype" parent="baseFrontAction">
 		<property name="productService" ref="productService" />
 		<property name="productCategoryService" ref="productCategoryService" />
-		<property name="updateProgramService" ref="updateProgramService" />
+		<property name="downloadService" ref="downloadService" />
 		<property name="downloadHelpService" ref="downloadHelpService" />
 		<property name="advertisementService" ref="advertisementService" />
 		<property name="attributeService" ref="attributeService" />
@@ -279,7 +279,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 		<property name="brandService" ref="brandService"></property>
 		<property name="productCategoryService" ref="productCategoryService"></property>
 		<property name="downloadHelpService" ref="downloadHelpService"></property>
-	  	<property name="updateProgramService" ref="updateProgramService"></property>
+	  	<property name="downloadService" ref="downloadService"></property>
 		<property name="advertisementService" ref="advertisementService"></property>
 		<property name="webDistributeService" ref="webDistributeService"></property>
 		<property name="newspaperService" ref="newspaperService"></property>

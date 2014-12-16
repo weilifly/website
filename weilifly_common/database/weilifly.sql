@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50520
 File Encoding         : 65001
 
-Date: 2014-12-15 12:07:18
+Date: 2014-12-16 21:27:55
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -141,10 +141,10 @@ INSERT INTO `bt_rights` VALUES ('62', '资料管理', 'queryMaterialsInit.do', '
 INSERT INTO `bt_rights` VALUES ('63', '添加资料', 'addMaterialsInit.do', '添加资料', '1', '1', null, null, null);
 INSERT INTO `bt_rights` VALUES ('64', '修改资料', 'updateMaterialsInit.do', '修改资料', '1', '1', null, null, null);
 INSERT INTO `bt_rights` VALUES ('65', '删除资料', 'deleteMaterialsInit.do', '删除资料', '1', '1', null, null, null);
-INSERT INTO `bt_rights` VALUES ('66', '升级程序管理', 'queryCoursewareInit.do', '升级程序管理', '1', '1', '-5', '1', '33');
-INSERT INTO `bt_rights` VALUES ('67', '添加升级程序', 'addCoursewareInit.do', '添加升级程序', '1', '1', null, null, null);
-INSERT INTO `bt_rights` VALUES ('68', '修改审计程序', 'updateCoursewareInit.do', '修改审计程序', '1', '1', null, null, null);
-INSERT INTO `bt_rights` VALUES ('69', '删除审计程序', 'deleteCoursewareInit.do', '删除审计程序', '1', '1', null, null, null);
+INSERT INTO `bt_rights` VALUES ('66', '下载资料管理', 'queryDownloadInit.do', '下载资料管理', '1', '1', '-5', '1', '33');
+INSERT INTO `bt_rights` VALUES ('67', '添加升级程序', 'addUpdateProgramInit.do', '添加升级程序', '1', '1', null, null, null);
+INSERT INTO `bt_rights` VALUES ('68', '修改审计程序', 'updateUpdateProgramInit.do', '修改审计程序', '1', '1', null, null, null);
+INSERT INTO `bt_rights` VALUES ('69', '删除审计程序', 'deleteUpdateProgramInit.do', '删除审计程序', '1', '1', null, null, null);
 INSERT INTO `bt_rights` VALUES ('70', '下载帮助管理', 'queryDownloadHelpInit.do', '下载帮助管理', '1', '1', '-5', '1', '34');
 INSERT INTO `bt_rights` VALUES ('71', '添加下载帮助', 'addDownloadHelpInit.do', '添加下载帮助', '1', '1', null, null, null);
 INSERT INTO `bt_rights` VALUES ('72', '修改下载帮助', 'updateDownloadHelpInit.do', '修改下载帮助', '1', '1', null, null, null);
@@ -243,7 +243,7 @@ CREATE TABLE `t_admin` (
 -- ----------------------------
 -- Records of t_admin
 -- ----------------------------
-INSERT INTO `t_admin` VALUES ('1', 'admin', '4GV5XUIGJwbJe/9PnpHhf7Njd1xJVCBUyCn4Qvuk1xqDVkA5SlQnVw==', '1', '2014-12-15 09:17:16', '127.0.0.1', '-1');
+INSERT INTO `t_admin` VALUES ('1', 'admin', '4GV5XUIGJwbJe/9PnpHhf7Njd1xJVCBUyCn4Qvuk1xqDVkA5SlQnVw==', '1', '2014-12-16 21:01:42', '127.0.0.1', '-1');
 
 -- ----------------------------
 -- Table structure for t_advertisement
@@ -283,11 +283,15 @@ CREATE TABLE `t_attribute` (
   `addTime` datetime DEFAULT NULL COMMENT '添加时间',
   `productIds` varchar(300) DEFAULT NULL COMMENT '关联产品集',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_attribute
 -- ----------------------------
+INSERT INTO `t_attribute` VALUES ('1', '精品课件', '-1', '1', '1', '2014-12-15 22:59:39', '');
+INSERT INTO `t_attribute` VALUES ('2', '精品视频', '-1', '2', '1', '2014-12-15 22:59:59', '');
+INSERT INTO `t_attribute` VALUES ('3', '行业报告', '-1', '3', '1', '2014-12-15 23:00:10', '');
+INSERT INTO `t_attribute` VALUES ('4', '案例分析', '-1', '4', '1', '2014-12-15 23:00:19', '');
 
 -- ----------------------------
 -- Table structure for t_banner
@@ -364,13 +368,14 @@ CREATE TABLE `t_brand_advertise` (
   `seoKeywords` text COMMENT 'SEO_关键字',
   `seoDescription` text COMMENT 'SEO_描述',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='品牌广告';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='品牌广告';
 
 -- ----------------------------
 -- Records of t_brand_advertise
 -- ----------------------------
-INSERT INTO `t_brand_advertise` VALUES ('4', 'sf', '32', 'upload/image/admin/2014/20140910/201409101450182217.jpg', 'upload/media/admin/2014/20140718/201407181710347835.flv', '2014-07-18 17:11:12', '1', '-1', null, null, null);
-INSERT INTO `t_brand_advertise` VALUES ('5', '时代复分十分丰富', '18', 'upload/image/admin/2014/20140910/201409101450018813.jpg', 'upload/media/admin/2014/20140802/20140802092821597.flv', '2014-07-25 14:16:51', '1', '-1', null, null, null);
+INSERT INTO `t_brand_advertise` VALUES ('4', 'sf', '33', 'upload/image/admin/2014/20140910/201409101450182217.jpg', 'upload/media/admin/2014/20140718/201407181710347835.flv', '2014-07-18 17:11:12', '1', '-1', null, null, null);
+INSERT INTO `t_brand_advertise` VALUES ('5', '时代复分十分丰富', '19', 'upload/image/admin/2014/20140910/201409101450018813.jpg', 'upload/media/admin/2014/20140802/20140802092821597.flv', '2014-07-25 14:16:51', '1', '-1', null, null, null);
+INSERT INTO `t_brand_advertise` VALUES ('6', 'rere', '2', 'upload/image/admin/2014/20141215/201412151510386080.jpg', 'upload/media/admin/2014/20141215/20141215151025343.flv', '2014-12-15 15:10:42', '1', '-1', null, null, null);
 
 -- ----------------------------
 -- Table structure for t_consumers
@@ -389,11 +394,15 @@ CREATE TABLE `t_consumers` (
   `need_content` varchar(255) DEFAULT NULL COMMENT '要求描述',
   `addTime` datetime DEFAULT NULL COMMENT '加入时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_consumers
 -- ----------------------------
+INSERT INTO `t_consumers` VALUES ('13', null, null, null, null, null, null, '-1', null, null, null);
+INSERT INTO `t_consumers` VALUES ('14', '热热', '131', null, null, null, null, '1', '冯绍峰', '辅导费', null);
+INSERT INTO `t_consumers` VALUES ('15', '邓雄', '13112121212', null, null, null, null, '1', '南昌', '展示型', null);
+INSERT INTO `t_consumers` VALUES ('16', '呼呼', '111', null, null, null, null, '2', 'D大调', '水水水水是', null);
 
 -- ----------------------------
 -- Table structure for t_design
@@ -468,6 +477,54 @@ INSERT INTO `t_development` VALUES ('1', '2014-至今', '阿德法撒旦法<span
 INSERT INTO `t_development` VALUES ('2', '2013-2015', '阿德法撒旦法<span>发射点发射得分</span><span>发射点发射得分</span><span>发射点发射得分</span><span>发射点发射得分</span><span>发射点发射得分</span><span>发射点发射得分</span><span>发射点发射得分</span><span>发射点发射得分</span><span>发射点发射得分</span>', '1', '2014-07-19 09:56:12', '-1', null, null, null);
 INSERT INTO `t_development` VALUES ('3', '2011-2012', '<p>\n	发射点发射得分<span>发射点发射得分</span><span>发射点发射得分</span><span>发射点发射得分</span><span>发射点发射得分</span><span>发射点发射得分</span><span>发射点发射得分</span><span>发射点发射得分</span><span>发</span>\n</p>', '1', '2014-07-19 09:57:13', '-1', null, null, null);
 INSERT INTO `t_development` VALUES ('5', '2013-2015', '山东分公司的法国队<span>山东分公司的法国队</span><span>山东分公司的法国队</span><span>山东分公司的法国队</span><span>山东分公司的法国队</span><span>山东分公司的法国队</span><span>山东分公司的法国队</span><span>山东分公司的法国队</span><span>山东分公司的法国队</span><span>山东分公司的法国队</span><span>山东分公司的法国队</span><span>山东分公司的法国队</span><span>山东分公司的法国队</span><span>山东分公司的法国队</span><span>山东分公司的法国队</span><span>山东分公司的法国队</span><span>山东分公司的法国队</span><span>山东分公司的法国队</span><span>山东分公司的法国队</span><span>山东分公司的法国队</span><span>山东分公司的法国队</span><span>山东分公司的法国队</span>', '1', '2014-07-29 09:21:04', '-1', null, null, null);
+
+-- ----------------------------
+-- Table structure for t_download
+-- ----------------------------
+DROP TABLE IF EXISTS `t_download`;
+CREATE TABLE `t_download` (
+  `id` bigint(11) NOT NULL AUTO_INCREMENT,
+  `categoryId` bigint(20) DEFAULT NULL COMMENT '所属ID',
+  `name` varchar(100) DEFAULT NULL COMMENT '名字',
+  `image` varchar(200) DEFAULT NULL COMMENT '图片',
+  `path` varchar(300) DEFAULT NULL COMMENT '下载路径',
+  `isRecommend` int(1) DEFAULT NULL COMMENT '是否推荐：1是   2否',
+  `addTime` datetime DEFAULT NULL,
+  `sortIndex` int(11) DEFAULT NULL COMMENT '排序',
+  `status` int(11) DEFAULT NULL COMMENT '是否显示（1，是 2，否）',
+  `seoTitle` varchar(200) DEFAULT NULL COMMENT 'SEO_标题',
+  `seoKeywords` text COMMENT 'SEO_关键字',
+  `seoDescription` text COMMENT 'SEO_描述',
+  `size` double DEFAULT NULL,
+  `down_num` int(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_download
+-- ----------------------------
+INSERT INTO `t_download` VALUES ('1', '1', '数据库插入测试1', 'upload/image/admin/2014/20141215/201412152305154691.jpg', 'upload/file/admin/2014/20141215/201412152305251360.txt', '1', '2014-12-15 23:43:33', '1', '1', '1', '1', '1', null, null);
+INSERT INTO `t_download` VALUES ('2', '1', '测试数据1:血字的研究', 'upload/image/admin/2014/20141216/201412161959583712.jpg', 'upload/file/admin/2014/20141216/201412161959465867.txt', null, '2014-12-16 19:59:59', '1', '1', null, null, null, null, null);
+INSERT INTO `t_download` VALUES ('3', '3', '测试数据2:行业报告', 'upload/image/admin/2014/20141216/201412162000452823.jpg', 'upload/file/admin/2014/20141216/20141216200113182.txt', null, '2014-12-16 20:01:14', '1', '1', null, null, null, null, null);
+INSERT INTO `t_download` VALUES ('4', '2', '曾仕强', 'upload/image/admin/2014/20141216/20141216210242831.jpg', 'upload/all/admin/2014/20141216/201412162102181613.flv', null, '2014-12-16 21:02:43', '1', '1', null, null, null, null, null);
+
+-- ----------------------------
+-- Table structure for t_download_category
+-- ----------------------------
+DROP TABLE IF EXISTS `t_download_category`;
+CREATE TABLE `t_download_category` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `category_name` varchar(200) DEFAULT NULL COMMENT '下载内容所属类目名称',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_download_category
+-- ----------------------------
+INSERT INTO `t_download_category` VALUES ('1', '精品课件');
+INSERT INTO `t_download_category` VALUES ('2', '精品视频');
+INSERT INTO `t_download_category` VALUES ('3', '行业报告');
+INSERT INTO `t_download_category` VALUES ('4', '案例下载');
 
 -- ----------------------------
 -- Table structure for t_download_help
@@ -634,13 +691,11 @@ CREATE TABLE `t_materials` (
   `seoDescription` text,
   `image` varchar(200) DEFAULT NULL COMMENT '图片',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_materials
 -- ----------------------------
-INSERT INTO `t_materials` VALUES ('1', '14版外研新标准初中英语八下Module 10.', '123123123123', '5', 'upload/file/admin/2014/20140802/20140802085529746.doc', '0.09M', '2014-07-16 10:14:52', '-1', '1', '', '', '', null);
-INSERT INTO `t_materials` VALUES ('2', '快易典电子书包助力阳光高效课堂', '31312312312', '6', 'upload/file/admin/2014/20141211/201412111028098807.pdf', '0.09M', '2014-07-16 10:20:52', '-1', '1', '', '', '', null);
 
 -- ----------------------------
 -- Table structure for t_materials_attribute
@@ -656,8 +711,6 @@ CREATE TABLE `t_materials_attribute` (
 -- ----------------------------
 -- Records of t_materials_attribute
 -- ----------------------------
-INSERT INTO `t_materials_attribute` VALUES ('9', '20', '1');
-INSERT INTO `t_materials_attribute` VALUES ('12', '9', '1');
 
 -- ----------------------------
 -- Table structure for t_needs
@@ -4625,7 +4678,7 @@ CREATE TABLE `t_seo_page` (
   `mKeyWord` varchar(500) DEFAULT NULL,
   `mDescription` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_seo_page
@@ -4635,7 +4688,7 @@ INSERT INTO `t_seo_page` VALUES ('2', 'index.do', null, '深圳微力科技有�
 INSERT INTO `t_seo_page` VALUES ('3', 'mapInit.do?a=3a', null, '深圳微力科技有限公司', null, null, null, null, null);
 INSERT INTO `t_seo_page` VALUES ('4', 'queryOnline.do', null, '深圳微力科技有限公司', null, null, null, null, null);
 INSERT INTO `t_seo_page` VALUES ('5', 'downloadIndex.do', null, '深圳微力科技有限公司', null, null, null, null, null);
-INSERT INTO `t_seo_page` VALUES ('6', 'coursewareIndex.do', null, '深圳微力科技有限公司', null, null, null, null, null);
+INSERT INTO `t_seo_page` VALUES ('6', 'updateProgramIndex.do', null, '深圳微力科技有限公司', null, null, null, null, null);
 INSERT INTO `t_seo_page` VALUES ('7', 'advertiseIndex.do', null, '深圳微力科技有限公司', null, null, null, null, null);
 INSERT INTO `t_seo_page` VALUES ('8', 'queryRecruitInit.do?a=2a', null, '深圳微力科技有限公司', null, null, null, null, null);
 INSERT INTO `t_seo_page` VALUES ('9', 'queryWebDistributeListInit.do', null, '深圳微力科技有限公司', null, null, null, null, null);
@@ -4649,6 +4702,8 @@ INSERT INTO `t_seo_page` VALUES ('16', 'materialsIndex.do', null, '深圳微力�
 INSERT INTO `t_seo_page` VALUES ('17', 'queryRecruitInit.do', null, '深圳微力科技有限公司', null, null, null, null, null);
 INSERT INTO `t_seo_page` VALUES ('18', 'productCompare.do', null, '深圳微力科技有限公司', null, null, null, null, null);
 INSERT INTO `t_seo_page` VALUES ('19', 'querySearch.do', null, '深圳微力科技有限公司', null, null, null, null, null);
+INSERT INTO `t_seo_page` VALUES ('20', 'coursewareIndex.do', null, '微力科技', null, null, null, null, null);
+INSERT INTO `t_seo_page` VALUES ('21', 'preDownloadIndex.do', null, '微力科技', null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for t_service_type
@@ -4691,14 +4746,15 @@ CREATE TABLE `t_update_program` (
   `seoKeywords` text COMMENT 'SEO_关键字',
   `seoDescription` text COMMENT 'SEO_描述',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_update_program
 -- ----------------------------
-INSERT INTO `t_update_program` VALUES ('1', '智能家教机 H23 下载', 'upload/image/admin/2014/20140716/201407161529471683.jpg', 'upload/file/admin/2014/20140716/201407161529194234.xls', '1', null, '2014-07-16 15:29:50', null, '1', null, null, null);
-INSERT INTO `t_update_program` VALUES ('2', '学生电脑 G12 下载程序', 'upload/image/admin/2014/20140716/201407161539236484.jpg', 'upload/file/admin/2014/20140726/201407261111049080.rar', '2', null, '2014-07-16 15:39:24', null, '1', null, null, null);
-INSERT INTO `t_update_program` VALUES ('3', '11', 'upload/image/admin/2014/20140802/201408020903279278.png', 'upload/file/admin/2014/20140802/201408020903081593.doc', '2', null, '2014-07-28 17:48:56', null, '1', null, null, null);
+INSERT INTO `t_update_program` VALUES ('1', '智能家教机 H23 下载', 'upload/image/admin/2014/20141215/201412152305154691.jpg', 'upload/file/admin/2014/20141215/201412152305251360.txt', '1', null, '2014-07-16 15:29:50', null, '1', null, null, null);
+INSERT INTO `t_update_program` VALUES ('2', '学生电脑 G12 下载程序', 'upload/image/admin/2014/20141215/201412152304252697.jpg', 'upload/file/admin/2014/20141215/201412152304366208.pdf', '2', null, '2014-07-16 15:39:24', null, '1', null, null, null);
+INSERT INTO `t_update_program` VALUES ('3', '11', 'upload/image/admin/2014/20141215/201412152304099336.jpg', 'upload/file/admin/2014/20141215/201412152303545303.txt', '2', null, '2014-07-28 17:48:56', null, '1', null, null, null);
+INSERT INTO `t_update_program` VALUES ('4', '22222', 'upload/image/admin/2014/20141215/201412152305588261.jpg', 'upload/file/admin/2014/20141215/201412152305421544.pdf', '5', null, '2014-12-15 23:05:59', null, '1', null, null, null);
 
 -- ----------------------------
 -- Table structure for t_user
@@ -5377,7 +5433,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost`  VIEW `v_t_attribute_mater
 -- View structure for v_t_consumers_needs
 -- ----------------------------
 DROP VIEW IF EXISTS `v_t_consumers_needs`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost`  VIEW `v_t_consumers_needs` AS SELECT
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `v_t_consumers_needs` AS SELECT
 tc.id AS cId,
 tc.c_name AS cName,
 tc.c_telephone AS cTelephone,
@@ -5388,7 +5444,8 @@ tc.c_qq AS cQQ,
 tc.needs_status AS needStatus,
 tn.needs_name AS needsName,
 tc.address AS address,
-tc.need_content AS needContent
+tc.need_content AS needContent,
+tc.addTime AS addTime
 FROM
 t_consumers AS tc
 INNER JOIN t_needs AS tn ON tc.needs_status = tn.id ;
@@ -5398,6 +5455,28 @@ INNER JOIN t_needs AS tn ON tc.needs_status = tn.id ;
 -- ----------------------------
 DROP VIEW IF EXISTS `v_t_design_category`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost`  VIEW `v_t_design_category` AS select `t1`.`id` AS `id`,`t1`.`title` AS `title`,`t1`.`author` AS `author`,`t1`.`categoryId` AS `categoryId`,`t1`.`addTime` AS `addTime`,`t1`.`imgUrl` AS `imgUrl`,`t1`.`sortIndex` AS `sortIndex`,`t1`.`status` AS `status`,`t2`.`name` AS `name` from (`t_design` `t1` join `t_design_category` `t2` on((`t1`.`categoryId` = `t2`.`id`))) ; ;
+
+-- ----------------------------
+-- View structure for v_t_download
+-- ----------------------------
+DROP VIEW IF EXISTS `v_t_download`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `v_t_download` AS SELECT
+td.id AS id,
+td.categoryId AS categoryId,
+tdc.category_name AS categoryName,
+td.`name` AS `name`,
+td.image AS image,
+td.path AS path,
+td.isRecommend AS isRecommend,
+td.addTime AS addTime,
+td.sortIndex AS sortIndex,
+td.`status` AS `status`,
+td.seoTitle AS seoTitle,
+td.seoKeywords AS seoKeywords,
+td.seoDescription AS seoDescription
+FROM
+t_download AS td
+INNER JOIN t_download_category AS tdc ON td.categoryId = tdc.id ;
 
 -- ----------------------------
 -- View structure for v_t_img_design

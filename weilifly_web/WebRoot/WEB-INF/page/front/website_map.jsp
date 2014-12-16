@@ -52,7 +52,7 @@
 							<a href="downloadIndex.do">资料下载</a>
 							<%--
 								<a href="queryDownloadHelpInit.do">下载帮助</a>
-								<a href="updateProgramIndex.do">升级程序</a>
+								<a href="preDownloadIndex.do">升级程序</a>
 							--%>
 						</dd>
 					</dl>

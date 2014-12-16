@@ -115,8 +115,8 @@
    	   <property name="attributeDao" ref="attributeDao"/>
    	</bean>
    	<!-- 升级程序管理 -->
-   	<bean id="updateProgramService" class="com.weili.service.UpdateProgramService" parent="baseService">
-   	   <property name="updateProgramDao" ref="updateProgramDao"/>
+   	<bean id="downloadService" class="com.weili.service.DownloadService" parent="baseService">
+   	   <property name="downloadDao" ref="downloadDao"/>
    	</bean>
    	<!-- 下载帮助管理 -->
    	<bean id="downloadHelpService" class="com.weili.service.DownloadHelpService" parent="baseService">

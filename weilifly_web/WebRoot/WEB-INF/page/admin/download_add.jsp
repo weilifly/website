@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 	<head>
-		<title>会员管理-添加会员</title>
+		<title>下载资料管理-添加下载资料</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="pragma" content="no-cache" />
 		<meta http-equiv="cache-control" content="no-cache" />
@@ -26,7 +26,7 @@
 				var uploadbutton = K.uploadbutton({
 					button : K('#uploadButton'),
 					fieldName : 'imgFile',
-					url : '../myFileUpload.do?p=<%=des.encrypt("3,1,7,1,"+((Admin)session.getAttribute(IConstants.SESSION_ADMIN)).getId()) %>',
+					url : '../myFileUpload.do?p=<%=des.encrypt("4,1,7,1,"+((Admin)session.getAttribute(IConstants.SESSION_ADMIN)).getId()) %>',
 					afterUpload : function(data) {
 						if (data.error === 0) {
 							K('#path').val(data.url);
@@ -75,8 +75,8 @@
 				$("#btn_save").click(function(){
 					var even = $(this);
 					even.hide();
-					param["id"] = "${paramMap.id}";
 					param["name"] = $("#name").val();
+					param["sortIndex"] = $("#sortIndex").val();
 					param["categoryId"] = $("#categoryId").val();
 					/*param["seoTitle"] = $("#seoTitle").val();
 					param["seoKeywords"] = $("#seoKeywords").val();
@@ -84,10 +84,11 @@
 					param["path"] = $("#path").val();
 					param["image"] = $("#image").val();
 					param["status"] = $("input[name=paramMap.status]:checked").val();
-					$.shovePost("updateUpdateProgram.do",param,function(data){
+					param["isRecommend"] = $("input[name=paramMap.isRecommend]:checked").val();
+					$.shovePost("addDownload.do",param,function(data){
 						alert(data.error);
 						if(data.returnId>0){
-							window.location.href = "queryUpdateProgramInit.do";
+							window.location.href = "queryDownloadInit.do";
 							return;
 							
 						}
@@ -109,13 +110,13 @@
 							<tr>
 								<td width="100" height="28" align="center" bgcolor="#8594A9"
 									class="white12">
-									<a href="queryUpdateProgramInit.do">升级程序列表</a>
+									<a href="queryDownloadInit.do">下载资料列表</a>
 								</td>
 								<td width="2">
 									&nbsp;
 								</td>
 								<td width="100" align="center" bgcolor="#CC0000" class="white12">
-									修改升级程序
+									<a href="addDownloadInit.do">添加下载资料</a>
 								</td>
 								<td>
 									&nbsp;
@@ -130,7 +131,7 @@
 							<tr>
 								<td style="width: 100px; height: 25px;" align="right"
 									class="blue12">
-									名称：
+									资料名称：
 								</td>
 								<td align="left" class="f66">
 									<s:textfield id="name" name="paramMap.name"
@@ -141,11 +142,11 @@
 							<tr>
 								<td style="width: 100px; height: 25px;" align="right"
 									class="blue12">
-									系列：
+									资料类型：
 								</td>
 								<td align="left" class="f66">
 									<s:select id="categoryId" theme="simple" name="paramMap.categoryId"
-											list="categoryList" listKey="id" listValue="name" headerKey="-1" headerValue="-请选择-">
+											list="categoryList" listKey="id" listValue="category_name" headerKey="-1" headerValue="-请选择-">
 									</s:select>
 									<span class="require-field">*<s:fielderror fieldName="paramMap.categoryId"></s:fielderror></span>
 								</td>
@@ -156,19 +157,39 @@
 									是否显示：
 								</td>
 								<td align="left" class="f66">
-									<s:radio name="paramMap.status" id="status" theme="simple"
+									<s:radio name="paramMap.status" id="status" theme="simple" value="1"
 										list="#{1:'是',2:'否'}"/>
 									<span class="require-field">*<s:fielderror fieldName="paramMap.status"></s:fielderror></span>
 								</td>
 							</tr>
-							
+							<tr>
+								<td style="width: 100px; height: 25px;" align="right"
+									class="blue12">
+									是否推荐：
+								</td>
+								<td align="left" class="f66">
+									<s:radio name="paramMap.isRecommend" id="status" theme="simple" value="1"
+										list="#{1:'是',2:'否'}"/>
+									<span class="require-field">*<s:fielderror fieldName="paramMap.isRecommend"></s:fielderror></span>
+								</td>
+							</tr>
+							<tr>
+								<td style="width: 100px; height: 25px;" align="right"
+									class="blue12">
+									资料排序：
+								</td>
+								<td align="left" class="f66">
+									<s:textfield id="sortIndex" name="paramMap.sortIndex"
+										cssClass="in_text_250" theme="simple"></s:textfield>
+								</td>
+							</tr>
 							<tr>
 								<td style="width: 100px; height: 25px;" align="right"
 									class="blue12">
 									上传资料：
 								</td>
 								<td align="left" class="f66">
-									<input class="in_text_2" id="path" name="paramMap.path" value="${paramMap.path}"
+									<input class="in_text_2" id="path" name="paramMap.path"
 										type="text" style="width: 350px; height: 20px;" />
 									<input style="display: none;" id="uploadButton" value="浏览"
 										type="button" />

@@ -18,7 +18,7 @@
 			$(function(){
 				//$('#pic-list-s').Slider();
 				$(".path").click(function(){
-					window.location.href = "downloadProgram.do?filePath="+$(this).attr("path");
+					window.location.href = "downloadData.do?filePath="+$(this).attr("path")+"&id="+;
 				});
 				
 				$("li[name=li]").click(function(){
@@ -31,8 +31,6 @@
 				$("li[name ^= divCategory_]").hide();
 				$("li[name=divCategory_"+pcId+"]").show();
 			}
-
-			    
 
 		</script>
 	</head>
@@ -87,11 +85,12 @@
 					
 					<!-- 下载专区《行业报告》开始 -->
 					<div class="m-s-ban m-s-ban-1">
-						<a href="updateProgramIndex.do">more+</a>下载专区《行业报告》
+						<a href="preDownloadIndex.do">more+</a>下载专区《行业报告》
 					</div>
 					<ul class="down-list">
-						<s:iterator value="#request.updateProgramList" var="bean" status="st">
+						<s:iterator value="#request.coursewareList" var="bean" status="st">
 							<li>
+							<s:hidden name="#bean.id" id="dId"></s:hidden>
 								<a href="javascript:;" class="tit">${bean.name}</a>
 								<div class="other">
 									<span><s:date name="#bean.addTime" format="yyyy-MM-dd HH:mm:ss" /></span><a href="javascript:;" class="path" path="${bean.path}">下载</a>
@@ -103,11 +102,12 @@
 					
 					<!-- 下载专区《精品课件》开始 -->
 					<div class="m-s-ban m-s-ban-1">
-						<a href="updateProgramIndex.do">more+</a>下载专区《精品课件》
+						<a href="preDownloadIndex.do">more+</a>下载专区《精品课件》
 					</div>
 					<ul class="down-list">
-						<s:iterator value="#request.updateProgramList" var="bean" status="st">
+						<s:iterator value="#request.coursewareList" var="bean" status="st">
 							<li>
+							<s:hidden name="#bean.id" id="dId"></s:hidden>
 								<a href="javascript:;" class="tit">${bean.name}</a>
 								<div class="other">
 									<span><s:date name="#bean.addTime" format="yyyy-MM-dd HH:mm:ss" /></span><a href="javascript:;" class="path" path="${bean.path}">下载</a>

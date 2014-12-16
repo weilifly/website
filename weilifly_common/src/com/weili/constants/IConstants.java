@@ -312,22 +312,25 @@ public class IConstants {
     	EXTMAP.put(1, "swf,flv");//flash
     	EXTMAP.put(2, "swf,flv,mp3,wav,wma,wmv,mid,avi,mpg,asf,rm,rmvb");//media
     	EXTMAP.put(3, "doc,docx,xls,xlsx,ppt,htm,html,txt,zip,rar,gz,bz2,pdf,apk");//file
+    	EXTMAP.put(4, "swf,flv,mp3,wav,wma,wmv,mid,avi,mpg,asf,rm,rmvb,doc,docx,xls,xlsx,ppt,htm,html,txt,zip,rar,gz,bz2,pdf,apk");//file
+    	
     	
     	//定义文件类型名称
     	NAMEMAP.put(0, "image");
     	NAMEMAP.put(1, "flash");
     	NAMEMAP.put(2, "media");
     	NAMEMAP.put(3, "file");
+    	NAMEMAP.put(4, "all");
     	
     	//定义文件大小类型 单位b
     	SIZEMAP.put(0, 200*1024L);//200KB
-    	SIZEMAP.put(1, 500*1024L);//
-    	SIZEMAP.put(2, 1024*1024L);//
+    	SIZEMAP.put(1, 500*1024L);//500KB
+    	SIZEMAP.put(2, 1024*1024L);//1M
     	SIZEMAP.put(3, 1*1024*1024L);//1MB
-    	SIZEMAP.put(4, 2*1024*1024L);//
-    	SIZEMAP.put(5, 5*1024*1024L);//
-    	SIZEMAP.put(6, 10*1024*1024L);//
-    	SIZEMAP.put(7, 500*1024*1024L);//
+    	SIZEMAP.put(4, 2*1024*1024L);//2M
+    	SIZEMAP.put(5, 5*1024*1024L);//5M
+    	SIZEMAP.put(6, 10*1024*1024L);//10M
+    	SIZEMAP.put(7, 500*1024*1024L);//500M
     	SIZEMAP.put(8, 1024*1024*1024L);//1G
     	
     	MAIL_HOST =  pf.read("mail_host");

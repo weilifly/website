@@ -9,10 +9,10 @@
 						选中
 					</th>
 					<th scope="col">
-						升级程序名称
+						下载资料名称
 					</th>
 					<th scope="col">
-						系列
+						类型
 					</th>
 					<th scope="col">
 						是否显示
@@ -50,7 +50,7 @@
 								<s:date name="#bean.addTime" format="yyyy-MM-dd HH:mm:ss" />
 							</td>
 							<td>
-								<a href="updateUpdateProgramInit.do?id=${bean.id }" target="main">
+								<a href="updateCoursewareInit.do?id=${bean.id }" target="main">
 								修改
 								</a>
 								&nbsp;&nbsp;

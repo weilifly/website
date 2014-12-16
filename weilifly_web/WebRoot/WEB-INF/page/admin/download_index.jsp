@@ -2,7 +2,7 @@
 <%@ include file="/include/taglib.jsp"%>
 <html>
 	<head>
-		<title>会员管理</title>
+		<title>后台下载资料管理</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="pragma" content="no-cache" />
 		<meta http-equiv="cache-control" content="no-cache" />
@@ -32,7 +32,7 @@
 				praData["startDate"] = $("#startDate").val();
 				praData["endDate"] = $("#endDate").val();
 				
-		 		$.shovePost("queryUpdateProgramInfo.do",praData,initCallBack);
+		 		$.shovePost("queryDownloadInfo.do",praData,initCallBack);
 		 	}
 		 	
 		 	function initCallBack(data){
@@ -71,7 +71,7 @@
    			}
    			
    			function delObjs(ids){
-   				$.shovePost("deleteUpdateProgram.do",{id:ids},function(data){
+   				$.shovePost("deleteCourseware.do",{id:ids},function(data){
    					if(data.msg==1){
    						alert("删除成功！");
    						window.location.href = window.location.href;
@@ -87,30 +87,25 @@
 	</head>
 	<body>
 		<div id="right"
-			style="background-image: url(../images/admin/right_bg_top.jpg); background-position: top; background-repeat: repeat-x;">
+		style="background-image: url(../images/admin/right_bg_top.jpg); background-position: top; background-repeat: repeat-x;">
 			<div style="padding: 15px 10px 0px 10px;">
 				<div>
 					<table width="100%" border="0" cellspacing="0" cellpadding="0">
 						<tr>
 							<td width="100" height="28" align="center" bgcolor="#CC0000"
 								class="white12">
-								<a href="queryUpdateProgramInit.do">升级程序列表</a>
+								<a href="queryDownloadInit.do">下载资料列表</a>
 							</td>
 							<td width="2">
 								&nbsp;
 							</td>
 							<td width="100" align="center" bgcolor="#8594A9" class="white12">
-								<a href="addUpdateProgramInit.do">添加升级程序</a>
+								<a href="addDownloadInit .do">添加下载资料</a>
 							</td>
-							<td width="2">
-								&nbsp;
-							</td>
-							<td width="2">
-								&nbsp;
-							</td>
-							<td>
-								&nbsp;
-							</td>
+							<td width="200">&nbsp;</td>
+							<td width="200">&nbsp;</td>
+							<td width="2">&nbsp;</td>
+							<td width="200">&nbsp;</td>
 						</tr>
 					</table>
 					<div
@@ -120,23 +115,19 @@
 							<tbody>
 								<tr>
 									<td class="f66" align="left" width="50%" height="36px">
-									
-										名称：
+										资料名称：
 										<input id="name" type="text"/>
 										&nbsp;&nbsp;
-										
-										系列：
+										资料类型：
 										<s:select name="categoryId" id="categoryId" theme="simple"
-											list="categoryList" listKey="id" listValue="name" headerKey="-1" headerValue="-请选择-">
+											list="categoryList" listKey="id" listValue="category_name" headerKey="-1" headerValue="-请选择-">
 										</s:select>
 										&nbsp;&nbsp;
-										
 										是否显示：
 										<s:select name="status" id="status" theme="simple"
 										list="#{-1:'-请选择-',1:'是',2:'否'}" value="-1">
 										</s:select>
 										&nbsp;&nbsp;
-										
 										添加时间：
 										<input id="startDate" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:'readOnly'})"/>
 										—
@@ -150,6 +141,7 @@
 						<span id="dataInfo"> </span>
 					</div>
 				</div>
+			</div>
 			</div>
 	</body>
 </html>

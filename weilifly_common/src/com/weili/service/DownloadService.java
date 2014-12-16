@@ -13,15 +13,22 @@ import org.apache.commons.logging.LogFactory;
 import com.shove.base.BaseService;
 import com.shove.data.dao.MySQL;
 import com.shove.vo.PageBean;
-import com.weili.dao.UpdateProgramDao;
+import com.weili.dao.DownloadDao;
 
-public class UpdateProgramService extends BaseService {
+public class DownloadService extends BaseService {
 	
-	public static Log log = LogFactory.getLog(UpdateProgramService.class);
+	public static Log log = LogFactory.getLog(DownloadService.class);
 	
-	private UpdateProgramDao updateProgramDao;
+	private DownloadDao downloadDao;
 
-	public Map<String,Object> addUpdateProgram(String name,String image,String path,Long categoryId,Long productId,Integer sortIndex,Integer status,String seoTitle,String seoKeywords,String seoDescription) throws Exception{
+	/**
+	 * action添加下载资料详细化之service业务处理
+	 * @return
+	 */
+	public Map<String,Object> addDownload(String name,String image,String path,Long categoryId,
+			Integer sortIndex,Integer status,Integer isRecommend,
+			String seoTitle,String seoKeywords,String seoDescription) throws Exception{
+		
 		Connection conn = null;
 		
 		long returnId = -1;
@@ -29,16 +36,19 @@ public class UpdateProgramService extends BaseService {
 		
 		Map<String,Object> map = new HashMap<String, Object>();
 		try{
-			Map<String,Object> returnMap = checkUpdateProgram(name, image, path, categoryId, productId, sortIndex, status, seoTitle, seoKeywords, seoDescription);
+			//添加资料的验证程序,验证关键内容是否为空或是违规
+			Map<String,Object> returnMap = checkCourseware(name, image, path, categoryId,  sortIndex,
+														   status, isRecommend, seoTitle, seoKeywords, seoDescription);
+			
 			returnId = ((Long)returnMap.get("returnId")); 
 			if(returnId <= 0){
 				error = (String)returnMap.get("error");
-				
 				return map;
-				
 			}
+			
 			conn = MySQL.getConnection();
-			returnId = updateProgramDao.addUpdateProgram(conn, name, image, path, categoryId, productId, sortIndex, status, seoTitle, seoKeywords, seoDescription);
+			returnId = downloadDao.addDownload(conn, name, image, path, categoryId, sortIndex, 
+											   status, isRecommend,seoTitle, seoKeywords, seoDescription);
 			if(returnId < 0){
 				conn.rollback();
 				return map;
@@ -65,7 +75,14 @@ public class UpdateProgramService extends BaseService {
 		return map;
 	}
 	
-	private Map<String,Object> checkUpdateProgram(String name,String image,String path,Long categoryId,Long productId,Integer sortIndex,Integer status,String seoTitle,String seoKeywords,String seoDescription){
+	/**
+	 * 上传‘下载资料’时候的验证程序
+	 * */
+	private Map<String,Object> checkCourseware(
+			String name,String image,String path,Long categoryId,
+			Integer sortIndex,Integer status,Integer isRecommend,
+			String seoTitle,String seoKeywords,String seoDescription){
+		
 		Map<String,Object> map = new HashMap<String, Object>();
 		long returnId = -1;
 		String error = "验证失败！";
@@ -77,6 +94,10 @@ public class UpdateProgramService extends BaseService {
 			}
 			if(categoryId == null||categoryId < 0){
 				error = "请选择系列";
+				return map;
+			}
+			if(isRecommend == null||isRecommend < 0){
+				error = "请选择是否推荐";
 				return map;
 			}
 			if(status == null||status < 0){
@@ -104,7 +125,8 @@ public class UpdateProgramService extends BaseService {
 		}
 	}
 	
-	public Map<String,Object> updateUpdateProgram(long id,String name,String image,String path,Long categoryId,Long productId,Integer sortIndex,Integer status,String seoTitle,String seoKeywords,String seoDescription) throws Exception{
+	
+	public Map<String,Object> updateCourseware(long id,String name,String image,String path,Long categoryId,Integer sortIndex,Integer status,String seoTitle,String seoKeywords,String seoDescription) throws Exception{
 		Connection conn = null;
 		
 		long returnId = -1;
@@ -112,16 +134,16 @@ public class UpdateProgramService extends BaseService {
 		
 		Map<String,Object> map = new HashMap<String, Object>();
 		try{
-			Map<String,Object> returnMap = checkUpdateProgram(name, image, path, categoryId, productId, sortIndex, status, seoTitle, seoKeywords, seoDescription);
-			returnId = ((Long)returnMap.get("returnId")); 
-			if(returnId <= 0){
-				error = (String)returnMap.get("error");
-				
-				return map;
-				
-			}
+			//Map<String,Object> returnMap = checkCourseware(name, image, path, categoryId, sortIndex, status, seoTitle, seoKeywords, seoDescription);
+//			returnId = ((Long)returnMap.get("returnId")); 
+//			if(returnId <= 0){
+//				error = (String)returnMap.get("error");
+//				
+//				return map;
+//				
+//			}
 			conn = MySQL.getConnection();
-			returnId = updateProgramDao.updateUpdateProgram(conn,id, name, image, path, categoryId, productId, sortIndex, status, seoTitle, seoKeywords, seoDescription);
+			returnId = downloadDao.updateCourseware(conn,id, name, image, path, categoryId,  sortIndex, status, seoTitle, seoKeywords, seoDescription);
 			if(returnId < 0){
 				conn.rollback();
 				return map;
@@ -148,12 +170,12 @@ public class UpdateProgramService extends BaseService {
 		return map;
 	}
 	
-	public long deleteUpdateProgram(String ids) throws Exception{
+	public long deleteCourseware(String ids) throws Exception{
 		Connection conn = connectionManager.getConnection();
 		
 		long returnId = -1;
 		try{
-			returnId = updateProgramDao.deleteUpdateProgram(conn, ids);
+			returnId = downloadDao.deleteCourseware(conn, ids);
 		}catch (Exception e) {
 			log.error(e);
 			e.printStackTrace();
@@ -165,12 +187,12 @@ public class UpdateProgramService extends BaseService {
 		return returnId;
 	}
 	
-	public Map<String,String> queryUpdateProgramById(long id) throws Exception{
+	public Map<String,String> queryCoursewareById(long id) throws Exception{
 		Connection conn = connectionManager.getConnection();
 		
 		Map<String,String> map = new HashMap<String, String>();
 		try{
-			map = updateProgramDao.queryUpdateProgramById(conn, id);
+			map = downloadDao.queryCoursewareById(conn, id);
 		}catch (Exception e) {
 			log.error(e);
 			e.printStackTrace();
@@ -182,12 +204,30 @@ public class UpdateProgramService extends BaseService {
 		return map;
 	}
 	
-	public List<Map<String,Object>> queryUpdateProgramAll(String fieldList,String condition,String order) throws Exception{
+	//通过名字查找分类ID
+	public long queryCoursewareByName(String name) throws Exception{
+		Connection conn = connectionManager.getConnection();
+		
+		long  returnId = -1;
+		try{
+			returnId = downloadDao.queryCoursewareByName(conn, name);
+		}catch (Exception e) {
+			log.error(e);
+			e.printStackTrace();
+			throw e;
+		}finally{
+			conn.close();
+		}
+		
+		return returnId;
+	}
+	
+	public List<Map<String,Object>> queryCoursewareAll(String fieldList,String condition,String order) throws Exception{
 		Connection conn = connectionManager.getConnection();
 		
 		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
 		try{
-			list = updateProgramDao.queryUpdateProgramAll(conn, fieldList, condition, order);
+			list = downloadDao.queryCoursewareAll(conn, fieldList, condition, order);
 		}catch (Exception e) {
 			log.error(e);
 			e.printStackTrace();
@@ -199,7 +239,11 @@ public class UpdateProgramService extends BaseService {
 		return list;
 	}
 	
-	public void queryUpdateProgramPage(PageBean<Map<String,Object>> pageBean,String fieldList,StringBuffer condition,String order,String table) throws Exception{
+	/**
+	 * action查询下载资料详细化之service业务处理和数据处理(直接调用父类分页查询的存储过程)
+	 * @return
+	 */
+	public void queryDownloadPage(PageBean<Map<String,Object>> pageBean,String fieldList,StringBuffer condition,String order,String table) throws Exception{
 		Connection conn = connectionManager.getConnection();
 		try{
 			dataPage(conn, pageBean, table, fieldList, order, condition.toString());
@@ -213,7 +257,7 @@ public class UpdateProgramService extends BaseService {
 		
 	}
 
-	public void queryUpdateProgram(PageBean<Map<String,Object>> pageBean,Integer status,Long categoryId) throws Exception{
+	public void queryPreDownload(PageBean<Map<String,Object>> pageBean,Integer status,Long categoryId) throws Exception{
 		Connection conn = connectionManager.getConnection();
 		StringBuffer condition = new StringBuffer();
 		if(status != null&&status > 0){
@@ -223,7 +267,7 @@ public class UpdateProgramService extends BaseService {
 			condition.append(" and `categoryId` = "+categoryId);
 		}
 		try{
-			dataPage(conn, pageBean, "t_update_program", "*", "order by addTime desc", condition.toString());
+			dataPage(conn, pageBean, "t_download", "*", "order by addTime desc", condition.toString());
 		}catch (Exception e) {
 			log.error(e);
 			e.printStackTrace();
@@ -235,12 +279,12 @@ public class UpdateProgramService extends BaseService {
 	}
 
 	/**
-	 * 搜索升级程序列表
+	 * 搜索前台下载资料列表
 	 * @param keywords
 	 * @return
 	 * @throws Exception
 	 */
-	public List<Map<String,Object>> queryUpdateProgramList(String keywords) throws Exception{
+	public List<Map<String,Object>> queryCoursewareList(String keywords) throws Exception{
 		Connection conn = connectionManager.getConnection();
 		
 		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
@@ -253,7 +297,7 @@ public class UpdateProgramService extends BaseService {
 			condition.append(" and name like CONCAT('%','"+keywords+"','%')");
 		}
 		try{
-			list = updateProgramDao.queryUpdateProgramAll(conn, "*", condition.toString(), " addTime desc");
+			list = downloadDao.queryCoursewareAll(conn, "*", condition.toString(), " addTime desc");
 		}catch (Exception e) {
 			log.error(e);
 			e.printStackTrace();
@@ -266,8 +310,47 @@ public class UpdateProgramService extends BaseService {
 	
 	
 	
-	public void setUpdateProgramDao(UpdateProgramDao updateProgramDao) {
-		this.updateProgramDao = updateProgramDao;
+	public void setDownloadDao(DownloadDao downloadDao) {
+		this.downloadDao = downloadDao;
 	}
 	
+	
+	
+	/**
+	 * 获取下载资料分类列表 之业务处理
+	 * @return
+	 */
+	public List<Map<String,Object>> queryDownloadCategoryAll(String fieldList,String condition) throws Exception{
+		Connection conn = connectionManager.getConnection();
+		
+		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
+		try{
+			list = downloadDao.queryDownloadCategoryAll(conn, fieldList, condition);
+		}catch (Exception e) {
+			log.error(e);
+			e.printStackTrace();
+			throw e;
+		}finally{
+			conn.close();
+		}
+		return list;
+	}
+	
+	
+	/**
+	 * 增加下载量
+	 * @throws Exception 
+	 * */
+	public void updateDownNum(Integer categoryId) throws Exception{
+		Connection conn = MySQL.getConnection();
+		try{
+			MySQL.executeNonQuery(conn, "update t_download set down_num = down_num+1 where categoryId = "+categoryId); 
+		}catch (Exception e) {
+			log.error(e);
+			e.printStackTrace();
+			throw e;
+		}finally{
+			conn.close();
+		}
+	}
 }

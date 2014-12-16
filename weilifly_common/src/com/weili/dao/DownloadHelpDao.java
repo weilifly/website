@@ -127,7 +127,7 @@ public class DownloadHelpDao {
 	/**
 	 * 查询前台升级程序下载
 	 */
-	public Map<String, String> queryUpdateProgramById(Connection conn, long id)
+	public Map<String, String> queryCoursewareById(Connection conn, long id)
 			throws SQLException, DataException {
 		Dao.Tables.t_update_program t_update_program = new Dao().new Tables().new t_update_program();
 		DataSet ds = t_update_program.open(conn, " * ", " id = " + id, "", -1,

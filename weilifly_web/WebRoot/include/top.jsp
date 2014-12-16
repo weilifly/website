@@ -67,15 +67,15 @@
 								</li>
 							</ul>
 						</li>
-						<li>下载专区
+						<li><a href="downloadIndex.do">下载专区</a>
 							<ul>
-								<li><a href="updateProgramIndex.do">精品课件</a>
+								<li><a href="preDownloadIndex.do?categoryId=1">精品课件</a>
 								</li>
-								<li><a href="advertiseIndex.do">精品视频</a>
+								<li><a href="preDownloadIndex.do?categoryId=2">精品视频</a>
 								</li>
-								<li><a href="updateProgramIndex.do">行业报告</a>
+								<li><a href="preDownloadIndex.do?categoryId=3">行业报告</a>
 								</li>
-								<li><a href="materialsIndex.do">案例下载</a>
+								<li><a href="preDownloadIndex.do?categoryId=4">案例下载</a>
 								</li>
 							</ul>
 						</li>

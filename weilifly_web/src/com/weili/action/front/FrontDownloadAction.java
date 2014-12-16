@@ -20,14 +20,14 @@ import com.weili.service.DownloadHelpService;
 import com.weili.service.MaterialsService;
 import com.weili.service.ProductCategoryService;
 import com.weili.service.ProductService;
-import com.weili.service.UpdateProgramService;
+import com.weili.service.DownloadService;
 
 
 public class FrontDownloadAction extends BaseFrontAction {
 
 	private ProductCategoryService productCategoryService;
 	private ProductService productService;
-	private UpdateProgramService updateProgramService;
+	private DownloadService downloadService;
 	private DownloadHelpService downloadHelpService;
 	private AdvertisementService advertisementService;
 	private AttributeService attributeService;;
@@ -46,7 +46,7 @@ public class FrontDownloadAction extends BaseFrontAction {
 		queryDownloadHelp();//下载帮助
 		List<Map<String,Object>> productList = productService.queryProductAll("*", "1=1 and `status` = "+IConstants.STATUS_ON, " sortIndex asc");//产品型号
 		
-		queryUpdateProgram();//升级程序，最新的前五个
+		queryCourseware();//升级程序，最新的前五个
 		
 		queryAdvertise();//广告片
 		
@@ -57,45 +57,44 @@ public class FrontDownloadAction extends BaseFrontAction {
 	}
 	
 	/**
-	 * 升级程序
+	 *  前台资料查看列表
 	 * @return
 	 * @throws Exception 
 	 */
-	public String updateProgramIndex() throws Exception{
-		
-		List<Map<String,Object>> categoryList = productCategoryService.queryProductCategoryAll("*", "1=1 and `status` = "+IConstants.STATUS_ON, " sortIndex asc");//产品系列
-	
+	public String preDownloadIndex() throws Exception{
 		Long categoryId = -1L;
-		if(categoryList != null&&categoryList.size() > 0){
-			categoryId = Convert.strToLong(request("a"), (Long)categoryList.get(0).get("id"));
-		}
+//		String name = request("name");
+//		categoryId = downloadService.queryCoursewareByName(name);//通过名称查找属性id
+		categoryId = Convert.strToLong(request("categoryId"), -1L) ;
+		
 		int pageNum = Convert.strToInt(request("curPage"), 1);
 		pageBean.setPageNum(pageNum);
-		pageBean.setPageSize(9);
+		pageBean.setPageSize(10);
 		
-		updateProgramService.queryUpdateProgram(pageBean, IConstants.STATUS_ON,categoryId);//升级程序
+		downloadService.queryPreDownload(pageBean, IConstants.STATUS_ON,categoryId);//
 		
-		queryDownloadHelp();//下载帮助
-		queryAdvertise();//广告片
+	//	queryDownloadHelp();//下载帮助
+	//	queryAdvertise();//广告片
 		
-		Map<String,String> seoMap = getSeoMap("updateProgramIndex.do");//seo
+		Map<String,String> seoMap = getSeoMap("preDownloadIndex.do");//seo
 		request("seoMap",seoMap);
 		
 		request("categoryId",categoryId);
-		request("categoryList",categoryList);
 		return SUCCESS;
 	}
 	
 	/**
-	 * 下载升级程序
+	 * 精品课件下载courseware 02
 	 * @return
-	 * @throws IOException 
+	 * @throws Exception 
 	 */
-	public String downloadProgram() throws IOException{
+	public String downloadData() throws Exception{
+		Integer categoryId = Convert.strToInt(request("categoryId"), -1);
 		String filePath = request("filePath");
 		if (StringUtils.isNotBlank(filePath)) {
 			if(filePath.startsWith("upload")){
 				FileUtils.downloadFile(ServletActionContext.getServletContext().getRealPath("/")+filePath, response());
+				downloadService.updateDownNum(categoryId);
 				return null;
 			}else{
 				response().sendRedirect(filePath);
@@ -148,16 +147,15 @@ public class FrontDownloadAction extends BaseFrontAction {
 	
 	public String materialsList() throws Exception{
 		
-		Long productId = Convert.strToLong(request("id"), -1);//产品ID
 		String keywords = request("keywords");
 		String attributeIds = request("attributeIds");
 		String pattributeIds = request("pattributeIds");
 		
-		long count = materialsService.queryMaterials(pageBean, productId, keywords, attributeIds,pattributeIds);
+	//	long count = materialsService.queryMaterials(pageBean, keywords, attributeIds,pattributeIds);
 		
-		request("count",count);
+		//request("count",count);
 		
-		paramMap = productService.queryProductCategoryById(productId);
+		//paramMap = productService.queryProductCategoryById(productId);
 		
 		return SUCCESS;
 	}
@@ -256,13 +254,13 @@ public class FrontDownloadAction extends BaseFrontAction {
 		request("downloadHelpList",downloadHelpList);
 	}
 	
-	private void queryUpdateProgram() throws Exception{
+	private void queryCourseware() throws Exception{
 		pageBean.setPageSize(9);
-		updateProgramService.queryUpdateProgram(pageBean, IConstants.STATUS_ON,null);
+		downloadService.queryPreDownload(pageBean, IConstants.STATUS_ON,null);
 		
-		List<Map<String,Object>> updateProgramList = pageBean.getPage();
+		List<Map<String,Object>> coursewareList = pageBean.getPage();
 		
-		request("updateProgramList",updateProgramList);
+		request("coursewareList",coursewareList);
 	}
 	
 	private void queryAdvertise() throws Exception{
@@ -279,8 +277,8 @@ public class FrontDownloadAction extends BaseFrontAction {
 		this.productService = productService;
 	}
 
-	public void setUpdateProgramService(UpdateProgramService updateProgramService) {
-		this.updateProgramService = updateProgramService;
+	public void setDownloadService(DownloadService downloadService) {
+		this.downloadService = downloadService;
 	}
 
 	public void setDownloadHelpService(DownloadHelpService downloadHelpService) {

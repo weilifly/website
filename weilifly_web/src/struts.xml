@@ -15,6 +15,9 @@
 	
 	<include file="struts/shove/kindEditorUploadAction.xml" />
 	
+
+	<!-- 后台管理 -->
+	<include file="struts/admin/download.xml" />
 	<include file="struts/admin/role.xml" />
 	<include file="struts/admin/admin.xml" />
 	<include file="struts/admin/productCategory.xml" />
@@ -27,7 +30,7 @@
 	<include file="struts/admin/attribute.xml" />
 	<include file="struts/admin/config.xml" />
 	<include file="struts/admin/materialsAttribute.xml" />
-	<include file="struts/admin/updateProgram.xml" />
+	<include file="struts/admin/courseware.xml" />
 	<include file="struts/admin/downloadHelp.xml" />
 	<include file="struts/admin/region.xml" />
 	<include file="struts/admin/advertisement.xml" />

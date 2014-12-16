@@ -302,11 +302,11 @@ public class DownloadHelpService extends BaseService {
 	/**
 	 * 查询前台升级程序下载
 	 */
-	public Map<String,String> queryUpdateProgramById(long id) throws Exception{
+	public Map<String,String> queryCoursewareById(long id) throws Exception{
 		Connection conn = connectionManager.getConnection();		
 		Map<String,String> map = new HashMap<String, String>();
 		try{
-			map = downloadHelpDao.queryUpdateProgramById(conn, id);
+			map = downloadHelpDao.queryCoursewareById(conn, id);
 		}catch (Exception e) {
 			log.error(e);
 			e.printStackTrace();
