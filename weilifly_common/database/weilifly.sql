@@ -141,10 +141,10 @@ INSERT INTO `bt_rights` VALUES ('62', '资料管理', 'queryMaterialsInit.do', '
 INSERT INTO `bt_rights` VALUES ('63', '添加资料', 'addMaterialsInit.do', '添加资料', '1', '1', null, null, null);
 INSERT INTO `bt_rights` VALUES ('64', '修改资料', 'updateMaterialsInit.do', '修改资料', '1', '1', null, null, null);
 INSERT INTO `bt_rights` VALUES ('65', '删除资料', 'deleteMaterialsInit.do', '删除资料', '1', '1', null, null, null);
-INSERT INTO `bt_rights` VALUES ('66', '升级程序管理', 'queryUpdateProgramInit.do', '升级程序管理', '1', '1', '-5', '1', '33');
-INSERT INTO `bt_rights` VALUES ('67', '添加升级程序', 'addUpdateProgramInit.do', '添加升级程序', '1', '1', null, null, null);
-INSERT INTO `bt_rights` VALUES ('68', '修改审计程序', 'updateUpdateProgramInit.do', '修改审计程序', '1', '1', null, null, null);
-INSERT INTO `bt_rights` VALUES ('69', '删除审计程序', 'deleteUpdateProgramInit.do', '删除审计程序', '1', '1', null, null, null);
+INSERT INTO `bt_rights` VALUES ('66', '升级程序管理', 'queryCoursewareInit.do', '升级程序管理', '1', '1', '-5', '1', '33');
+INSERT INTO `bt_rights` VALUES ('67', '添加升级程序', 'addCoursewareInit.do', '添加升级程序', '1', '1', null, null, null);
+INSERT INTO `bt_rights` VALUES ('68', '修改审计程序', 'updateCoursewareInit.do', '修改审计程序', '1', '1', null, null, null);
+INSERT INTO `bt_rights` VALUES ('69', '删除审计程序', 'deleteCoursewareInit.do', '删除审计程序', '1', '1', null, null, null);
 INSERT INTO `bt_rights` VALUES ('70', '下载帮助管理', 'queryDownloadHelpInit.do', '下载帮助管理', '1', '1', '-5', '1', '34');
 INSERT INTO `bt_rights` VALUES ('71', '添加下载帮助', 'addDownloadHelpInit.do', '添加下载帮助', '1', '1', null, null, null);
 INSERT INTO `bt_rights` VALUES ('72', '修改下载帮助', 'updateDownloadHelpInit.do', '修改下载帮助', '1', '1', null, null, null);
@@ -4635,7 +4635,7 @@ INSERT INTO `t_seo_page` VALUES ('2', 'index.do', null, '深圳微力科技有�
 INSERT INTO `t_seo_page` VALUES ('3', 'mapInit.do?a=3a', null, '深圳微力科技有限公司', null, null, null, null, null);
 INSERT INTO `t_seo_page` VALUES ('4', 'queryOnline.do', null, '深圳微力科技有限公司', null, null, null, null, null);
 INSERT INTO `t_seo_page` VALUES ('5', 'downloadIndex.do', null, '深圳微力科技有限公司', null, null, null, null, null);
-INSERT INTO `t_seo_page` VALUES ('6', 'updateProgramIndex.do', null, '深圳微力科技有限公司', null, null, null, null, null);
+INSERT INTO `t_seo_page` VALUES ('6', 'coursewareIndex.do', null, '深圳微力科技有限公司', null, null, null, null, null);
 INSERT INTO `t_seo_page` VALUES ('7', 'advertiseIndex.do', null, '深圳微力科技有限公司', null, null, null, null, null);
 INSERT INTO `t_seo_page` VALUES ('8', 'queryRecruitInit.do?a=2a', null, '深圳微力科技有限公司', null, null, null, null, null);
 INSERT INTO `t_seo_page` VALUES ('9', 'queryWebDistributeListInit.do', null, '深圳微力科技有限公司', null, null, null, null, null);
