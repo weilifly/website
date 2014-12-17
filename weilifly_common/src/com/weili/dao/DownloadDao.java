@@ -53,44 +53,51 @@ public class DownloadDao {
 		return td.insert(conn);
 	}
 	
-	public long updateCourseware(Connection conn,long id,String name,String image,String path,Long categoryId,Integer sortIndex,Integer status,String seoTitle,String seoKeywords,String seoDescription) throws SQLException{
-		Dao.Tables.t_download courseware = new Dao().new Tables().new t_download();
+	/**
+	 * 修改下载资料 之数据处理 
+	 * @return
+	 */
+	
+	public long updateDownload(Connection conn,long id,String name,String image,String path,Long categoryId,Integer sortIndex,Integer status,String seoTitle,String seoKeywords,String seoDescription) throws SQLException{
+		Dao.Tables.t_download td = new Dao().new Tables().new t_download();
 		
 		if(StringUtils.isNotBlank(name)){
-			courseware._name.setValue(name);
+			td._name.setValue(name);
 		}
 		if(StringUtils.isNotBlank(image)){
-			courseware.image.setValue(image);
+			td.image.setValue(image);
 		}
 		if(StringUtils.isNotBlank(path)){
-			courseware.path.setValue(path);
+			td.path.setValue(path);
 		}
 		if(categoryId != null&&categoryId > 0){
-			courseware.categoryId.setValue(categoryId);
+			td.categoryId.setValue(categoryId);
 		}
 		if(sortIndex != null&&sortIndex > 0){
-			courseware.sortIndex.setValue(sortIndex);
+			td.sortIndex.setValue(sortIndex);
 		}
 		if(status != null&&status > 0){
-			courseware.status.setValue(status);
+			td.status.setValue(status);
 		}
 		if(StringUtils.isNotBlank(seoTitle)){
-			courseware.seoTitle.setValue(seoTitle);
+			td.seoTitle.setValue(seoTitle);
 		}
 		if(StringUtils.isNotBlank(seoKeywords)){
-			courseware.seoKeywords.setValue(seoKeywords);
+			td.seoKeywords.setValue(seoKeywords);
 		}
 		if(StringUtils.isNotBlank(seoDescription)){
-			courseware.seoDescription.setValue(seoDescription);
+			td.seoDescription.setValue(seoDescription);
 		}
 		
-		return courseware.update(conn, " id = "+id);
+		return td.update(conn, " id = "+id);
 	}
 	
-	public long deleteCourseware(Connection conn,String ids) throws SQLException{
-		Dao.Tables.t_download courseware = new Dao().new Tables().new t_download();
+	
+	
+	public long deleteDownload(Connection conn,String ids) throws SQLException{
+		Dao.Tables.t_download td = new Dao().new Tables().new t_download();
 		
-		return courseware.delete(conn, " id in("+ids+") ");
+		return td.delete(conn, " id in("+ids+") ");
 	}
 	
 	public Map<String,String> queryCoursewareById(Connection conn,long id) throws SQLException, DataException{

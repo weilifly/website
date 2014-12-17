@@ -125,8 +125,15 @@ public class DownloadService extends BaseService {
 		}
 	}
 	
-	
-	public Map<String,Object> updateCourseware(long id,String name,String image,String path,Long categoryId,Integer sortIndex,Integer status,String seoTitle,String seoKeywords,String seoDescription) throws Exception{
+	/**
+	 * 修改下载资料 之业务处理
+	 * @return
+	 */
+	public Map<String,Object> updateDownload(
+			long id , String name , String image , String path,
+			Long categoryId , Integer sortIndex , Integer status , String seoTitle,
+			String seoKeywords,String seoDescription) throws Exception{
+		
 		Connection conn = null;
 		
 		long returnId = -1;
@@ -143,7 +150,7 @@ public class DownloadService extends BaseService {
 //				
 //			}
 			conn = MySQL.getConnection();
-			returnId = downloadDao.updateCourseware(conn,id, name, image, path, categoryId,  sortIndex, status, seoTitle, seoKeywords, seoDescription);
+			returnId = downloadDao.updateDownload(conn,id, name, image, path, categoryId,  sortIndex, status, seoTitle, seoKeywords, seoDescription);
 			if(returnId < 0){
 				conn.rollback();
 				return map;
@@ -170,12 +177,16 @@ public class DownloadService extends BaseService {
 		return map;
 	}
 	
-	public long deleteCourseware(String ids) throws Exception{
+	/**
+	 * 删除下载资料之 业务处理
+	 * @return
+	 */
+	public long deleteDownload(String ids) throws Exception{
 		Connection conn = connectionManager.getConnection();
 		
 		long returnId = -1;
 		try{
-			returnId = downloadDao.deleteCourseware(conn, ids);
+			returnId = downloadDao.deleteDownload(conn, ids);
 		}catch (Exception e) {
 			log.error(e);
 			e.printStackTrace();

@@ -64,6 +64,12 @@ public class DownloadAction extends BasePageAction {
 		}
 		//---查询的条件结束---
 		
+		//待添加size、seoTitle、seoKeywords、seoDescription
+				//	String size = request("size"); //size大小是自己输入的还是自动识别呢？自动的话怎么识别呢？	
+				//	String seoTitle = request("seoTitle");	
+				//	String seoKeywords = request("seoKeywords");	
+				//	String seoDescription = request("seoDescription");
+		
 		//---查询sql语句中的结果\排序条件\表名或视图名
 		String fieldList = "*"; //* 输出表或视图中所有列数据
 		String order = "order by addTime desc"; //按时间最近顺序排序
@@ -127,12 +133,13 @@ public class DownloadAction extends BasePageAction {
 		String name = request("name");
 		Long categoryId = Convert.strToLong(request("categoryId"), -1);
 		Integer status = Convert.strToInt(request("status"), -1);
+		Integer sortIndex = Convert.strToInt(request("sortIndex"), -1);
 		String path = request("path");
 		String image = request("image");
 		
 		JSONObject obj = new JSONObject();
 		
-		//obj.putAll(downloadService.updateCourseware(id,name, image, path, categoryId, null, null, status, null, null, null));
+		obj.putAll(downloadService.updateDownload(id , name , image, path, categoryId, sortIndex, status, null, null, null));
 		
 		JSONUtils.printObject(obj);
 		
@@ -155,7 +162,7 @@ public class DownloadAction extends BasePageAction {
 				return null;
 			}
 		
-			long returnId = downloadService.deleteCourseware(ids);
+			long returnId = downloadService.deleteDownload(ids);
 			if(returnId<=0){
 				return null;
 			}

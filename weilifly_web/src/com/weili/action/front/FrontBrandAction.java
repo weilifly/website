@@ -16,14 +16,14 @@ import com.weili.service.ConsumerService;
 import com.weili.service.DevelopmentService;
 import com.weili.service.KydReportService;
 import com.weili.service.NewspaperService;
-import com.weili.service.WeiliResearchesService;
+import com.weili.service.WeiliDisplayService;
 
 public class FrontBrandAction extends BaseFrontAction {
 
 	private static final long serialVersionUID = 1L;
 	private BrandService brandService;
 	private NewspaperService newspaperService;
-	private WeiliResearchesService weiliResearchesService;
+	private WeiliDisplayService weiliDisplayesService;
 	private KydReportService kydReportService;
 	private BrandAdvertiseService brandAdvertiseService;
 	private DevelopmentService developmentService;
@@ -68,8 +68,8 @@ public class FrontBrandAction extends BaseFrontAction {
 			pageBean.setPageSize(12);
 			int pageNum = Convert.strToInt(request("curPage"), 1);
 			pageBean.setPageNum(pageNum);
-			weiliResearchesService.queryWeiliResearchPageFront(pageBean, IConstants.STATUS_ON);
-			Map<String,String> newMap = weiliResearchesService.queryBrandRecommendedNews(IConstants.RECOMMEND_ON);
+			weiliDisplayesService.queryWeiliResearchPageFront(pageBean, IConstants.STATUS_ON);
+			Map<String,String> newMap = weiliDisplayesService.queryBrandRecommendedNews(IConstants.RECOMMEND_ON);
 			String regEx_html = "<[^>]+>";
 			String content = newMap.get("content");
 			Pattern p_html = Pattern.compile(regEx_html, Pattern.CASE_INSENSITIVE);
@@ -122,16 +122,16 @@ public class FrontBrandAction extends BaseFrontAction {
 		return "idea";
 	}
 	
-	public String weiliResearchDetail() throws Exception{
+	public String weiliDisplayDetail() throws Exception{
 		Long id = Convert.strToLong(request("id"), -1);
 		
-		weiliResearchesService.updateNewsViews(id);//增加浏览数
+		weiliDisplayesService.updateNewsViews(id);//增加浏览数
 		
-		Map<String,String> newsDetail = weiliResearchesService.queryWeiliResearchesById(id);
+		Map<String,String> newsDetail = weiliDisplayesService.queryWeiliResearchesById(id);
 		
 		paramMap = brandService.queryBrandById(IConstants.BRAND_ID_NEWS);
 		
-		Map<String,String> nextMap = weiliResearchesService.queryWeiliResearchesNextId(id);
+		Map<String,String> nextMap = weiliDisplayesService.queryWeiliResearchesNextId(id);
 		
 		request("newsDetail",newsDetail);
 		request("nextMap",nextMap);
@@ -204,8 +204,8 @@ public class FrontBrandAction extends BaseFrontAction {
 		this.newspaperService = newspaperService;
 	}
 
-	public void setWeiliResearchesService(WeiliResearchesService weiliResearchesService) {
-		this.weiliResearchesService = weiliResearchesService;
+	public void setWeiliResearchesService(WeiliDisplayService weiliDisplayesService) {
+		this.weiliDisplayesService = weiliDisplayesService;
 	}
 
 	public void setKydReportService(KydReportService kydReportService) {

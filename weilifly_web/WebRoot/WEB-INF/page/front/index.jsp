@@ -166,15 +166,15 @@
 						<dl class="zx-list">
 							<dt>
 								<!--内容缩略图 -->
-								<a href="weiliResearchesDetail.do?id=${bean.id}"><img
+								<a href="weiliDisplayesDetail.do?id=${bean.id}"><img
 									src="${bean.image}" /> </a>
 							</dt>
 							<dd>
 								<div style="height: 55px; overflow: hidden;">
 									<!--内容标题 -->
-									<a href="weiliResearchesDetail.do?id=${bean.id}" class="title">${bean.title}</a>
+									<a href="weiliDisplayesDetail.do?id=${bean.id}" class="title">${bean.title}</a>
 								</div>
-								<a href="weiliResearchesDetail.do?id=${bean.id}" class="btn"></a>
+								<a href="weiliDisplayesDetail.do?id=${bean.id}" class="btn"></a>
 							</dd>
 						</dl>
 					</s:iterator>
@@ -191,15 +191,15 @@
 						<dl class="zx-list">
 							<dt>
 								<!--内容缩略图 -->
-								<a href="weiliResearchesDetail.do?id=${bean.id}"><img
+								<a href="weiliDisplayesDetail.do?id=${bean.id}"><img
 									src="${bean.image}" /> </a>
 							</dt>
 							<dd>
 								<div style="height: 55px; overflow: hidden;">
 									<!--内容标题 -->
-									<a href="weiliResearchesDetail.do?id=${bean.id}" class="title">${bean.title}</a>
+									<a href="weiliDisplayesDetail.do?id=${bean.id}" class="title">${bean.title}</a>
 								</div>
-								<a href="weiliResearchesDetail.do?id=${bean.id}" class="btn"></a>
+								<a href="weiliDisplayesDetail.do?id=${bean.id}" class="btn"></a>
 							</dd>
 						</dl>
 					</s:iterator>
@@ -238,14 +238,14 @@
 					<s:iterator value="#request.newList" var="bean" status="st">
 						<dl class="zx-list">
 							<dt>
-								<a href="weiliResearchesDetail.do?id=${bean.id}"><img
+								<a href="weiliDisplayesDetail.do?id=${bean.id}"><img
 									src="${bean.image}" /> </a>
 							</dt>
 							<dd>
 								<div style="height: 55px; overflow: hidden;">
-									<a href="weiliResearchesDetail.do?id=${bean.id}" class="title">${bean.title}</a>
+									<a href="weiliDisplayesDetail.do?id=${bean.id}" class="title">${bean.title}</a>
 								</div>
-								<a href="weiliResearchesDetail.do?id=${bean.id}" class="btn"></a>
+								<a href="weiliDisplayesDetail.do?id=${bean.id}" class="btn"></a>
 							</dd>
 						</dl>
 					</s:iterator>

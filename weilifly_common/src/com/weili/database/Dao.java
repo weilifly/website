@@ -663,7 +663,7 @@ public class Dao {
 				}
 			}
 
-			public class t_weili_research extends Table {
+			public class t_weili_display extends Table {
 				public Field id = new Field(this, "`id`", Types.BIGINT, true);
 				public Field title = new Field(this, "`title`", Types.VARCHAR, false);
 				public Field source = new Field(this, "`source`", Types.VARCHAR, false);
@@ -680,17 +680,17 @@ public class Dao {
 				public Field seoDescription = new Field(this, "`seoDescription`", Types.VARCHAR, false);
 				public Field type = new Field(this, "`type`", Types.INTEGER, false);
 
-				public t_weili_research() {
-					name = "`t_weili_research`";
+				public t_weili_display() {
+					name = "`t_weili_display`";
 				}
 			}
 
-			public class t_weili_research_type extends Table {
+			public class t_weili_display_type extends Table {
 				public Field id = new Field(this, "`id`", Types.BIGINT, true);
 				public Field type_name = new Field(this, "`type_name`", Types.VARCHAR, false);
 
-				public t_weili_research_type() {
-					name = "`t_weili_research_type`";
+				public t_weili_display_type() {
+					name = "`t_weili_display_type`";
 				}
 			}
 		}

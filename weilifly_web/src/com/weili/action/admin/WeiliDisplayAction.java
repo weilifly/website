@@ -1,12 +1,14 @@
 package com.weili.action.admin;
 
 import com.shove.Convert;
+import com.shove.data.DataException;
 import com.shove.util.StringCommon;
 import com.shove.web.action.BasePageAction;
 import com.shove.web.util.JSONUtils;
 import com.weili.service.ConsumerService;
-import com.weili.service.WeiliResearchesService;
+import com.weili.service.WeiliDisplayService;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -15,15 +17,18 @@ import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.json.simple.JSONArray;
 
-public class WeiliResearchAction extends BasePageAction
+public class WeiliDisplayAction extends BasePageAction
 {
-  public static Log log = LogFactory.getLog(WeiliResearchAction.class);
-  private WeiliResearchesService weiliResearchesService;
+  public static Log log = LogFactory.getLog(WeiliDisplayAction.class);
+  private WeiliDisplayService weiliDisplayService;
   private ConsumerService consumerService;
   
   private List<Map<String,Object>> typeList;
+  private List<Map<String,Object>> parentTypeList;
   private List<Map<String,Object>> needsTypeList;
+  
   
   /**
    * 查询潜在用户初始化
@@ -145,12 +150,12 @@ public class WeiliResearchAction extends BasePageAction
  
  
   
-  public String queryWeiliResearchInit()
+  public String queryDisplayInit()
   {
     return "success";
   }
 
-  public String queryWeiliResearchInfo() throws Exception
+  public String queryDisplayInfo() throws Exception
   {
     String title = request("title");
     Integer status = Integer.valueOf(Convert.strToInt(request("status"), -1));
@@ -159,7 +164,7 @@ public class WeiliResearchAction extends BasePageAction
 
     String fieldList = "*";
     String order = "order by addTime desc";
-    String table = "t_weili_research";
+    String table = "t_weili_display";
 
     StringBuffer condition = new StringBuffer();
 
@@ -175,20 +180,20 @@ public class WeiliResearchAction extends BasePageAction
       condition.append(" and date_format(addTime,'%Y-%m-%d') <= '" + endDate + "'");
     }
 
-    this.weiliResearchesService.queryWeiliResearchPage(this.pageBean, fieldList, condition, order, table);
+    this.weiliDisplayService.queryWeiliResearchPage(this.pageBean, fieldList, condition, order, table);
     return "success";
   }
 
-  public String addWeiliResearchInit()
+  public String addDisplayInit()
     throws Exception
   {
-    List sortList = this.weiliResearchesService.querySort();
+    List sortList = this.weiliDisplayService.querySort();
     request().setAttribute("sortList", sortList);
 
     return "success";
   }
 
-  public String addWeiliResearch() throws Exception {
+  public String addDisplay() throws Exception {
     String title = request("title");
     String image = request("image");
     Integer status = Integer.valueOf(Convert.strToInt(request("status"), -1));
@@ -201,11 +206,12 @@ public class WeiliResearchAction extends BasePageAction
     String seoKeywords = request("seoKeywords");
     String seoDescription = request("seoDescription");
     String addTime = request("addTime");
-    Integer type = Integer.valueOf(Convert.strToInt(request("type"), -1));
+    Integer type = Integer.valueOf(Convert.strToInt(request("typeId"), -1));
+    Integer parentId = Integer.valueOf(Convert.strToInt(request("parentId"), -1));
 
     JSONObject obj = new JSONObject();
 
-    obj.putAll(this.weiliResearchesService.addWeiliResearch(title, source, null, image, 
+    obj.putAll(this.weiliDisplayService.addDisplay(title, source, null, image, 
       content, status, isRecommended, isIndex, sortIndex, 
       seoTitle, seoKeywords, seoDescription, addTime, type));
 
@@ -214,15 +220,15 @@ public class WeiliResearchAction extends BasePageAction
     return null;
   }
 
-  public String updateWeiliResearchInit()
+  public String updateDisplayInit()
     throws Exception
   {
     long id = Convert.strToLong(request("id"), -1L);
-    this.paramMap = this.weiliResearchesService.queryWeiliResearchesById(id);
+    this.paramMap = this.weiliDisplayService.queryWeiliResearchesById(id);
     return "success";
   }
 
-  public String updateWeiliResearch() throws Exception {
+  public String updateDisplay() throws Exception {
     long id = Convert.strToLong(request("id"), -1L);
     String title = request("title");
     String image = request("image");
@@ -239,14 +245,14 @@ public class WeiliResearchAction extends BasePageAction
 
     JSONObject obj = new JSONObject();
 
-    obj.putAll(this.weiliResearchesService.updateWeiliResearch(id, title, source, null, image, content, status, isRecommended, isIndex, sortIndex, seoTitle, seoKeywords, seoDescription, addTime));
+    obj.putAll(this.weiliDisplayService.updateDisplay(id, title, source, null, image, content, status, isRecommended, isIndex, sortIndex, seoTitle, seoKeywords, seoDescription, addTime));
 
     JSONUtils.printObject(obj);
 
     return null;
   }
 
-  public String deleteWeiliResearch() throws Exception {
+  public String deleteDisplay() throws Exception {
     JSONObject obj = new JSONObject();
 
     String ids = request("id");
@@ -259,7 +265,7 @@ public class WeiliResearchAction extends BasePageAction
         return null;
       }
 
-      long returnId = this.weiliResearchesService.deleteWeiliResearch(ids);
+      long returnId = this.weiliDisplayService.deleteDisplay(ids);
       if (returnId <= 0L) {
         return null;
       }
@@ -279,11 +285,12 @@ public class WeiliResearchAction extends BasePageAction
     return null;
   }
 
-  public void setWeiliResearchesService(WeiliResearchesService weiliResearchesService)
-  {
-    this.weiliResearchesService = weiliResearchesService;
-  }
-  public void setConsumerService(ConsumerService consumerService) {
+
+  
+  public void setWeiliDisplayService(WeiliDisplayService weiliDisplayService) {
+	this.weiliDisplayService = weiliDisplayService;
+}
+public void setConsumerService(ConsumerService consumerService) {
 	this.consumerService = consumerService;
   }
  
@@ -294,14 +301,57 @@ public class WeiliResearchAction extends BasePageAction
   public void setNeedsTypeList(List<Map<String, Object>> needsTypeList) {
 	this.needsTypeList = needsTypeList;
 }
+  
+  
+  
+  /**
+	 * 类型查询联动
+	 * @return
+	 * @throws Exception 
+	 */
+	public String ajaxqueryDisplayType() throws Exception{
+		Long parentId = Convert.strToLong(request("parentId"), -1);  //父编号
+		Integer order_num = Convert.strToInt(request("order_num"), -1);  //类型级别
+		//Long parentId = Convert.strToLong(request("parentId"), -1);
+		List<Map<String, Object>> list;
+		try {
+			list = weiliDisplayService.queryDisplayTypeList(parentId, order_num);
+		} catch (SQLException e) {
+			log.error(e);
+			e.printStackTrace();
+			throw e;
+		} catch (DataException e) {
+			log.error(e);
+			e.printStackTrace();
+			throw e;
+		}catch (Exception e) {
+			e.printStackTrace();
+			log.error(e);
+			throw e;
+		}
+		String jsonStr = JSONArray.toJSONString(list);
+		JSONUtils.printStr(jsonStr);
+		return null;
+	}
+  
+  
 /**
    * 微力展示内容类型查询
    * */
-  public List<Map<String, Object>> getTypeList() throws Exception{
-	  if(typeList == null){
-		  typeList = weiliResearchesService.queryWeiliResearchType("*","1=1");
+//  public List<Map<String, Object>> getTypeList() throws Exception{
+//	  if(typeList == null){
+//		  typeList = weiliDisplayService.queryWeiliResearchType("*","1=1");
+//	  }
+//	  return typeList;
+//  }
+  /**
+   * 微力展示内容父类型查询
+   * */
+  public List<Map<String, Object>> getParentTypeList() throws Exception{
+	  if(parentTypeList == null){
+		  parentTypeList = weiliDisplayService.queryWeiliResearchType("*","1=1 and parentId=-1");
 	  }
-	  return typeList;
+	  return parentTypeList;
   }
   /**
    * 用户需求类型查询

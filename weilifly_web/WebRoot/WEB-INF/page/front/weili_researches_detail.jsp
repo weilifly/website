@@ -51,7 +51,7 @@
 									上一篇：
 								</div>
 								<p style="line-height: 30px;">
-									<a href="weiliResearchesDetail.do?id=${nextMap.preId}">${nextMap.preTitle}</a>
+									<a href="weiliDisplayesDetail.do?id=${nextMap.preId}">${nextMap.preTitle}</a>
 								</p>
 							</li>
 						</s:if>
@@ -61,7 +61,7 @@
 									下一篇：
 								</div>
 								<p style="line-height: 30px;">
-									<a href="weiliResearchesDetail.do?id=${nextMap.nextId}">${nextMap.nextTitle}</a>
+									<a href="weiliDisplayesDetail.do?id=${nextMap.nextId}">${nextMap.nextTitle}</a>
 								</p>
 							</li>
 						</s:if>

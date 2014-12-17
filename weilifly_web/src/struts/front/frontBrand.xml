@@ -16,7 +16,7 @@
 			<result name="development" >/WEB-INF/page/front/brand_development.jsp</result>
 		</action>
 		
-		<action name="weiliResearchDetail" class="frontBrandAction" method="weiliResearchDetail">
+		<action name="weiliDisplayDetail" class="frontBrandAction" method="weiliDisplayDetail">
 			<result name="success" >/WEB-INF/page/front/brand_news_detail.jsp</result>
 		</action>
 		

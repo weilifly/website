@@ -35,19 +35,19 @@
 						</a>
 						<div>
 							<p class="title">
-								<a href="weiliResearchesDetail.do?id=${newMap.id }">${newMap.title }</a><span>${newMap.addTime }</span>
+								<a href="weiliDisplayesDetail.do?id=${newMap.id }">${newMap.title }</a><span>${newMap.addTime }</span>
 								</p>
 									<p class="txt">
 										<shove:sub value="#request.newMap.content" size="100" suffix="..."/>
 									</p>
-									<a href="weiliResearchesDetail.do?id=${newMap.id }" class="ck-btn">查看详情</a>
+									<a href="weiliDisplayesDetail.do?id=${newMap.id }" class="ck-btn">查看详情</a>
 						</div>
 					</div>
 
 					<ul class="pp-info-news">
 						<s:iterator value="pageBean.page" var="bean" status="st">
 							<li>
-								<span><s:date name="#bean.addTime" format="yyyy-MM-dd HH:mm:ss" /></span><a href="weiliResearchesDetail.do?id=${bean.id }">${bean.title }</a>
+								<span><s:date name="#bean.addTime" format="yyyy-MM-dd HH:mm:ss" /></span><a href="weiliDisplayesDetail.do?id=${bean.id }">${bean.title }</a>
 							</li>
 						</s:iterator>
 					</ul>

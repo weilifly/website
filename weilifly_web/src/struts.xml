@@ -45,7 +45,7 @@
 	<include file="struts/admin/info.xml" />
 	<include file="struts/admin/infoContent.xml" />
 	<include file="struts/admin/brandAdvertise.xml" />
-	<include file="struts/admin/weiliResearches.xml" />
+	<include file="struts/admin/weiliDisplay.xml" />
 	<include file="struts/admin/development.xml" />
 	<include file="struts/admin/banner.xml" />
 	<include file="struts/admin/seoPage.xml" />

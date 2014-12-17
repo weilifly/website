@@ -13,19 +13,56 @@ import org.apache.commons.logging.LogFactory;
 
 import com.shove.Convert;
 import com.shove.base.BaseService;
+import com.shove.data.DataException;
 import com.shove.data.DataSet;
 import com.shove.data.dao.MySQL;
 import com.shove.util.BeanMapUtils;
 import com.shove.vo.PageBean;
 import com.weili.constants.IConstants;
-import com.weili.dao.WeiliResearchesDao;
+import com.weili.dao.WeiliDisplayDao;
 
-public class WeiliResearchesService extends BaseService {
+public class WeiliDisplayService extends BaseService {
 	
-	public static Log log = LogFactory.getLog(WeiliResearchesService.class);
+	public static Log log = LogFactory.getLog(WeiliDisplayService.class);
 	
-	private WeiliResearchesDao weiliResearchesDao;
+	private WeiliDisplayDao weiliDisplayDao;
 
+	
+	
+	/**
+	 * 类型查询联动
+	* @Title: queryDisplayTypeList
+	* @Description: TODO
+	* @param id  
+	* @param parentId  父ID
+	* @param order_num  类型级别
+	* @return
+	* @throws Exception
+	* @return List<Map<String,Object>>
+	* @throws
+	 */
+	public List<Map<String, Object>> queryDisplayTypeList( Long parentId, Integer order_num) throws Exception{
+		Connection conn = connectionManager.getConnection();
+		List<Map<String, Object>> listMap = null;
+		try {
+			listMap = weiliDisplayDao.queryDisplayTypeList(conn, parentId, order_num);
+		} catch (SQLException e) {
+			log.error(e);
+			e.printStackTrace();
+			throw e;
+		} catch (DataException e) {
+			log.error(e);
+			e.printStackTrace();
+			throw e;
+		} catch(Exception e){
+			log.error(e);
+			e.printStackTrace();
+			throw e;
+		}finally {
+			conn.close();
+		}
+		return listMap;
+	}
 	
 	//查询微力研究院内容属类表querySort()
 	public List<Map<String,String>> querySort() throws Exception{
@@ -35,7 +72,7 @@ public class WeiliResearchesService extends BaseService {
 		try{
 			conn = MySQL.getConnection();
 
-			map = weiliResearchesDao.querySort(conn);
+			map = weiliDisplayDao.querySort(conn);
 			conn.commit();
 		}catch (Exception e) {
 			if(conn != null){
@@ -55,7 +92,7 @@ public class WeiliResearchesService extends BaseService {
 	
 	
 	//添加微力研究院的内容
-	public Map<String,Object> addWeiliResearch(String title,String source,Long views,
+	public Map<String,Object> addDisplay(String title,String source,Long views,
 			String image,String content,Integer status,Integer isRecommended,
 			Integer isIndex,Integer sortIndex,String seoTitle,String seoKeywords,
 			String seoDescription,String addTime,Integer type) throws Exception{
@@ -75,7 +112,7 @@ public class WeiliResearchesService extends BaseService {
 				
 			}
 			conn = MySQL.getConnection();
-			returnId = weiliResearchesDao.addWeiliResearch(conn, title, source, views, image,  content, status, isRecommended, 
+			returnId = weiliDisplayDao.addDisplay(conn, title, source, views, image,  content, status, isRecommended, 
 					isIndex, sortIndex, seoTitle, seoKeywords, seoDescription,addTime,type);
 			if(returnId <= 0){
 				conn.rollback();
@@ -158,7 +195,7 @@ public class WeiliResearchesService extends BaseService {
 		}
 	}
 	
-	public Map<String,Object> updateWeiliResearch(long id,String title,String source,Long views,String image,String content,Integer status,Integer isRecommended,Integer isIndex,Integer sortIndex,String seoTitle,String seoKeywords,String seoDescription,String addTime) throws Exception{
+	public Map<String,Object> updateDisplay(long id,String title,String source,Long views,String image,String content,Integer status,Integer isRecommended,Integer isIndex,Integer sortIndex,String seoTitle,String seoKeywords,String seoDescription,String addTime) throws Exception{
 		Connection conn = null;
 		
 		long returnId = -1;
@@ -175,7 +212,7 @@ public class WeiliResearchesService extends BaseService {
 				
 			}
 			conn = MySQL.getConnection();
-			returnId = weiliResearchesDao.updateWeiliResearch(conn, id, title, source, views, image,  content, status, isRecommended, isIndex, sortIndex, seoTitle, seoKeywords, seoDescription,addTime);
+			returnId = weiliDisplayDao.updateDisplay(conn, id, title, source, views, image,  content, status, isRecommended, isIndex, sortIndex, seoTitle, seoKeywords, seoDescription,addTime);
 			if(returnId <= 0){
 				conn.rollback();
 				return map;
@@ -202,12 +239,12 @@ public class WeiliResearchesService extends BaseService {
 		return map;
 	}
 	
-	public long deleteWeiliResearch(String ids) throws Exception{
+	public long deleteDisplay(String ids) throws Exception{
 		Connection conn = connectionManager.getConnection();
 		
 		long returnId = -1;
 		try{
-			returnId = weiliResearchesDao.deleteWeiliResearch(conn, ids);
+			returnId = weiliDisplayDao.deleteDisplay(conn, ids);
 		}catch (Exception e) {
 			log.error(e);
 			e.printStackTrace();
@@ -224,7 +261,7 @@ public class WeiliResearchesService extends BaseService {
 		
 		Map<String,String> map = new HashMap<String, String>();
 		try{
-			map = weiliResearchesDao.queryWeiliResearchById(conn, id);
+			map = weiliDisplayDao.queryWeiliResearchById(conn, id);
 		}catch (Exception e) {
 			log.error(e);
 			e.printStackTrace();
@@ -241,23 +278,23 @@ public class WeiliResearchesService extends BaseService {
 		
 		Map<String,String> map = new HashMap<String, String>();
 		try{
-			DataSet ds = MySQL.executeQuery(conn, "select min(id) as preId from t_weili_research where id > "+id);
+			DataSet ds = MySQL.executeQuery(conn, "select min(id) as preId from t_weili_display where id > "+id);
 			Map<String,String> nMap = BeanMapUtils.dataSetToMap(ds);
 			if(nMap != null&&!nMap.isEmpty()){
 				Long preId = Convert.strToLong(nMap.get("preId"), -1);
 				map.put("preId", preId+"");
-				ds = MySQL.executeQuery(conn, "select title from t_weili_research where id = "+preId);
+				ds = MySQL.executeQuery(conn, "select title from t_weili_display where id = "+preId);
 				Map<String,String> tMap = BeanMapUtils.dataSetToMap(ds);
 				if(tMap != null&&!tMap.isEmpty()){
 					map.put("preTitle", tMap.get("title"));
 				}
 			}
-			ds = MySQL.executeQuery(conn, "select max(id) as nextId from t_weili_research where id < "+id);
+			ds = MySQL.executeQuery(conn, "select max(id) as nextId from t_weili_display where id < "+id);
 			nMap = BeanMapUtils.dataSetToMap(ds);
 			if(nMap != null&&!nMap.isEmpty()){
 				Long nextId = Convert.strToLong(nMap.get("nextId"), -1);
 				map.put("nextId", nextId+"");
-				ds = MySQL.executeQuery(conn, "select title from t_weili_research where id = "+nextId);
+				ds = MySQL.executeQuery(conn, "select title from t_weili_display where id = "+nextId);
 				Map<String,String> tMap = BeanMapUtils.dataSetToMap(ds);
 				if(tMap != null&&!tMap.isEmpty()){
 					map.put("nextTitle", tMap.get("title"));
@@ -280,7 +317,7 @@ public class WeiliResearchesService extends BaseService {
 		
 		long returnId = -1;
 		try{
-			returnId = MySQL.executeNonQuery(conn, "update t_weili_research set views = views+1 where id = "+id);
+			returnId = MySQL.executeNonQuery(conn, "update t_weili_display set views = views+1 where id = "+id);
 			if(returnId < 0){
 				conn.rollback();
 				return returnId;
@@ -303,7 +340,7 @@ public class WeiliResearchesService extends BaseService {
 		
 		Map<String,String> map = new HashMap<String, String>();
 		try{
-			map = weiliResearchesDao.queryBrandRecommendedNews(conn, isRecommended);
+			map = weiliDisplayDao.queryBrandRecommendedNews(conn, isRecommended);
 		}catch (Exception e) {
 			log.error(e);
 			e.printStackTrace();
@@ -320,7 +357,7 @@ public class WeiliResearchesService extends BaseService {
 		
 		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
 		try{
-			list = weiliResearchesDao.queryWeiliResearchAll(conn, fieldList, condition, order);
+			list = weiliDisplayDao.queryWeiliResearchAll(conn, fieldList, condition, order);
 		}catch (Exception e) {
 			log.error(e);
 			e.printStackTrace();
@@ -347,7 +384,7 @@ public class WeiliResearchesService extends BaseService {
 		}
 		
 		try{
-			list = weiliResearchesDao.queryWeiliResearchAll(conn, "*", condition.toString(), "addTime desc");
+			list = weiliDisplayDao.queryWeiliResearchAll(conn, "*", condition.toString(), "addTime desc");
 		}catch (Exception e) {
 			log.error(e);
 			e.printStackTrace();
@@ -377,7 +414,7 @@ public class WeiliResearchesService extends BaseService {
 		
 		
 		try{
-			DataSet ds = MySQL.executeQuery(conn, "select * from t_weili_research "+condition.toString()+" ORDER BY addTime desc LIMIT 4");
+			DataSet ds = MySQL.executeQuery(conn, "select * from t_weili_display "+condition.toString()+" ORDER BY addTime desc LIMIT 4");
 			ds.tables.get(0).rows.genRowsMap();
 			
 			list =  ds.tables.get(0).rows.rowsMap;
@@ -412,7 +449,7 @@ public class WeiliResearchesService extends BaseService {
 			condition.append(" and `status` = "+status);
 		}
 		try{
-			dataPage(conn, pageBean, "t_weili_research", "*", " order by addTime desc", condition.toString());
+			dataPage(conn, pageBean, "t_weili_display", "*", " order by addTime desc", condition.toString());
 		}catch (Exception e) {
 			log.error(e);
 			e.printStackTrace();
@@ -432,7 +469,7 @@ public class WeiliResearchesService extends BaseService {
 		
 		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
 		try{
-			list = weiliResearchesDao.queryWeiliResearchType(conn, fieldList, condition);
+			list = weiliDisplayDao.queryWeiliResearchType(conn, fieldList, condition);
 		}catch (Exception e) {
 			log.error(e);
 			e.printStackTrace();
@@ -442,10 +479,10 @@ public class WeiliResearchesService extends BaseService {
 		}
 		return list;
 	}
-	
-	public void setWeiliResearchesDao(WeiliResearchesDao weiliResearchesDao) {
-		this.weiliResearchesDao = weiliResearchesDao;
+
+
+	public void setWeiliDisplayDao(WeiliDisplayDao weiliDisplayDao) {
+		this.weiliDisplayDao = weiliDisplayDao;
 	}
 	
-
 }

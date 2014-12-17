@@ -15,7 +15,7 @@ import com.weili.database.Dao.Tables;
 import com.weili.database.Dao.Tables.t_banner;
 import com.weili.database.Dao.Tables.t_brand;
 import com.weili.database.Dao.Tables.t_user;
-import com.weili.database.Dao.Tables.t_weili_research_type;
+import com.weili.database.Dao.Tables.t_weili_display_type;
 
 public class ConsumerDao {
 	

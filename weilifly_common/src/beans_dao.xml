@@ -33,7 +33,7 @@
   <bean id="designDao" class="com.weili.dao.DesignDao" />
   <bean id="kydReportDao" class="com.weili.dao.KydReportDao" /> 
   <bean id="brandAdvertiseDao" class="com.weili.dao.BrandAdvertiseDao" /> 
-  <bean id="weiliResearchesDao" class="com.weili.dao.WeiliResearchesDao" /> 
+  <bean id="weiliDisplayDao" class="com.weili.dao.WeiliDisplayDao" /> 
   <bean id="developmentDao" class="com.weili.dao.DevelopmentDao" /> 
   <bean id="recruitDao" class="com.weili.dao.RecruitDao" />
   <bean id="infoDao" class="com.weili.dao.InfoDao" />

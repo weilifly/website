@@ -174,9 +174,9 @@
    	<bean id="developmentService" class="com.weili.service.DevelopmentService" parent="baseService">
    	   <property name="developmentDao" ref="developmentDao"/>
    	</bean>  
-   	<!-- 微力研究学院管理 -->
-   	<bean id="weiliResearchesService" class="com.weili.service.WeiliResearchesService" parent="baseService">
-   	   <property name="weiliResearchesDao" ref="weiliResearchesDao"/>
+   	<!-- 微力展示内容(微力研究院，O2O兵器库，标杆案例)管理 -->
+   	<bean id="weiliDisplayService" class="com.weili.service.WeiliDisplayService" parent="baseService">
+   	   <property name="weiliDisplayDao" ref="weiliDisplayDao"/>
    	</bean> 
    		<!--Banner管理 -->
    	<bean id="bannerService" class="com.weili.service.BannerService" parent="baseService">

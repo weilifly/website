@@ -22,10 +22,10 @@ import com.weili.service.QuestionService;
 import com.weili.service.RecruitService;
 import com.weili.service.DownloadService;
 import com.weili.service.WebDistributeService;
-import com.weili.service.WeiliResearchesService;
+import com.weili.service.WeiliDisplayService;
 
 public class SearchAction extends BaseFrontAction {
-	private WeiliResearchesService WeiliResearchesService;  //品牌资讯
+	private WeiliDisplayService WeiliResearchesService;  //品牌资讯
 	private QuestionService questionService; //常见问题
 	private BrandService brandService;  //品牌
 	private ProductCategoryService productCategoryService;  //产品类型
@@ -77,7 +77,7 @@ public class SearchAction extends BaseFrontAction {
 					totalNum ++ ;
 					Map<String,String> rMap = new HashMap<String, String>();
 					rMap.put("title", map.get("title")+"");
-					rMap.put("url", "weiliResearchDetail.do?id="+map.get("id"));
+					rMap.put("url", "weiliDisplayDetail.do?id="+map.get("id"));
 					allResultList.add(rMap);
 				}
 			}
@@ -210,7 +210,7 @@ public class SearchAction extends BaseFrontAction {
 		return SUCCESS;
 	}
 
-	public void setWeiliResearchesService(WeiliResearchesService WeiliResearchesService) {
+	public void setWeiliResearchesService(WeiliDisplayService WeiliResearchesService) {
 		this.WeiliResearchesService = WeiliResearchesService;
 	}
 

@@ -40,9 +40,9 @@
 		<location>/WEB-INF/page/exception.jsp</location>  
 	</error-page>
 
-	<error-page>
+	<!-- <error-page>
 		<error-code>404</error-code>
 		<location>/WEB-INF/page/exception.jsp</location>
-	</error-page>
+	</error-page> -->
 
 </web-app>

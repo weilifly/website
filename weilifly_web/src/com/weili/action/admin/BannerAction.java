@@ -5,8 +5,11 @@ import java.util.Map;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.shove.Convert;
+import com.shove.util.StringCommon;
 import com.shove.web.action.BasePageAction;
 import com.shove.web.util.JSONUtils;
 import com.weili.service.BannerService;
@@ -14,6 +17,7 @@ import com.weili.service.BannerService;
 
 public class BannerAction extends BasePageAction<Map<String, Object>> {
 		
+	public static Log log = LogFactory.getLog(BannerAction.class);
 	private BannerService bannerService;
 	
 	
@@ -92,7 +96,7 @@ public class BannerAction extends BasePageAction<Map<String, Object>> {
 	public  String queryBanner() throws Exception {
 		String title=request("title");
 		int type=Convert.strToInt(request("type"), -1);
-		int sortIndex=Convert.strToInt(request("sortIndex"), -1);
+		int status=Convert.strToInt(request("status"), -1);
 		StringBuffer condition=new StringBuffer();
 		if(StringUtils.isNotBlank(title)){
 			condition.append(" AND title like concat('%','"+title+"','%')");			
@@ -100,30 +104,48 @@ public class BannerAction extends BasePageAction<Map<String, Object>> {
 		if(type>0){
 			condition.append(" AND type="+type);
 		}
-		if(sortIndex>0){
-			condition.append(" AND sortIndex="+sortIndex);
+		if(status>0){
+			condition.append(" AND status="+status);
 		}		
 		bannerService.queryBannerPage(pageBean, "*", condition, " order by addTime desc", "t_banner");
 		System.out.println(pageBean.pageNum);
 		return SUCCESS;
 	}
 	
-	
 	/**
 	 * 删除
 	 * @return
-	 * @throws Exception
 	 */
-	public String deleteBanner() throws Exception {
-		String ids=request("id");
-		Long result=bannerService.deleteBanner(ids);
-		if(result<0){
-			this.addFieldError("errorMessage","删除失败");
-			return INPUT;
+	public String deleteBanner() throws Exception{
+		JSONObject obj = new JSONObject();
+		
+		String ids = request("id");
+		
+		String msg = "删除失败！";
+		
+		try {
+			int rid = StringCommon.checkIds(ids);
+			if(rid<=0){
+				return null;
+			}
+		
+			long returnId = bannerService.deleteBanner(ids);
+			if(returnId<=0){
+				return null;
+			}
+			
+			msg = "1";
+			
+		} catch (Exception e) {
+			log.error(e);
+			e.printStackTrace();
+			msg = "删除失败！";
+		}finally{
+			obj.put("msg", msg);
+			JSONUtils.printObject(obj);
 		}
-		return SUCCESS;
+		return null;
 	}
-
 
 	public void setBannerService(BannerService bannerService) {
 		this.bannerService = bannerService;
