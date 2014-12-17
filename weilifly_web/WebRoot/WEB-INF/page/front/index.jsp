@@ -8,17 +8,18 @@
 <meta name="keywords" content="${seoMap.seoKeyWord}" />
 <meta name="description" content="${seoMap.seoDescription}" />
 <link href="css/Common.css" type="text/css" rel="stylesheet" />
-<script src="script/jquery.min.js"></script>
-<script src="script/slider.js"></script>
-<script type="text/javascript" src="kindeditor/plugins/jwplayer/jwplayer.js"></script>
-<script src="script/easing.js"></script>
-<script src="script/commom.js"></script>
+		<script src="script/jquery.min.js"></script>
+		<script src="script/slider.js"></script>
+		<script type="text/javascript"
+			src="kindeditor/plugins/jwplayer/jwplayer.js"></script>
+		<script src="script/easing.js"></script>
+		<script src="script/commom.js"></script>
 
 <script type="text/javascript">
 		var thePlayer;
 		$(function(){
-			  videoInit("${paramMap.var}","${paramMap.image}");
-		      $("#slider").slider({
+			 videoInit("${paramMap.var}","${paramMap.image}");
+		      $('#slider').slider({
 		         motion:{
 		            DB_1_1:{left:200,opacity:0,speed:700,delay:600},
 		            DB_1_2:{left:800,opacity:0,speed:1200,delay:500},

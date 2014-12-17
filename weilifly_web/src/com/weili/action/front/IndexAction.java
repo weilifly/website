@@ -10,7 +10,7 @@ import com.weili.service.WeiliDisplayService;
 
 public class IndexAction extends BaseFrontAction {
 	private BannerService bannerService;
-	private WeiliDisplayService weiliDisplayesService;
+	private WeiliDisplayService weiliDisplayService;
 	private ProductService productService;
 	
 	
@@ -18,7 +18,7 @@ public class IndexAction extends BaseFrontAction {
 
 	public String index() throws Exception {
 		
-		List<Map<String, Object>> newList = weiliDisplayesService.queryWeiliResearchIndex(IConstants.STATUS_ON);
+		List<Map<String, Object>> newList = weiliDisplayService.queryWeiliResearchIndex(IConstants.STATUS_ON);
 		
 		List<Map<String,Object>> productList = getConfigService().queryProductConfigByType(IConstants.CONFIG_TYPE_PRODUCT);
 		
@@ -49,8 +49,8 @@ public class IndexAction extends BaseFrontAction {
 		this.bannerService = bannerService;
 	}
 
-	public void setWeiliResearchesService(WeiliDisplayService weiliDisplayesService) {
-		this.weiliDisplayesService = weiliDisplayesService;
+	public void setWeiliDisplayService(WeiliDisplayService weiliDisplayService) {
+		this.weiliDisplayService = weiliDisplayService;
 	}
 
 	public void setProductService(ProductService productService) {

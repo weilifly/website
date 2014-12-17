@@ -23,7 +23,7 @@ public class FrontBrandAction extends BaseFrontAction {
 	private static final long serialVersionUID = 1L;
 	private BrandService brandService;
 	private NewspaperService newspaperService;
-	private WeiliDisplayService weiliDisplayesService;
+	private WeiliDisplayService weiliDisplayService;
 	private KydReportService kydReportService;
 	private BrandAdvertiseService brandAdvertiseService;
 	private DevelopmentService developmentService;
@@ -68,8 +68,8 @@ public class FrontBrandAction extends BaseFrontAction {
 			pageBean.setPageSize(12);
 			int pageNum = Convert.strToInt(request("curPage"), 1);
 			pageBean.setPageNum(pageNum);
-			weiliDisplayesService.queryWeiliResearchPageFront(pageBean, IConstants.STATUS_ON);
-			Map<String,String> newMap = weiliDisplayesService.queryBrandRecommendedNews(IConstants.RECOMMEND_ON);
+			weiliDisplayService.queryWeiliResearchPageFront(pageBean, IConstants.STATUS_ON);
+			Map<String,String> newMap = weiliDisplayService.queryBrandRecommendedNews(IConstants.RECOMMEND_ON);
 			String regEx_html = "<[^>]+>";
 			String content = newMap.get("content");
 			Pattern p_html = Pattern.compile(regEx_html, Pattern.CASE_INSENSITIVE);
@@ -125,13 +125,13 @@ public class FrontBrandAction extends BaseFrontAction {
 	public String weiliDisplayDetail() throws Exception{
 		Long id = Convert.strToLong(request("id"), -1);
 		
-		weiliDisplayesService.updateNewsViews(id);//增加浏览数
+		weiliDisplayService.updateNewsViews(id);//增加浏览数
 		
-		Map<String,String> newsDetail = weiliDisplayesService.queryWeiliResearchesById(id);
+		Map<String,String> newsDetail = weiliDisplayService.queryWeiliResearchesById(id);
 		
 		paramMap = brandService.queryBrandById(IConstants.BRAND_ID_NEWS);
 		
-		Map<String,String> nextMap = weiliDisplayesService.queryWeiliResearchesNextId(id);
+		Map<String,String> nextMap = weiliDisplayService.queryWeiliResearchesNextId(id);
 		
 		request("newsDetail",newsDetail);
 		request("nextMap",nextMap);
@@ -204,8 +204,8 @@ public class FrontBrandAction extends BaseFrontAction {
 		this.newspaperService = newspaperService;
 	}
 
-	public void setWeiliResearchesService(WeiliDisplayService weiliDisplayesService) {
-		this.weiliDisplayesService = weiliDisplayesService;
+	public void setWeiliResearchesService(WeiliDisplayService weiliDisplayService) {
+		this.weiliDisplayService = weiliDisplayService;
 	}
 
 	public void setKydReportService(KydReportService kydReportService) {
