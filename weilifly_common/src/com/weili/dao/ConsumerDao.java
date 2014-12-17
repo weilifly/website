@@ -2,6 +2,7 @@ package com.weili.dao;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
@@ -14,6 +15,7 @@ import com.weili.database.Dao.Tables;
 import com.weili.database.Dao.Tables.t_banner;
 import com.weili.database.Dao.Tables.t_brand;
 import com.weili.database.Dao.Tables.t_user;
+import com.weili.database.Dao.Tables.t_weili_research_type;
 
 public class ConsumerDao {
 	
@@ -88,4 +90,17 @@ public class ConsumerDao {
 		return tc.update(conn, " id = "+id);
 	}
 
+	/**
+	 * 获取用户需求分类列表 之数据处理
+	 * @return
+	 */
+	public List<Map<String, Object>> queryNeedsType(
+			Connection conn,String fieldList,String condition)throws SQLException, DataException {
+		Dao.Tables.t_needs tn = new Dao().new Tables().new t_needs();
+		
+		DataSet ds = tn.open(conn, fieldList, condition,"", -1, -1);
+		
+		ds.tables.get(0).rows.genRowsMap();
+		return ds.tables.get(0).rows.rowsMap;
+	}
 }

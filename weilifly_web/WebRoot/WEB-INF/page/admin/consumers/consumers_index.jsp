@@ -27,6 +27,8 @@
 			
 				praData["cTelephone"] = $("#cTelephone").val();
 				praData["cName"] = $("#cName").val();
+				praData["address"] = $("#address").val();
+				praData["needId"] = $("#needId").val();
 				
 		 		$.shovePost("queryConsumersInfo.do",praData,initCallBack);
 		 	}
@@ -126,8 +128,18 @@
 										<input id="cTelephone" name="paramMap.cTelephone" type="text"/>
 										&nbsp;&nbsp;
 										
-										<input id="bt_search" type="button" value="搜索"  />
-									</td>
+										地址：
+										<input id="address" name="paramMap.address" type="text"/>
+										&nbsp;&nbsp;
+										
+										需求类型：
+											<s:select list="needsTypeList" id="needId" name="paramMap.needId" listKey="id" listValue="needs_name" headerKey="-2" headerValue="--请选择--"></s:select>
+											<span style="color: red;">*<s:fielderror
+											fieldName="paramMap.needId" />
+											</span>
+										
+											<input id="bt_search" type="button" value="搜索"  />
+										</td>
 								</tr>
 							</tbody>
 						</table>

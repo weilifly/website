@@ -23,6 +23,7 @@ public class WeiliResearchAction extends BasePageAction
   private ConsumerService consumerService;
   
   private List<Map<String,Object>> typeList;
+  private List<Map<String,Object>> needsTypeList;
   
   /**
    * 查询潜在用户初始化
@@ -45,7 +46,7 @@ public class WeiliResearchAction extends BasePageAction
     String cName = request("cName");
     String cTelephone = request("cTelephone");
     String address = request("address");
-    Integer needStatus = Integer.valueOf(Convert.strToInt(request("needStatus"), -1));
+    Integer needStatus = Integer.valueOf(Convert.strToInt(request("needId"), -1));
     String needContent = request("needContent");
     String startDate = request("startDate");
     String endDate = request("endDate");
@@ -289,14 +290,27 @@ public class WeiliResearchAction extends BasePageAction
   public void setTypeList(List<Map<String, Object>> typeList) {
 		this.typeList = typeList;
   }
-  /**
-   * 
+  
+  public void setNeedsTypeList(List<Map<String, Object>> needsTypeList) {
+	this.needsTypeList = needsTypeList;
+}
+/**
+   * 微力展示内容类型查询
    * */
   public List<Map<String, Object>> getTypeList() throws Exception{
 	  if(typeList == null){
 		  typeList = weiliResearchesService.queryWeiliResearchType("*","1=1");
 	  }
 	  return typeList;
+  }
+  /**
+   * 用户需求类型查询
+   * */
+  public List<Map<String, Object>> getNeedsTypeList() throws Exception{
+	  if(needsTypeList == null){
+		  needsTypeList = consumerService.queryNeedsType("*","1=1");
+	  }
+	  return needsTypeList;
   }
   
 }

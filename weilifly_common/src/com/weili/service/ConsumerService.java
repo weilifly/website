@@ -2,7 +2,9 @@ package com.weili.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -147,6 +149,27 @@ public class ConsumerService extends BaseService {
 			map.put("error", error);
 		}
 		return map;
+	}
+	
+	
+	/**
+	 * 获取用户需求分类列表 之业务处理
+	 * @return
+	 */
+	public List<Map<String,Object>> queryNeedsType(String fieldList,String condition) throws Exception{
+		Connection conn = connectionManager.getConnection();
+		
+		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
+		try{
+			list = consumerDao.queryNeedsType(conn, fieldList, condition);
+		}catch (Exception e) {
+			log.error(e);
+			e.printStackTrace();
+			throw e;
+		}finally{
+			conn.close();
+		}
+		return list;
 	}
 	//待用1
 	public Map<String,Object> updateConsumer(long id,String title,String source,Long views,String image,String content,Integer status,Integer isRecommended,Integer isIndex,Integer sortIndex,String seoTitle,String seoKeywords,String seoDescription,String addTime) throws Exception{
