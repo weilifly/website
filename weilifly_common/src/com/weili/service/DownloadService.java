@@ -341,10 +341,10 @@ public class DownloadService extends BaseService {
 	 * 增加下载量
 	 * @throws Exception 
 	 * */
-	public void updateDownNum(Integer categoryId) throws Exception{
+	public void updateDownNum(Integer id) throws Exception{
 		Connection conn = MySQL.getConnection();
 		try{
-			MySQL.executeNonQuery(conn, "update t_download set down_num = down_num+1 where categoryId = "+categoryId); 
+			MySQL.executeNonQuery(conn, "update t_download set down_num = down_num+1 where id = "+id); 
 		}catch (Exception e) {
 			log.error(e);
 			e.printStackTrace();

@@ -89,19 +89,18 @@ public class FrontDownloadAction extends BaseFrontAction {
 	 * @throws Exception 
 	 */
 	public String downloadData() throws Exception{
-		Integer categoryId = Convert.strToInt(request("categoryId"), -1);
+		Integer id = Convert.strToInt(request("id"), -1);
 		String filePath = request("filePath");
 		if (StringUtils.isNotBlank(filePath)) {
 			if(filePath.startsWith("upload")){
 				FileUtils.downloadFile(ServletActionContext.getServletContext().getRealPath("/")+filePath, response());
-				downloadService.updateDownNum(categoryId);
+				//下载量
+				downloadService.updateDownNum(id);
 				return null;
 			}else{
 				response().sendRedirect(filePath);
 			}
-			
 		}
-		
 		return null;
 	}
 	
@@ -258,9 +257,9 @@ public class FrontDownloadAction extends BaseFrontAction {
 		pageBean.setPageSize(9);
 		downloadService.queryPreDownload(pageBean, IConstants.STATUS_ON,null);
 		
-		List<Map<String,Object>> coursewareList = pageBean.getPage();
+		List<Map<String,Object>> PreDownloadList = pageBean.getPage();
 		
-		request("coursewareList",coursewareList);
+		request("coursewareList",PreDownloadList);
 	}
 	
 	private void queryAdvertise() throws Exception{

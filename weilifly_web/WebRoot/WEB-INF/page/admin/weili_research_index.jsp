@@ -94,13 +94,13 @@
 						<tr>
 							<td width="100" height="28" align="center" bgcolor="#CC0000"
 								class="white12">
-								<a href="queryWeiliResearchInit.do">微力研究内容列表</a>
+								<a href="queryWeiliResearchInit.do">微力研究列表</a>
 							</td>
 							<td width="2">
 								&nbsp;
 							</td>
 							<td width="100" align="center" bgcolor="#8594A9" class="white12">
-								<a href="addWeiliResearchInit.do">添加微力研究内容</a>
+								<a href="addWeiliResearchInit.do">添加微力研究</a>
 							</td>
 							<td>
 								&nbsp;

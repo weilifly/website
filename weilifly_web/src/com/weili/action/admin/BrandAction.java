@@ -172,4 +172,42 @@ public class BrandAction extends BasePageAction {
 		this.brandService = brandService;
 	}
 	
+	
+	/**
+	 * 查询微力展示内容初始化
+	 * @return
+	 */
+	public String queryWeiliResearchTypeInit(){
+		return SUCCESS;
+	}
+	/**
+	 * 查询微力展示内容
+	 * @return
+	 */
+	public String queryWeiliResearchTypeInfo() throws Exception{
+		String name = request("name");
+		Integer status = Convert.strToInt(request("status"), -1);
+		Long parentId = Convert.strToLong(request("parentId"), -1);
+		
+		String fieldList = "*";
+		String order = "order by sortIndex asc";
+		String table = "t_brand";
+		
+		StringBuffer condition = new StringBuffer();
+		
+		if(parentId != null){
+			condition.append(" and parentId = "+parentId);
+		}
+		
+		if(StringUtils.isNotBlank(name)){
+			condition.append(" and `name` LIKE CONCAT('%','"+name.trim()+"','%')");
+		}
+		if(status != null&&status > 0){
+			condition.append(" and `status` = "+status);
+		}
+		
+		brandService.queryBrandPage(pageBean, fieldList, condition, order, table);
+		
+		return SUCCESS;
+	}
 }

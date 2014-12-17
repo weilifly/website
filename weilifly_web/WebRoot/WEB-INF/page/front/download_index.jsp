@@ -18,7 +18,7 @@
 			$(function(){
 				//$('#pic-list-s').Slider();
 				$(".path").click(function(){
-					window.location.href = "downloadData.do?filePath="+$(this).attr("path")+"&id="+;
+					window.location.href = "downloadData.do?filePath="+$(this).attr("path")+"&id="+$("#dId").val();
 				});
 				
 				$("li[name=li]").click(function(){
@@ -42,46 +42,6 @@
 		<div class="content">
 			<div class="main-content3 clearfix" style="border: 0; width: 1000px;">
 				<div class="left-box left-box-1">
-					
-					<!-- 资料下载《精品视频》开始 -->
-					<div class="m-s-ban1">
-						资料下载《精品视频》
-					</div>
-					
-					<%--	
-					<div class="n-s-nav n-s-nav-1">
-						<div class="s-block"></div>
-						<ul>
-							<s:iterator value="#request.categoryList" var="bean" status="st">
-								<li <s:if test="#st.index==0">class="cur"</s:if> name="li">
-									<a href="javascript:productTab(${bean.id});" class="pcp" pcId="${bean.id}">${bean.name}</a>
-								</li>
-							</s:iterator>
-						</ul>
-					</div>
-					--%>
-					
-				<div class="pic-list-s" id="pic-list-s">
-						<em class="left" id="lefta"></em>
-						<em class="right" id="righta"></em>
-						 <div class="roll-box">
-						<ul class="roll-list">
-							<s:iterator value="#request.categoryList" var="bean" status="st">
-								<s:iterator value="#request.productList.{?#this.categoryId==#bean.id}" var="beans" status="sta">
-									<s:if test="#st.index==0"><li style="display: block;" name="divCategory_${bean.id }" class="ssa"></s:if>
-									<s:else><li style="display: none;" name="divCategory_${bean.id }" class="ssa"></s:else>
-										<a href="materialsIndex.do?id=${beans.id}" class="pic"><img src="${beans.image}" />
-										</a>
-										<div class="title">
-											<a href="materialsIndex.do?id=${beans.id}">${beans.name}</a>
-										</div>
-										</li>
-								</s:iterator>
-							</s:iterator>
-						</ul>
-						</div>
-					</div>
-					<!-- 资料下载《精品视频》结束 -->
 					
 					<!-- 下载专区《行业报告》开始 -->
 					<div class="m-s-ban m-s-ban-1">
@@ -107,7 +67,7 @@
 					<ul class="down-list">
 						<s:iterator value="#request.coursewareList" var="bean" status="st">
 							<li>
-							<s:hidden name="#bean.id" id="dId"></s:hidden>
+							<s:hidden name="#bean.id" id="cId"></s:hidden>
 								<a href="javascript:;" class="tit">${bean.name}</a>
 								<div class="other">
 									<span><s:date name="#bean.addTime" format="yyyy-MM-dd HH:mm:ss" /></span><a href="javascript:;" class="path" path="${bean.path}">下载</a>

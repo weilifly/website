@@ -6,22 +6,22 @@
 	<package name="weiliResearch" extends="admin-default" namespace="/admin">
 	
 		<action name="queryWeiliResearchInit" class="weiliResearchAction" method="queryWeiliResearchInit">
-			<result name="success">/WEB-INF/page/admin/brand_news_index.jsp</result>
+			<result name="success">/WEB-INF/page/admin/weili_research_index.jsp</result>
 		</action>
 		
 		<action name="queryWeiliResearchInfo" class="weiliResearchAction" method="queryWeiliResearchInfo">
-			<result name="success">/WEB-INF/page/admin/brand_news_index_info.jsp</result>
+			<result name="success">/WEB-INF/page/admin/weili_research_index_info.jsp</result>
 		</action>
 		
 		<action name="addWeiliResearchInit" class="weiliResearchAction" method="addWeiliResearchInit">
-			<result name="success">/WEB-INF/page/admin/brand_news_add.jsp</result>
+			<result name="success">/WEB-INF/page/admin/weili_research_add.jsp</result>
 		</action>
 		
 		<action name="addWeiliResearch" class="weiliResearchAction" method="addWeiliResearch">
 		</action>
 		
 		<action name="updateWeiliResearchInit" class="weiliResearchAction" method="updateWeiliResearchInit">
-			<result name="success">/WEB-INF/page/admin/brand_news_update.jsp</result>
+			<result name="success">/WEB-INF/page/admin/weili_research_update.jsp</result>
 		</action>
 		
 		<action name="updateWeiliResearch" class="weiliResearchAction" method="updateWeiliResearch">
@@ -38,6 +38,15 @@
 		<action name="queryConsumersInfo" class="weiliResearchAction" method="queryConsumersInfo">
 			<result name="success">/WEB-INF/page/admin/consumers/consumers_index_info.jsp</result>
 		</action>
+		<!-- 删除潜在用户信息 deleteConsumers-->
+		<action name="deleteConsumers" class="weiliResearchAction" method="deleteConsumers">
+		</action>
+		<!-- 备注潜在用户信息 addRemark-->
 		
+		<action name="addRemarkInit" class="weiliResearchAction" method="addRemarkInit">
+			<result name="success">/WEB-INF/page/admin/consumers/remark_add.jsp</result>
+		</action>
+		<action name="addRemark" class="weiliResearchAction" method="addRemark">
+		</action>
 	</package>
 </struts>

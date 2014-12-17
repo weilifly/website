@@ -103,13 +103,13 @@
 							<tr>
 								<td width="100" height="28" align="center" bgcolor="#8594A9"
 									class="white12">
-									<a href="queryWeiliResearchInit.do">品牌资讯列表</a>
+									<a href="queryWeiliResearchInit.do">微力研究列表</a>
 								</td>
 								<td width="2">
 									&nbsp;
 								</td>
 								<td width="100" align="center" bgcolor="#CC0000" class="white12">
-									<a href="addWeiliResearchInit.do">添加品牌资讯</a>
+									<a href="addWeiliResearchInit.do">添加微力研究</a>
 								</td>
 								<td>
 									&nbsp;
@@ -160,9 +160,9 @@
 									文章属类：
 								</td>
 								<td align="left" class="f66">
-										<s:select list="#request.sortList" theme="simple" name="paramMap.typeId" listKey="id"
-												listValue="type_name"   headerKey="-1" headerValue="--请选择--"  id="typeId"/>
-									<span class="require-field">*<s:fielderror fieldName="paramMap.typeId"></s:fielderror></span>
+								<s:select name="id" id="id" theme="simple" 
+										  list="typeList" listKey="id" listValue="type_name" headerKey="-1" headerValue="-请选择-">
+								</s:select>
 								</td>
 							</tr>
 							<tr>

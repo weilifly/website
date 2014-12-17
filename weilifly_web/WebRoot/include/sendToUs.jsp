@@ -29,12 +29,12 @@
 							});
 		
 		function sendToUs(param){
-		
+			/*
 			alert($("#cName").val() + "~"
 					+ $("#cTelephone").val() + "~"
 					+ $("#address").val() + "~"
 					+ $("#needId").val());
-			/*debugger;
+			debugger;
 			$.shovePost("sendToUs.do",param,function(data) {
 				alert("jjjjjjjjjjjjjjjjjjjj");
 				if (data.returnId > 0) {

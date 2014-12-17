@@ -422,6 +422,27 @@ public class WeiliResearchesService extends BaseService {
 		}
 	}
 
+	
+	/**
+	 * 获取展示内容分类列表 之业务处理
+	 * @return
+	 */
+	public List<Map<String,Object>> queryWeiliResearchType(String fieldList,String condition) throws Exception{
+		Connection conn = connectionManager.getConnection();
+		
+		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
+		try{
+			list = weiliResearchesDao.queryWeiliResearchType(conn, fieldList, condition);
+		}catch (Exception e) {
+			log.error(e);
+			e.printStackTrace();
+			throw e;
+		}finally{
+			conn.close();
+		}
+		return list;
+	}
+	
 	public void setWeiliResearchesDao(WeiliResearchesDao weiliResearchesDao) {
 		this.weiliResearchesDao = weiliResearchesDao;
 	}

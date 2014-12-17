@@ -67,7 +67,7 @@
    			}
    			
    			function delObjs(ids){
-   				$.shovePost("deleteDemo.do",{id:ids},function(data){
+   				$.shovePost("deleteConsumers.do",{id:ids},function(data){
    					if(data.msg==1){
    						alert("删除成功！");
    						window.location.href = window.location.href;
@@ -98,7 +98,8 @@
 							<%--<td width="100" align="center" bgcolor="#8594A9" class="white12">
 								<a href="addDemoInit.do">添加用户</a>
 							</td>
-							--%><td width="2">
+							--%>
+							<td width="2">
 								&nbsp;
 							</td>
 							<td width="2">
@@ -133,6 +134,7 @@
 						<span id="dataInfo"> </span>
 					</div>
 				</div>
+			</div>
 			</div>
 	</body>
 </html>

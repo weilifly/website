@@ -38,7 +38,7 @@
 				<!-- 《精品课件》开始 -->
 					<div class="m-s-ban m-s-ban-1">
 						《精品课件》
-				</div>
+					</div>
 					<ul class="down-list">
 						<s:iterator value="pageBean.page" var="bean" status="st"><!-- #request.coursewareList -->
 							<li>
@@ -52,7 +52,9 @@
 					</ul>
 					<!-- 《精品课件》结束 -->
 					
-				</div><%--
+				</div>
+			</div>
+				<%--
 				<!---左侧列表结束--->
 				<div class="right-box">
 					<div class="m-s-ban m-s-ban-1">

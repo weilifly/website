@@ -8,6 +8,8 @@ import com.weili.service.ConsumerService;
 import com.weili.service.WeiliResearchesService;
 
 import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
@@ -19,7 +21,8 @@ public class WeiliResearchAction extends BasePageAction
   public static Log log = LogFactory.getLog(WeiliResearchAction.class);
   private WeiliResearchesService weiliResearchesService;
   private ConsumerService consumerService;
-
+  
+  private List<Map<String,Object>> typeList;
   
   /**
    * 查询潜在用户初始化
@@ -77,6 +80,69 @@ public class WeiliResearchAction extends BasePageAction
     this.consumerService.queryConsumersPage(this.pageBean, condition, table,order, fieldList);
     return SUCCESS;
   }
+  
+  /**
+   * 删除潜在用户信息//局部刷新
+   * @throws Exception 
+   * */
+ public String deleteConsumers() throws Exception{
+	 JSONObject obj = new JSONObject(); 
+	 String ids = request("id");
+	 String msg = "删除失败！";
+	 try {
+			int rid = StringCommon.checkIds(ids);
+			if(rid<=0){
+				return null;
+			}
+			Long resut = consumerService.deleteConsumers(ids);
+			if(resut<=0){
+				return null;
+			}
+			msg = "1";
+		} catch (Exception e) {
+			log.error(e);
+			e.printStackTrace();
+			msg = "删除失败！";
+		}finally{
+			obj.put("msg", msg);
+			JSONUtils.printObject(obj);
+		}
+		return null;
+ }
+  
+ 	/**
+	 * 备注潜在客户初始化
+	 * @return
+	 * @throws Exception
+	 */
+	public String addRemarkInit() throws Exception {
+		Long id=Convert.strToLong(request("id"), -1);
+		paramMap=consumerService.queryConsumerById(id);
+		return SUCCESS;
+	}
+	
+	/**
+	 * 备注潜在客户
+	 * @return
+	 * @throws Exception
+	 */
+	public String addRemark() throws Exception {
+		Long id=Convert.strToLong(paramMap.get("id"), -1);
+		String cName=paramMap.get("c_name");
+		String cTelephone=paramMap.get("c_telephone");
+		String address=paramMap.get("address");
+		String remark=paramMap.get("remark");
+		
+		JSONObject obj = new JSONObject();
+
+		obj.putAll(consumerService.addRemark(id, cName, cTelephone,address,remark));
+
+		JSONUtils.printObject(obj);
+		
+		return null;
+	}
+ 
+ 
   
   public String queryWeiliResearchInit()
   {
@@ -219,6 +285,30 @@ public class WeiliResearchAction extends BasePageAction
   public void setConsumerService(ConsumerService consumerService) {
 	this.consumerService = consumerService;
   }
-  
+ 
+  public void setTypeList(List<Map<String, Object>> typeList) {
+		this.typeList = typeList;
+  }
+  /**
+   * 
+   * */
+  public List<Map<String, Object>> getTypeList() throws Exception{
+	  if(typeList == null){
+		  typeList = weiliResearchesService.queryWeiliResearchType("*","1=1");
+	  }
+	  return typeList;
+  }
   
 }
+
+
+
+
+
+
+
+
+
+
+
+

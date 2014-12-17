@@ -163,6 +163,7 @@ public class Dao {
 				public Field address = new Field(this, "`address`", Types.VARCHAR, false);
 				public Field need_content = new Field(this, "`need_content`", Types.VARCHAR, false);
 				public Field addTime = new Field(this, "`addTime`", Types.TIMESTAMP, false);
+				public Field remark = new Field(this, "`remark`", Types.VARCHAR, false);
 
 				public t_consumers() {
 					name = "`t_consumers`";

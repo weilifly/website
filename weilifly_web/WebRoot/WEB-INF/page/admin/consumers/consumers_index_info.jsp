@@ -24,6 +24,9 @@
 						需求描述
 					</th>
 					<th scope="col">
+						备注
+					</th>
+					<th scope="col">
 						操作
 					</th>
 				</tr>
@@ -54,12 +57,18 @@
 							<td align="center">
 								${bean.needContent}
 							</td>
+							<td align="center">
+								${bean.remark}
+							</td>
 							<td>
-								<a href="#" target="main"><!-- updateDemoInit.do?id=${bean.id } -->
+								<a href="addRemarkInit.do?id=${bean.id }" target="main">
+									备注
+								</a>&nbsp;&nbsp;
+								<%--<a href="#" target="main"><!-- updateDemoInit.do?id=${bean.id } -->
 									修改
 								</a>
 								&nbsp;&nbsp;
-								<a href="javascript:del(${bean.id })" target="main">
+								--%><a href="javascript:del(${bean.id })" target="main">
 									删除
 								</a>
 							</td>

@@ -73,8 +73,81 @@ public class ConsumerService extends BaseService {
 			conn.close();
 		}
 	}
+	/**
+	 * 删除潜在用户
+	 */
+	public long deleteConsumers(String ids) throws Exception {
+		Connection conn = connectionManager.getConnection();
+
+		long returnId = -1;
+		try {
+			returnId = consumerDao.deleteConsumers(conn, ids);
+		} catch (Exception e) {
+			log.error(e);
+			e.printStackTrace();
+			throw e;
+		} finally {
+			conn.close();
+		}
+
+		return returnId;
+	}
+	
+	/**
+	 * 根据id  潜在用户
+	 * @throws SQLException 
+	 * @throws DataException
+	 */
+	public Map<String, String> queryConsumerById(long id) throws Exception {
+		Connection conn = connectionManager.getConnection();
+
+		Map<String, String> map = new HashMap<String, String>();
+		try {
+			map = consumerDao.queryConsumerById(conn, id);
+		} catch (Exception e) {
+			log.error(e);
+			e.printStackTrace();
+			throw e;
+		} finally {
+			conn.close();
+		}
+
+		return map;
+	}
 	
 	
+	public Map<String,Object> addRemark(long id,String cName,String cTelephone,String address,String remark) throws Exception{
+		Connection conn = null;
+		
+		long returnId = -1;
+		String error = "备注失败";
+		
+		Map<String,Object> map = new HashMap<String, Object>();
+		try{
+			conn = MySQL.getConnection();
+			returnId = consumerDao.addRemark(conn, id, cName, cTelephone, address, remark);
+			if(returnId <= 0){
+				conn.rollback();
+				return map;
+			}
+			conn.commit();
+			error = "备注成功";
+		}catch (Exception e) {
+			if(conn != null){
+				conn.close();
+			}
+			log.error(e);
+			e.printStackTrace();
+			throw e;
+		}finally{
+			if(conn != null){
+				conn.close();
+			}
+			map.put("returnId", returnId);
+			map.put("error", error);
+		}
+		return map;
+	}
 	//待用1
 	public Map<String,Object> updateConsumer(long id,String title,String source,Long views,String image,String content,Integer status,Integer isRecommended,Integer isIndex,Integer sortIndex,String seoTitle,String seoKeywords,String seoDescription,String addTime) throws Exception{
 		Connection conn = null;

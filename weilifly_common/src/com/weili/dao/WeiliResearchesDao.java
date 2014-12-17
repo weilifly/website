@@ -12,6 +12,8 @@ import com.shove.data.DataException;
 import com.shove.data.DataSet;
 import com.shove.util.BeanMapUtils;
 import com.weili.database.Dao;
+import com.weili.database.Dao.Tables;
+import com.weili.database.Dao.Tables.t_download_category;
 
 public class WeiliResearchesDao {
 	
@@ -94,6 +96,20 @@ public class WeiliResearchesDao {
 		}
 		
 		return weiliResearch.update(conn, " id = "+id);
+	}
+	
+	/**
+	 * 获取展示内容分类列表 之数据处理
+	 * @return
+	 */
+	public List<Map<String, Object>> queryWeiliResearchType(
+			Connection conn,String fieldList,String condition)throws SQLException, DataException {
+		Dao.Tables.t_weili_research_type productCategory = new Dao().new Tables().new t_weili_research_type();
+		
+		DataSet ds = productCategory.open(conn, fieldList, condition,"", -1, -1);
+		
+		ds.tables.get(0).rows.genRowsMap();
+		return ds.tables.get(0).rows.rowsMap;
 	}
 	
 	public long deleteWeiliResearch(Connection conn,String ids) throws SQLException{
