@@ -25,36 +25,41 @@
 								<a href="brandDetail.do?id=${bean.parentId}">${bean.name}</a>
 							</li>
 						</s:iterator>
-					</ul>
-					--%>
-					<span>${paramMap.type_name }</span>
+					</ul>--%>
+					<span>${parentMap.type_name }</span>&nbsp;&nbsp;&gt;<span><a style="text-decoration: none" href="queryWeiliDisplay.do?typeId=${paramMap.id}">${paramMap.type_name }</a></span>
+					<s:hidden name="paramMap.id"></s:hidden>
 				</div>
 				<!--内页头部导航结束--->
 				<div class="pp-info-box">
 					<div class="pp-info">
-						<a href="#" class="pic"><img src="${newMap.image }" />
+						<a href="weiliDisplayDetail.do?id=${newMap.id }&typeId=${paramMap.id}" class="pic"><img src="${newMap.image }" />
 						</a>
 						<div>
+						<s:if test="#request.newMap != null">
 							<p class="title">
-								<a href="weiliDisplayesDetail.do?id=${newMap.id }">${newMap.title }</a><span>${newMap.addTime }</span>
+								<a href="weiliDisplayDetail.do?id=${newMap.id }&typeId=${paramMap.id}">${newMap.title }</a><span>${newMap.addTime }</span>
 								</p>
 									<p class="txt">
-										<shove:sub value="#request.newMap.content" size="100" suffix="..."/>
+										<shove:sub value="#request.newMap.seoDescription" size="100" suffix="..."/><!--  -->
 									</p>
-									<a href="weiliDisplayesDetail.do?id=${newMap.id }" class="ck-btn">查看详情</a>
+									<a href="weiliDisplayDetail.do?id=${newMap.id }&typeId=${paramMap.id}" class="ck-btn">查看详情</a>
+						</s:if>
+						<s:else>
+							
+						</s:else>
 						</div>
 					</div>
 
 					<ul class="pp-info-news">
 						<s:iterator value="pageBean.page" var="bean" status="st">
 							<li>
-								<span><s:date name="#bean.addTime" format="yyyy-MM-dd HH:mm:ss" /></span><a href="weiliDisplayesDetail.do?id=${bean.id }">${bean.title }</a>
+								<span><s:date name="#bean.addTime" format="yyyy-MM-dd HH:mm:ss" /></span><a href="weiliDisplayDetail.do?id=${bean.id }&typeId=${paramMap.id}">${bean.title }</a>
 							</li>
 						</s:iterator>
 					</ul>
 
-						<shove:page url="brandDetail.do" curPage="${pageBean.pageNum}" showPageCount="5" pageSize="${pageBean.pageSize }" theme="numberFour" totalCount="${pageBean.totalNum}">
-		                   <s:param name="id" >${paramMap.id}</s:param>
+						<shove:page url="queryWeiliDisplay.do" curPage="${pageBean.pageNum}" showPageCount="5" pageSize="${pageBean.pageSize }" theme="numberFour" totalCount="${pageBean.totalNum}">
+		                   <s:param name="typeId" >${paramMap.id}</s:param>
 						</shove:page>
 				</div>
 

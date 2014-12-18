@@ -50,8 +50,7 @@
 							</td>
 							<!-- ++++++++++++++++++++++条件还要从变量中取，显示也要从变量中取+++++++++++++++++ -->
 							<td align="center">
-								<s:if test="#bean.type==2">查询出的1</s:if>
-								<s:elseif test="#bean.type==#d.id">查询出的2</s:elseif>
+								${bean.typeName}
 							</td>
 							<!-- +++++++++++++++++++++++++++++++++++++++ -->
 							<td align="center">

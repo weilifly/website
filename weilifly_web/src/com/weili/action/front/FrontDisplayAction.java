@@ -42,9 +42,13 @@ public class FrontDisplayAction extends BaseFrontAction {
 		
 		//通过typeId获取该类型的信息
 		paramMap = weiliDisplayService.queryDisplayTypeByTypeId(typeId);
+		//查找父类信息(上一级)
+		Map<String,String> parentMap = weiliDisplayService.queryDisplayTypeByTypeId(Convert.strToInt(paramMap.get("parentId"), -1));
+		request("parentMap",parentMap);
+		
 		
 		//weiliDisplayService.queryWeiliDisplayPageFront(pageBean, IConstants.STATUS_ON);
-		pageBean.setPageSize(20);
+		pageBean.setPageSize(15);
 		int pageNum = Convert.strToInt(request("curPage"), 1);
 		pageBean.setPageNum(pageNum);
 		
@@ -53,35 +57,50 @@ public class FrontDisplayAction extends BaseFrontAction {
 		
 		//根据typeId查询推荐的内容
 		Map<String,String> newMap = weiliDisplayService.queryRecommendedDisplayByTypeId(IConstants.RECOMMEND_ON,typeId);
+		
 		request("newMap",newMap);
 		
-		System.out.println(newMap.get("content")+"   pppppp");
+		
+		//System.out.println(newMap.get("content")+"   pppppp");
 		
 	//	List<Map<String, String>> weiliDisplayList = weiliDisplayService.queryDisplayByTypeId(typeId);
 	//	request("weiliDisplayList",weiliDisplayList);
 		return SUCCESS;
 	}
 	
+	
 	/**
 	 * 前台展示内容子模块内容详情
 	 * */
 	public String weiliDisplayDetail() throws Exception{
-		Long id = Convert.strToLong(request("id"), -1);
 		
+		Integer typeId = Convert.strToInt(request("typeId"),-1);
+		//通过typeId获取该类型的信息
+		paramMap = weiliDisplayService.queryDisplayTypeByTypeId(typeId);
+		
+		//查找父类信息(上一级)
+		Map<String,String> parentMap = weiliDisplayService.queryDisplayTypeByTypeId(Convert.strToInt(paramMap.get("parentId"), -1));
+		request("parentMap",parentMap);
+		
+		
+		Long id = Convert.strToLong(request("id"), -1);
 		weiliDisplayService.updateDisplay(id);//增加浏览数
 		
 		Map<String,String> displayDetail = weiliDisplayService.queryDisplayById(id);
 		
+		
 		Map<String,String> newMap = weiliDisplayService.queryRecommendedDisplay(IConstants.RECOMMEND_ON);
 		request("newMap",newMap);
-		//paramMap = brandService.queryBrandById(IConstants.BRAND_ID_NEWS);
 		
-	//	Map<String,String> nextMap = weiliDisplayService.queryWeiliResearchesNextId(id);
+//		paramMap = brandService.queryBrandById(IConstants.BRAND_ID_NEWS);
+		
+		Map<String,String> nextMap = weiliDisplayService.queryWeiliResearchesNextId(id,typeId);
 		
 		//内容详情
 		request("displayDetail",displayDetail);
+		
 		//
-		//request("nextMap",nextMap);
+		request("nextMap",nextMap);
 		
 		return SUCCESS;
 	}
@@ -98,8 +117,8 @@ public class FrontDisplayAction extends BaseFrontAction {
 		
 		paramMap = brandService.queryBrandById(id);
 		
-		Integer type = Convert.strToInt(paramMap.get("type"), -1);
-		Integer isLevel = Convert.strToInt(paramMap.get("isLevel"), -1);
+		Integer type = Convert.strToInt(paramMap.get("type"), -1);//////
+		Integer isLevel = Convert.strToInt(paramMap.get("isLevel"), -1);//////
 		Long parentId = Convert.strToLong(paramMap.get("parentId"), -1);
 		if(type == -1&&isLevel==IConstants.ISLEVEL_OFF&&parentId==-1){//品牌理念
 			return "idea";

@@ -159,12 +159,14 @@ public class WeiliDisplayAction extends BasePageAction
   {
     String title = request("title");
     Integer status = Integer.valueOf(Convert.strToInt(request("status"), -1));
+    Integer isIndex = Integer.valueOf(Convert.strToInt(request("isIndex"), -1));
+    Integer isRecommended = Integer.valueOf(Convert.strToInt(request("isRecommended"), -1));
     String startDate = request("startDate");
     String endDate = request("endDate");
 
     String fieldList = "*";
     String order = "order by addTime desc";
-    String table = "t_weili_display";
+    String table = "v_t_weili_type_display";
 
     StringBuffer condition = new StringBuffer();
 
@@ -179,6 +181,13 @@ public class WeiliDisplayAction extends BasePageAction
     if (StringUtils.isNotBlank(endDate)) {
       condition.append(" and date_format(addTime,'%Y-%m-%d') <= '" + endDate + "'");
     }
+    if ((isIndex != null) && (isIndex.intValue() > 0)) {
+        condition.append(" and `isIndex` = " + isIndex);
+      }
+    if ((isRecommended != null) && (isRecommended.intValue() > 0)) {
+        condition.append(" and `isRecommended` = " + isRecommended);
+      }
+    
 
     this.weiliDisplayService.queryWeiliResearchPage(this.pageBean, fieldList, condition, order, table);
     return "success";

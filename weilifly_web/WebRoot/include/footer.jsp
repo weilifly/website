@@ -87,7 +87,7 @@
 	<div class="bottom">
 		<span>深圳微力科技有限公司</span>
 		<span>版权所有</span>
-		<span>粤ICP备********号</span>
+		<span>粤ICP备1409693号</span>
 		<a href="mapInit.do?a=3a">网站地图</a>
 		<script src="http://s19.cnzz.com/z_stat.php?id=1253090651&web_id=1253090651" language="JavaScript"></script>
 		<s:iterator value="copyrightList" var="beanCopyRight" status="st">

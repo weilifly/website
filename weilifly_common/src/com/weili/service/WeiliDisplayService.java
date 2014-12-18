@@ -331,14 +331,15 @@ public class WeiliDisplayService extends BaseService {
 	}
 	
 	/**
-	 * 
+	 *详细内容页面之 上一篇和下一篇
 	 * */
-	public Map<String, String> queryWeiliResearchesNextId(Long id) throws Exception{
+	public Map<String, String> queryWeiliResearchesNextId(Long id,Integer typeId) throws Exception{
 		Connection conn = connectionManager.getConnection();
 		
 		Map<String,String> map = new HashMap<String, String>();
 		try{
-			DataSet ds = MySQL.executeQuery(conn, "select min(id) as preId from t_weili_display where id > "+id);
+			//
+			DataSet ds = MySQL.executeQuery(conn, "select min(id) as preId from t_weili_display where id > "+id+" and typeId = "+typeId);
 			Map<String,String> nMap = BeanMapUtils.dataSetToMap(ds);
 			if(nMap != null&&!nMap.isEmpty()){
 				Long preId = Convert.strToLong(nMap.get("preId"), -1);
@@ -349,7 +350,7 @@ public class WeiliDisplayService extends BaseService {
 					map.put("preTitle", tMap.get("title"));
 				}
 			}
-			ds = MySQL.executeQuery(conn, "select max(id) as nextId from t_weili_display where id < "+id);
+			ds = MySQL.executeQuery(conn, "select max(id) as nextId from t_weili_display where id < "+id+" and typeId = "+typeId);
 			nMap = BeanMapUtils.dataSetToMap(ds);
 			if(nMap != null&&!nMap.isEmpty()){
 				Long nextId = Convert.strToLong(nMap.get("nextId"), -1);

@@ -31,6 +31,8 @@
 				praData["status"] = $("#status").val();
 				praData["startDate"] = $("#startDate").val();
 				praData["endDate"] = $("#endDate").val();
+				praData["isRecommended"] = $("#isRecommended").val();
+				praData["isIndex"] = $("#isIndex").val();
 				
 		 		$.shovePost("queryDisplayInfo.do",praData,initCallBack);
 		 	}
@@ -125,6 +127,17 @@
 										--%>
 										是否显示：
 										<s:select name="status" id="status" theme="simple"
+										list="#{-1:'-请选择-',1:'是',2:'否'}" value="-1">
+										</s:select>
+										&nbsp;&nbsp;
+										是否推荐：
+										<s:select name="isRecommended" id="isRecommended" theme="simple"
+										list="#{-1:'-请选择-',1:'是',2:'否'}" value="-1">
+										</s:select>
+										
+										&nbsp;&nbsp;
+										是否首页推荐：
+										<s:select name="isIndex" id="isIndex" theme="simple"
 										list="#{-1:'-请选择-',1:'是',2:'否'}" value="-1">
 										</s:select>
 										&nbsp;&nbsp;

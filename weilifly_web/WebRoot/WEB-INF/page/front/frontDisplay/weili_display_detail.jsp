@@ -19,30 +19,30 @@
 			<div class="main-content">
 				<div class="head2">
 					<div class="s-block1"></div>
-					<ul class="second-nav">
+					<%--<ul class="second-nav">
 						<s:iterator value="brandList" var="bean" status="st">
 							<li <s:if test="#bean.id==paramMap.id">class="cur"</s:if>>
 								<a href="brandDetail.do?id=${bean.id}">${bean.name}</a>
 							</li>
 						</s:iterator>
-					</ul>
-					<span>${paramMap.name }</span>
+					</ul>--%>
+					<span>${parentMap.type_name }</span>&nbsp;&nbsp;&gt;<span>${paramMap.type_name }</span>
 				</div>
 				<div class="nr-txt">
 					<div class="pp-zx">
 						<h3>
-							${newsDetail.title}
+							${displayDetail.title}
 						</h3>
 						<div class="time">
-							<span>时间：${newsDetail.addTime}</span>
-							<s:if test="#request.newsDetail.source!=''&&#request.newsDetail.source!=null">
-								<span>来源：${newsDetail.source}</span>
+							<span>时间：${displayDetail.addTime}</span>
+							<s:if test="#request.displayDetail.source!=''&&#request.displayDetail.source!=null">
+								<span>来源：${displayDetail.source}</span>
 							</s:if>
-							<span>浏览：${newsDetail.views}</span>
+							<span>浏览：${displayDetail.views}</span>
 						</div>
 					</div>
 					<div class="pp-zx-txt">
-						${newsDetail.content}
+						${displayDetail.content}
 					</div>
 					<ul class="new-page">
 						<s:if test="#request.nextMap.preId>0">
@@ -51,7 +51,7 @@
 									上一篇：
 								</div>
 								<p style="line-height: 30px;">
-									<a href="weiliDisplayesDetail.do?id=${nextMap.preId}">${nextMap.preTitle}</a>
+									<a href="weiliDisplayDetail.do?id=${nextMap.preId}&typeId=${paramMap.id}">${nextMap.preTitle}</a>
 								</p>
 							</li>
 						</s:if>
@@ -61,7 +61,7 @@
 									下一篇：
 								</div>
 								<p style="line-height: 30px;">
-									<a href="weiliDisplayesDetail.do?id=${nextMap.nextId}">${nextMap.nextTitle}</a>
+									<a href="weiliDisplayDetail.do?id=${nextMap.nextId}&typeId=${paramMap.id}">${nextMap.nextTitle}</a>
 								</p>
 							</li>
 						</s:if>
