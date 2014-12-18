@@ -1,3 +1,5 @@
+
+
 (function(a) {
     a.fn.slider = function(b) {
         var c = {

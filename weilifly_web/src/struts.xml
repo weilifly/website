@@ -58,7 +58,7 @@
 	<!-- 前台 -->
 	<include file="struts/front/index.xml" />
 	<include file="struts/front/service.xml" />
-	<include file="struts/front/frontBrand.xml" />
+	<include file="struts/front/frontDisplay.xml" />
  	<include file="struts/front/login.xml" />
  	<include file="struts/front/frontInfoContent.xml"></include>
  	<include file="struts/front/frontRecruit.xml"></include>

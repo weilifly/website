@@ -224,7 +224,7 @@ public class WeiliDisplayAction extends BasePageAction
     throws Exception
   {
     long id = Convert.strToLong(request("id"), -1L);
-    this.paramMap = this.weiliDisplayService.queryWeiliResearchesById(id);
+    this.paramMap = this.weiliDisplayService.queryDisplayById(id);
     return "success";
   }
 

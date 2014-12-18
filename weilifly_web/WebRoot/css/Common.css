@@ -32,7 +32,7 @@ ul,li,ol { list-style:none;}
 .nav ul li a:hover{ color:#5CACEE;}
 .nav ul li.cur a{color:#5CACEE;}
 
-.sliding-block{ position:absolute; height:3px; background:#5CACEE; top:56px; left:0;}
+.nav .sliding-block{ position:absolute; height:3px; background:#5CACEE; top:56px; left:0;}
 
 
 
@@ -110,7 +110,7 @@ position:absolute; bottom:-34px; left:50%; margin-left:-21px; cursor:pointer; z-
 .main-box{ width:100%; background:#fefefe; background:#fefefe; border-top:1px solid #d4d4d4;}
 
 
-.main{ width:1000px;  margin:0 auto; padding:80px 0; overflow: hidden; position:relative;}
+.main{ width:1000px;  margin:0 auto; padding:40px 0; overflow: hidden; position:relative;}
 .roll-arrows{ width:60px; height:30px; background:url(../images/down.png) no-repeat; position:absolute; top:0; left:50%; margin-left:-28px; cursor:pointer;}
 .zx-box{ width:292px; padding:0 0 5px 0; overflow:hidden;  background: url(../images/index-shadow1.png) bottom no-repeat;
 border-top:1px solid #fcfcfc; border-radius:2px; float:left;}

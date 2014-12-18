@@ -19,7 +19,7 @@
 		var thePlayer;
 		$(function(){
 			 videoInit("${paramMap.var}","${paramMap.image}");
-		      $('#slider').slider({
+		      $("#slider").slider({
 		         motion:{
 		            DB_1_1:{left:200,opacity:0,speed:700,delay:600},
 		            DB_1_2:{left:800,opacity:0,speed:1200,delay:500},
@@ -65,6 +65,9 @@
 			
 			}) ;
 	
+		
+</script>
+<script type="text/javascript">
 		function search_mybtn(){
 		  var  keyWord  = $("#keyWord").val();
 		  if(keyWord==null||keyWord==""||keyWord =="请输入关键字"||keyWord==undefined){
@@ -87,6 +90,10 @@
 	      });
 	});
 	
+		
+</script>
+		
+<script type="text/javascript">	
 	$(function(){
 		//过两秒显示 showImage(); 内容
 	    setTimeout("showImage();",2000);
@@ -115,7 +122,7 @@
 	<!--头部外围盒子结束 head-box-->
 	<!-- banner图开始 -->
 	<div class="banner-box" style="height: 470px;">
-		<div class="roll-arrows1"></div>
+		<!--   <div class="roll-arrows1"></div>  -->
 		<div class="banner" id="slider">
 			<ul class="DB_bgSet">
 				<s:iterator value="#request.bannerList" var="bean" status="st">
@@ -161,7 +168,7 @@
 			<div class="zx-box" style="height: 448px;">
 				<div class="inner">
 					<h3>
-						<a href="brandDetail.do?id=4">more+</a><span>微力研究院</span>
+						<a href="QueryWeiliDisplay.do?type=1">more+</a><span>微力研究院</span>
 					</h3>
 					<s:iterator value="#request.newList" var="bean" status="st">
 						<dl class="zx-list">

@@ -34,7 +34,7 @@
 					+ $("#cTelephone").val() + "~"
 					+ $("#address").val() + "~"
 					+ $("#needId").val());
-			debugger;
+			
 			$.shovePost("sendToUs.do",param,function(data) {
 				alert("jjjjjjjjjjjjjjjjjjjj");
 				if (data.returnId > 0) {

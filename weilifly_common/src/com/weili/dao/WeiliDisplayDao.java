@@ -18,10 +18,13 @@ import com.weili.database.Dao.Tables.t_region;
 
 public class WeiliDisplayDao {
 	
+	/**
+	 * 添加微力展示内容
+	 * */
 	public long addDisplay(Connection conn,String title,String source,Long views,String image,
 			String content,Integer status,Integer isRecommended,Integer isIndex,
 			Integer sortIndex,String seoTitle,String seoKeywords,String seoDescription,
-			String addTime,Integer type) throws SQLException{
+			String addTime,Integer typeId) throws SQLException{
 		Dao.Tables.t_weili_display weiliDisplayes = new Dao().new Tables().new t_weili_display();
 		
 		weiliDisplayes.title.setValue(title);
@@ -36,13 +39,14 @@ public class WeiliDisplayDao {
 		weiliDisplayes.seoKeywords.setValue(seoKeywords);
 		weiliDisplayes.seoDescription.setValue(seoDescription);
 		weiliDisplayes.addTime.setValue(addTime);
-		weiliDisplayes.type.setValue(type);
+		weiliDisplayes.typeId.setValue(typeId);
 		
 		
 		return weiliDisplayes.insert(conn);
 	}
 	
 	//查询内容类型querySort
+	@SuppressWarnings("unchecked")
 	public List<Map<String,String>> querySort(Connection conn) throws SQLException{
 		Dao.Tables.t_weili_display_type twd = new Dao().new Tables().new t_weili_display_type();
 		
@@ -103,6 +107,7 @@ public class WeiliDisplayDao {
 	 * 获取展示内容分类列表 之数据处理
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> queryWeiliResearchType(
 			Connection conn,String fieldList,String condition)throws SQLException, DataException {
 		Dao.Tables.t_weili_display_type productCategory = new Dao().new Tables().new t_weili_display_type();
@@ -119,17 +124,57 @@ public class WeiliDisplayDao {
 		return weiliDisplay.delete(conn, " id in("+ids+") ");
 	}
 	
-	public Map<String,String> queryWeiliResearchById(Connection conn,long id) throws SQLException, DataException{
-		Dao.Tables.t_weili_display weiliDisplay = new Dao().new Tables().new t_weili_display();
-		
-		DataSet ds = weiliDisplay.open(conn, "  ", " id = "+id, "", -1, -1);
+	//通过类型Id查询微力前台展示内容类型Map
+	public Map<String,String> queryDisplayTypeByTypeId(Connection conn,long typeId) throws SQLException, DataException{
+		Dao.Tables.t_weili_display_type weiliDisplay = new Dao().new Tables().new t_weili_display_type();
+				
+		DataSet ds = weiliDisplay.open(conn, "*", " id = "+typeId, "", -1, -1);
 		return BeanMapUtils.dataSetToMap(ds);
 	}
+	
+	//通过类型Id查询微力前台展示内容 之数据库处理
+	@SuppressWarnings("unchecked")
+	public List<Map<String,String>> queryDisplayByTypeId(Connection conn,long typeId) throws SQLException, DataException{
+		Dao.Views.v_t_weili_type_display weiliDisplay = new Dao().new Views().new v_t_weili_type_display();
+		
+		DataSet ds = weiliDisplay.open(conn, "*", " typeId = "+typeId,"", -1, -1);
+		ds.tables.get(0).rows.genRowsMap();
+		
+		return ds.tables.get(0).rows.rowsMap;
+	}
+	
+	//通过类型Id查询前台展示内容子模块内容详情 之数据库处理
+		public Map<String,String> queryDisplayById(Connection conn,long id) throws SQLException, DataException{
+			Dao.Tables.t_weili_display weiliDisplay = new Dao().new Tables().new t_weili_display();
+			
+			DataSet ds = weiliDisplay.open(conn, "*", " id = "+id, "", -1, -1);
+			return BeanMapUtils.dataSetToMap(ds);
+		}
 
 	public Map<String,String> queryBrandRecommendedNews(Connection conn,Integer isRecommended) throws SQLException, DataException{
 		Dao.Tables.t_weili_display weiliDisplay = new Dao().new Tables().new t_weili_display();
 		
 		DataSet ds = weiliDisplay.open(conn, "  ", " isRecommended = "+isRecommended, "", -1, -1);
+		return BeanMapUtils.dataSetToMap(ds);
+	}
+	
+	/**
+	 * 查询推荐展示内容
+	 * */
+	public Map<String,String> queryRecommendedDisplay(Connection conn,Integer isRecommended) throws SQLException, DataException{
+		Dao.Tables.t_weili_display weiliDisplay = new Dao().new Tables().new t_weili_display();
+		
+		DataSet ds = weiliDisplay.open(conn, "  ", " isRecommended = "+isRecommended, "", -1, -1);
+		return BeanMapUtils.dataSetToMap(ds);
+	}
+	
+	/**
+	 * 根据TypeId查询推荐展示内容
+	 * */
+	public Map<String,String> queryRecommendedDisplayByTypeId(Connection conn,Integer isRecommended,Integer typeId) throws SQLException, DataException{
+		Dao.Tables.t_weili_display weiliDisplay = new Dao().new Tables().new t_weili_display();
+		
+		DataSet ds = weiliDisplay.open(conn, "  ", " isRecommended = "+isRecommended+" and typeId = "+typeId, "", -1, -1);
 		return BeanMapUtils.dataSetToMap(ds);
 	}
 	

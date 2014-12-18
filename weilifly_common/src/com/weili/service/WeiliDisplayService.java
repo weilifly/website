@@ -64,7 +64,10 @@ public class WeiliDisplayService extends BaseService {
 		return listMap;
 	}
 	
-	//查询微力研究院内容属类表querySort()
+	/**
+	 * 查询微力研究院内容属类表querySort()
+	 * 
+	 * */
 	public List<Map<String,String>> querySort() throws Exception{
 	Connection conn = null;
 		
@@ -91,7 +94,10 @@ public class WeiliDisplayService extends BaseService {
 	}
 	
 	
-	//添加微力研究院的内容
+	/**
+	 * 添加微力研究院的内容
+	 * 
+	 * */
 	public Map<String,Object> addDisplay(String title,String source,Long views,
 			String image,String content,Integer status,Integer isRecommended,
 			Integer isIndex,Integer sortIndex,String seoTitle,String seoKeywords,
@@ -139,6 +145,8 @@ public class WeiliDisplayService extends BaseService {
 		
 		return map;
 	}
+	
+	
 	
 	private Map<String,Object> checkWeiliResearches(String title,String source,Long views,String image,String content,Integer status,Integer isRecommended,Integer isIndex,Integer sortIndex,String seoTitle,String seoKeywords,String seoDescription,String addTime){
 		Map<String,Object> map = new HashMap<String, Object>();
@@ -195,6 +203,8 @@ public class WeiliDisplayService extends BaseService {
 		}
 	}
 	
+	
+	
 	public Map<String,Object> updateDisplay(long id,String title,String source,Long views,String image,String content,Integer status,Integer isRecommended,Integer isIndex,Integer sortIndex,String seoTitle,String seoKeywords,String seoDescription,String addTime) throws Exception{
 		Connection conn = null;
 		
@@ -239,6 +249,8 @@ public class WeiliDisplayService extends BaseService {
 		return map;
 	}
 	
+	
+	
 	public long deleteDisplay(String ids) throws Exception{
 		Connection conn = connectionManager.getConnection();
 		
@@ -256,12 +268,16 @@ public class WeiliDisplayService extends BaseService {
 		return returnId;
 	}
 	
-	public Map<String,String> queryWeiliResearchesById(long id) throws Exception{
+	
+	/**
+	 * 通过类型Id查询微力前台展示内容类型Map
+	 * */
+	public Map<String, String> queryDisplayTypeByTypeId(long typeId) throws Exception{
 		Connection conn = connectionManager.getConnection();
 		
-		Map<String,String> map = new HashMap<String, String>();
+		Map<String, String> map = new HashMap<String, String>();
 		try{
-			map = weiliDisplayDao.queryWeiliResearchById(conn, id);
+			map = weiliDisplayDao.queryDisplayTypeByTypeId(conn, typeId);
 		}catch (Exception e) {
 			log.error(e);
 			e.printStackTrace();
@@ -273,6 +289,50 @@ public class WeiliDisplayService extends BaseService {
 		return map;
 	}
 	
+	/**
+	 * 通过类型Id查询微力前台展示内容
+	 * */
+	public List<Map<String, String>> queryDisplayByTypeId(long id) throws Exception{
+		Connection conn = connectionManager.getConnection();
+		
+		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+		try{
+			list = weiliDisplayDao.queryDisplayByTypeId(conn, id);
+		}catch (Exception e) {
+			log.error(e);
+			e.printStackTrace();
+			throw e;
+		}finally{
+			conn.close();
+		}
+		
+		return list;
+	}
+	
+	
+	/**
+	 * 前台展示内容子模块内容详情
+	 * */
+	public Map<String, String> queryDisplayById(long id) throws Exception{
+		Connection conn = connectionManager.getConnection();
+		
+		Map<String, String> map = new HashMap<String, String>();
+		try{
+			map = weiliDisplayDao.queryDisplayById(conn, id);
+		}catch (Exception e) {
+			log.error(e);
+			e.printStackTrace();
+			throw e;
+		}finally{
+			conn.close();
+		}
+		
+		return map;
+	}
+	
+	/**
+	 * 
+	 * */
 	public Map<String, String> queryWeiliResearchesNextId(Long id) throws Exception{
 		Connection conn = connectionManager.getConnection();
 		
@@ -312,7 +372,12 @@ public class WeiliDisplayService extends BaseService {
 		return map;
 	}
 	
-	public long updateNewsViews(Long id) throws Exception{
+	
+	/**
+	 * 增加浏览数
+	 * 
+	 * */
+	public long updateDisplay(Long id) throws Exception{
 		Connection conn = MySQL.getConnection();
 		
 		long returnId = -1;
@@ -335,12 +400,15 @@ public class WeiliDisplayService extends BaseService {
 		return returnId;
 	}
 
-	public Map<String,String> queryBrandRecommendedNews(Integer isRecommended) throws Exception{
+	/**
+	 * 查询推荐展示内容
+	 * */
+	public Map<String,String> queryRecommendedDisplay(Integer isRecommended) throws Exception{
 		Connection conn = connectionManager.getConnection();
 		
 		Map<String,String> map = new HashMap<String, String>();
 		try{
-			map = weiliDisplayDao.queryBrandRecommendedNews(conn, isRecommended);
+			map = weiliDisplayDao.queryRecommendedDisplay(conn, isRecommended);
 		}catch (Exception e) {
 			log.error(e);
 			e.printStackTrace();
@@ -352,6 +420,25 @@ public class WeiliDisplayService extends BaseService {
 		return map;
 	}
 	
+	/**
+	 * 根据TypeId查询推荐展示内容
+	 * */
+	public Map<String,String> queryRecommendedDisplayByTypeId(Integer isRecommended,Integer typeId) throws Exception{
+		Connection conn = connectionManager.getConnection();
+		
+		Map<String,String> map = new HashMap<String, String>();
+		try{
+			map = weiliDisplayDao.queryRecommendedDisplayByTypeId(conn, isRecommended,typeId);
+		}catch (Exception e) {
+			log.error(e);
+			e.printStackTrace();
+			throw e;
+		}finally{
+			conn.close();
+		}
+		
+		return map;
+	}
 	public List<Map<String,Object>> queryWeiliResearchAll(String fieldList,String condition,String order) throws Exception{
 		Connection conn = connectionManager.getConnection();
 		
@@ -442,14 +529,20 @@ public class WeiliDisplayService extends BaseService {
 		}
 	}
 
-	public void queryWeiliResearchPageFront(PageBean<Map<String,Object>> pageBean,Integer status) throws Exception{
+	/**
+	 * 分页查询前台展示内容(状态是显示)
+	 * */
+	public void queryWeiliDisplayPageFront(PageBean<Map<String,Object>> pageBean,Integer status,Integer typeId) throws Exception{
 		Connection conn = connectionManager.getConnection();
 		StringBuffer condition = new StringBuffer();
 		if(status != null&&status > 0){
 			condition.append(" and `status` = "+status);
 		}
+		if(typeId != null&& typeId > 0){
+			condition.append(" and `typeId` ="+typeId);
+		}
 		try{
-			dataPage(conn, pageBean, "t_weili_display", "*", " order by addTime desc", condition.toString());
+			dataPage(conn, pageBean, "v_t_weili_type_display", "*", " order by addTime desc", condition.toString());
 		}catch (Exception e) {
 			log.error(e);
 			e.printStackTrace();

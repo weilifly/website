@@ -18,7 +18,7 @@ import com.weili.service.KydReportService;
 import com.weili.service.NewspaperService;
 import com.weili.service.WeiliDisplayService;
 
-public class FrontBrandAction extends BaseFrontAction {
+public class FrontDisplayAction extends BaseFrontAction {
 
 	private static final long serialVersionUID = 1L;
 	private BrandService brandService;
@@ -31,11 +31,73 @@ public class FrontBrandAction extends BaseFrontAction {
 	
 	private List<Map<String,Object>> brandList;
 	
+	
+	
+	/**
+	 * 前台查询展示内容子模块详情
+	 * */
+	public String queryWeiliDisplay() throws Exception{
+		//参数中获取内容类型id
+		Integer typeId = Convert.strToInt(request("typeId"), -1);
+		
+		//通过typeId获取该类型的信息
+		paramMap = weiliDisplayService.queryDisplayTypeByTypeId(typeId);
+		
+		//weiliDisplayService.queryWeiliDisplayPageFront(pageBean, IConstants.STATUS_ON);
+		pageBean.setPageSize(20);
+		int pageNum = Convert.strToInt(request("curPage"), 1);
+		pageBean.setPageNum(pageNum);
+		
+		//分页查询typeId的内容
+		weiliDisplayService.queryWeiliDisplayPageFront(pageBean, IConstants.STATUS_ON,typeId);
+		
+		//根据typeId查询推荐的内容
+		Map<String,String> newMap = weiliDisplayService.queryRecommendedDisplayByTypeId(IConstants.RECOMMEND_ON,typeId);
+		request("newMap",newMap);
+		
+		System.out.println(newMap.get("content")+"   pppppp");
+		
+	//	List<Map<String, String>> weiliDisplayList = weiliDisplayService.queryDisplayByTypeId(typeId);
+	//	request("weiliDisplayList",weiliDisplayList);
+		return SUCCESS;
+	}
+	
+	/**
+	 * 前台展示内容子模块内容详情
+	 * */
+	public String weiliDisplayDetail() throws Exception{
+		Long id = Convert.strToLong(request("id"), -1);
+		
+		weiliDisplayService.updateDisplay(id);//增加浏览数
+		
+		Map<String,String> displayDetail = weiliDisplayService.queryDisplayById(id);
+		
+		Map<String,String> newMap = weiliDisplayService.queryRecommendedDisplay(IConstants.RECOMMEND_ON);
+		request("newMap",newMap);
+		//paramMap = brandService.queryBrandById(IConstants.BRAND_ID_NEWS);
+		
+	//	Map<String,String> nextMap = weiliDisplayService.queryWeiliResearchesNextId(id);
+		
+		//内容详情
+		request("displayDetail",displayDetail);
+		//
+		//request("nextMap",nextMap);
+		
+		return SUCCESS;
+	}
+	
+	
+	
+	
+	
+	
 	public String brandDetail() throws Exception{
 		List<Map<String,Object>> bList = getBrandList();
 		Long bId = (Long) bList.get(0).get("id");
 		Long id = Convert.strToLong(request("id"), bId);
+		
 		paramMap = brandService.queryBrandById(id);
+		
 		Integer type = Convert.strToInt(paramMap.get("type"), -1);
 		Integer isLevel = Convert.strToInt(paramMap.get("isLevel"), -1);
 		Long parentId = Convert.strToLong(paramMap.get("parentId"), -1);
@@ -68,8 +130,8 @@ public class FrontBrandAction extends BaseFrontAction {
 			pageBean.setPageSize(12);
 			int pageNum = Convert.strToInt(request("curPage"), 1);
 			pageBean.setPageNum(pageNum);
-			weiliDisplayService.queryWeiliResearchPageFront(pageBean, IConstants.STATUS_ON);
-			Map<String,String> newMap = weiliDisplayService.queryBrandRecommendedNews(IConstants.RECOMMEND_ON);
+			weiliDisplayService.queryWeiliDisplayPageFront(pageBean, IConstants.STATUS_ON,-1);
+			Map<String,String> newMap = weiliDisplayService.queryRecommendedDisplay(IConstants.RECOMMEND_ON);
 			String regEx_html = "<[^>]+>";
 			String content = newMap.get("content");
 			Pattern p_html = Pattern.compile(regEx_html, Pattern.CASE_INSENSITIVE);
@@ -122,22 +184,6 @@ public class FrontBrandAction extends BaseFrontAction {
 		return "idea";
 	}
 	
-	public String weiliDisplayDetail() throws Exception{
-		Long id = Convert.strToLong(request("id"), -1);
-		
-		weiliDisplayService.updateNewsViews(id);//增加浏览数
-		
-		Map<String,String> newsDetail = weiliDisplayService.queryWeiliResearchesById(id);
-		
-		paramMap = brandService.queryBrandById(IConstants.BRAND_ID_NEWS);
-		
-		Map<String,String> nextMap = weiliDisplayService.queryWeiliResearchesNextId(id);
-		
-		request("newsDetail",newsDetail);
-		request("nextMap",nextMap);
-		
-		return SUCCESS;
-	}
 	
 	public String kydReport() throws Exception{
 		JSONObject obj = new JSONObject();
@@ -204,7 +250,8 @@ public class FrontBrandAction extends BaseFrontAction {
 		this.newspaperService = newspaperService;
 	}
 
-	public void setWeiliResearchesService(WeiliDisplayService weiliDisplayService) {
+
+	public void setWeiliDisplayService(WeiliDisplayService weiliDisplayService) {
 		this.weiliDisplayService = weiliDisplayService;
 	}
 

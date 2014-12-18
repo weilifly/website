@@ -7,8 +7,6 @@
 		<link rel="stylesheet" href="css/base.css" id="camera-css" />
 		<link rel="stylesheet" href="css/framework.css" />
 		<link rel="stylesheet" href="css/noscript.css" media="screen,all" id="noscript" />
-		<script src="script/jquery.min.js"></script>
-		<script src="script/slider.js"></script>
 
 <!-- 悬浮窗体开始 -->
 <div class="suspend-box">
@@ -35,35 +33,35 @@
 						</li>
 						<li>微力研究院
 							<ul>
-								<li><a href="#">方法论</a>
+								<li><a href="queryWeiliDisplay.do?typeId=6">方法论</a>
 								</li>
-								<li><a href="#">最连续沙龙</a>
+								<li><a href="queryWeiliDisplay.do?typeId=7">最连续沙龙</a>
 								</li>
-								<li><a href="#">必读书籍</a>
+								<li><a href="queryWeiliDisplay.do?typeId=8">必读书籍</a>
 								</li>
 							</ul>
 						</li>
 						<li>O2O兵器库
 							<ul>
-								<li><a href="#">O2O型网站</a>
+								<li><a href="queryWeiliDisplay.do?typeId=11">O2O型网站</a>
 								</li>
-								<li><a href="#">O2O型商城</a>
+								<li><a href="queryWeiliDisplay.do?typeId=12">O2O型商城</a>
 								</li>
-								<li><a href="#">手机APP</a>
+								<li><a href="queryWeiliDisplay.do?typeId=13">手机APP</a>
 								</li>
-								<li><a href="#">腾讯系列</a>
+								<li><a href="queryWeiliDisplay.do?typeId=14">腾讯系列</a>
 								</li>
-								<li><a href="#">阿里系列</a>
+								<li><a href="queryWeiliDisplay.do?typeId=15">阿里系列</a>
 								</li>
-								<li><a href="#">百度系列</a>
+								<li><a href="queryWeiliDisplay.do?typeId=16">百度系列</a>
 								</li>
 							</ul>
 						</li>
 						<li><a href="#">标杆案例</a>
 							<ul>
-								<li><a href="#"> 专业市场</a>
+								<li><a href="queryWeiliDisplay.do?typeId=9"> 专业市场</a>
 								</li>
-								<li><a href="#"> 传统商户</a>
+								<li><a href="queryWeiliDisplay.do?typeId=10"> 传统商户</a>
 								</li>
 							</ul>
 						</li>
@@ -79,7 +77,7 @@
 								</li>
 							</ul>
 						</li>
-						<li><a href="#">微力论坛</a>
+						<li><a href="www.weilifly.com">微力论坛</a>
 						</li> 
 					</ul>
 				</div>

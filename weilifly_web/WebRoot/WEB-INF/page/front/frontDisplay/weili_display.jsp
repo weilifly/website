@@ -19,14 +19,15 @@
 			<div class="main-content">
 				<div class="head2 bdnone">
 					<div class="s-block1"></div>
-					<ul class="second-nav">
-						<s:iterator value="brandList" var="bean" status="st">
+					<%--<ul class="second-nav">
+						<s:iterator value="#request.weiliDisplayList" var="bean" status="st">
 							<li <s:if test="#bean.id==paramMap.id">class="cur"</s:if>>
 								<a href="brandDetail.do?id=${bean.parentId}">${bean.name}</a>
 							</li>
 						</s:iterator>
 					</ul>
-					<span>${paramMap.name }</span>
+					--%>
+					<span>${paramMap.type_name }</span>
 				</div>
 				<!--内页头部导航结束--->
 				<div class="pp-info-box">
@@ -69,7 +70,7 @@
 		<script type="text/javascript">
 		  $(function(){
 		  		$.sideLi(".second-nav",".s-block1");
-		  })
+		  });
 		</script>
 	</body>
 </html>

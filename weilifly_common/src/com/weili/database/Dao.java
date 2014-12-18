@@ -678,7 +678,7 @@ public class Dao {
 				public Field seoTitle = new Field(this, "`seoTitle`", Types.VARCHAR, false);
 				public Field seoKeywords = new Field(this, "`seoKeywords`", Types.VARCHAR, false);
 				public Field seoDescription = new Field(this, "`seoDescription`", Types.VARCHAR, false);
-				public Field type = new Field(this, "`type`", Types.INTEGER, false);
+				public Field typeId = new Field(this, "`typeId`", Types.INTEGER, false);
 
 				public t_weili_display() {
 					name = "`t_weili_display`";
@@ -808,6 +808,12 @@ public class Dao {
 			public class v_t_web_distribute extends View {
 				public v_t_web_distribute() {
 					name = "`v_t_web_distribute`";
+				}
+			}
+			
+			public class v_t_weili_type_display extends View {
+				public v_t_weili_type_display() {
+					name = "`v_t_weili_type_display`";
 				}
 			}
 		}

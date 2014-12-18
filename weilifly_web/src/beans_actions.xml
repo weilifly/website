@@ -13,6 +13,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 	<bean id="commonAction" class="com.shove.web.action.CommonAction" scope="prototype"></bean>
 	
 	<!-- 管理员管理 -->
+	
 	<bean id="adminAction" class="com.weili.action.admin.AdminAction" scope="prototype">
 		<property name="adminService" ref="adminService" />
 		<property name="roleService" ref="roleService" />
@@ -207,8 +208,8 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 	<bean id="loginAction" class="com.weili.action.front.LoginAction" scope="prototype" parent="baseFrontAction">
 		<property name="userService" ref="userService" />
 	</bean>
-	<!-- 品牌-->
-	<bean id="frontBrandAction" class="com.weili.action.front.FrontBrandAction" scope="prototype" parent="baseFrontAction">
+	<!-- 微力展示内容-->
+	<bean id="frontDisplayAction" class="com.weili.action.front.FrontDisplayAction" scope="prototype" parent="baseFrontAction">
 		<property name="brandService" ref="brandService" />
 		<property name="consumerService" ref="consumerService" />
 		<property name="newspaperService" ref="newspaperService" />

@@ -3,7 +3,7 @@
 
 $(function(){
 	$(window).scroll(function() {
-		if($(window).scrollTop()>=30){
+		if($(window).scrollTop()>=50){
 			$('.back-top').show();
 			 $('.suspend-box').show();
 		}else{
@@ -16,14 +16,10 @@ $(function(){
 	 	$('html,body').animate({scrollTop:0},'slow'); 
 	});
 	$("#jt").click(function(){
-		if(bools){
-	    	$("#jt").removeClass("jtn").addClass("jt");
-	    	
-	      $('.suspend-box').animate({'right':-90},'slow'); 
-	      
-	      bools=false;
+	    if(bools){
+	      $('.suspend-box').animate({'right':-78},'slow'); 
+	        bools=false;
 	 	}else{
-	 		$("#jt").removeClass("jt").addClass("jtn");
 	 	   $('.suspend-box').animate({'right':0},'slow'); 
 	        bools=true;
 	 	}
@@ -206,9 +202,9 @@ $('.right-raea .fodder-list .pic').each(function(){//素材图片弹出
 	//alert(newsrc)
 	$(this).click(function(){
 		$('.img-bg').show();
-		$('.img-bg').show();
+		$('.img-bg').show()
 		$('.img-bg').before("<div class='shade-bg'></div>");
-		$('.img-bg').find('img').attr('src',newsrc);
+		$('.img-bg').find('img').attr('src',newsrc)
 	
 		});
 	
@@ -254,6 +250,7 @@ var alicc=$('.nav-item .check');
  		var sula=$(obj);
  		var slia=sula.find("li");
  		var sblock=$(cur);
+ 		
  		var curobj=sula.find(".cur");
  		var s_curW=curobj.outerWidth();
  		var curLeft=curobj.position().left;
@@ -285,18 +282,18 @@ var alicc=$('.nav-item .check');
         
     	}
  		
- 	})
+ 	});
 
 			$(function(){
 			  $.sideLi(".nav",".sliding-block");
-			})
+			});
 		
 		  $(function(){
 		   //$.sideLi(".n-s-nav",".s-block")//下载
-		  })
+		  });
 		  $(function(){
 		    // $.sideLi(".second-nav",".s-block1")//品牌
-		  })
+		  });
 		
 		
 	
@@ -346,4 +343,4 @@ var alicc=$('.nav-item .check');
 			parli.toggleClass('cur');
 			parli.find('.close').toggleClass('cur');
  		
- 	}
+ 	};
