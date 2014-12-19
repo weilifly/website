@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+newest<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/include/taglib.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -97,7 +97,7 @@
 				
 				$("#parentId").change(function(){
 					var parentId = $("#parentId").val();
-					typeSelectInit(parentId, 2);
+					typeSelectInit(parentId);
 				});
 				
 			});
@@ -105,13 +105,10 @@
 			function init(){
 				var parentId ='${paramMap.parentId}';
 				$("#parentId").val(parentId);
-				if(parentId != null && parentId !=''){
-					typeSelectInit(parentId,2);
-				}
 			}
 			
 			//级联二级类型
-			function typeSelectInit(parentId, order_num){
+			function typeSelectInit(parentId){
 				var _array = [];
 				_array.push("<option value='-1'>--请选择--</option>");
 				if(parentId<=0){
@@ -120,12 +117,12 @@
 				}
 				//debugger;
 				var param = {};
-				param["order_num"] = order_num;
 				param["parentId"] = parentId;
 				$.post("ajaxqueryDisplayType.do",param,function(data){
 					//执行了方法，但是没进来。
+					alert(data);
 					for(var i = 0; i < data.length; i ++){
-						_array.push("<option value='"+data[i].id+"'>"+data[i].type_name+"</option>");
+						_array.push("<option value='"+data[i].id+"'>"+data[i].name+"</option>");
 					}
 					$("#typeId").html(_array.join(""));
 					var typeId ='${paramMap.typeId}';
@@ -201,7 +198,7 @@
 									文章属类：
 								<s:select id="parentId" name="paramMap.parentId" 
 										list="parentTypeList" listKey="id"
-										listValue="type_name" headerKey="-1" headerValue="--请选择--" />
+										listValue="name" headerKey="-1" headerValue="--请选择--" />
 								<s:select name="paramMap.typeId" id="typeId" list="#{'-1':'-请选择-'}"><%--
 										  list="typeList" listKey="id" listValue="type_name" headerKey="-1" headerValue="-请选择-">
 								--%></s:select>

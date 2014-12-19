@@ -44,7 +44,8 @@
 							</li>
 						</s:iterator>
 						
-						<%--<s:if test="#bean.id==5">
+						<%--
+						<s:if test="#bean.id==5">
 							<li>
 								<a href="queryRecruitInit.do">人才招聘</a>
 							</li>

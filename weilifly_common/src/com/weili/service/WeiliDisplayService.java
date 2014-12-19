@@ -41,11 +41,11 @@ public class WeiliDisplayService extends BaseService {
 	* @return List<Map<String,Object>>
 	* @throws
 	 */
-	public List<Map<String, Object>> queryDisplayTypeList( Long parentId, Integer order_num) throws Exception{
+	public List<Map<String, Object>> queryDisplayTypeList(Long parentId) throws Exception{
 		Connection conn = connectionManager.getConnection();
 		List<Map<String, Object>> listMap = null;
 		try {
-			listMap = weiliDisplayDao.queryDisplayTypeList(conn, parentId, order_num);
+			listMap = weiliDisplayDao.queryDisplayTypeList(conn, parentId);
 		} catch (SQLException e) {
 			log.error(e);
 			e.printStackTrace();
@@ -93,10 +93,63 @@ public class WeiliDisplayService extends BaseService {
 		return map;
 	}
 	
+	/**
+	 * 添加最新动态
+	 * */
+	public Map<String,Object> addNewest(String title,String source,Long views,
+			String image,String content,Integer status,Integer isRecommended,
+			Integer isIndex,Integer sortIndex,String seoTitle,String seoKeywords,
+			String seoDescription,String addTime) throws Exception{
+		Connection conn = null;
+		
+		long returnId = -1;
+		String error = "添加失败";
+		
+		Map<String,Object> map = new HashMap<String, Object>();
+		try{
+			Map<String,Object> returnMap = 
+					checkWeiliResearches(title, source, views, 
+					image,  content, status, isRecommended, isIndex, sortIndex,
+					seoTitle, seoKeywords, seoDescription,addTime);
+			returnId = ((Long)returnMap.get("returnId")); 
+			if(returnId <= 0){
+				error = (String)returnMap.get("error");
+				
+				return map;
+				
+			}
+			conn = MySQL.getConnection();
+			returnId = weiliDisplayDao.addNewest(conn, title, source, views, image,  content, status, isRecommended, 
+					isIndex, sortIndex, seoTitle, seoKeywords, seoDescription,addTime);
+			if(returnId <= 0){
+				conn.rollback();
+				return map;
+			}
+			
+			conn.commit();
+			error = "添加成功";
+		}catch (Exception e) {
+			if(conn != null){
+				conn.close();
+			}
+			log.error(e);
+			e.printStackTrace();
+			throw e;
+		}finally{
+			if(conn != null){
+				conn.close();
+			}
+			
+			map.put("returnId", returnId);
+			map.put("error", error);
+		}
+		
+		return map;
+	}
+	
 	
 	/**
 	 * 添加微力研究院的内容
-	 * 
 	 * */
 	public Map<String,Object> addDisplay(String title,String source,Long views,
 			String image,String content,Integer status,Integer isRecommended,
@@ -249,6 +302,25 @@ public class WeiliDisplayService extends BaseService {
 		return map;
 	}
 	
+	/**
+	 *  删除最新动态
+	 * */
+	public long deleteNewest(String ids) throws Exception{
+		Connection conn = connectionManager.getConnection();
+		
+		long returnId = -1;
+		try{
+			returnId = weiliDisplayDao.deleteNewest(conn, ids);
+		}catch (Exception e) {
+			log.error(e);
+			e.printStackTrace();
+			throw e;
+		}finally{
+			conn.close();
+		}
+		
+		return returnId;
+	}
 	
 	
 	public long deleteDisplay(String ids) throws Exception{
@@ -272,12 +344,12 @@ public class WeiliDisplayService extends BaseService {
 	/**
 	 * 通过类型Id查询微力前台展示内容类型Map
 	 * */
-	public Map<String, String> queryDisplayTypeByTypeId(long typeId) throws Exception{
+	public Map<String, String> queryDisplayTypeByTypeId(long id) throws Exception{
 		Connection conn = connectionManager.getConnection();
 		
 		Map<String, String> map = new HashMap<String, String>();
 		try{
-			map = weiliDisplayDao.queryDisplayTypeByTypeId(conn, typeId);
+			map = weiliDisplayDao.queryDisplayTypeByTypeId(conn, id);
 		}catch (Exception e) {
 			log.error(e);
 			e.printStackTrace();
@@ -319,6 +391,26 @@ public class WeiliDisplayService extends BaseService {
 		Map<String, String> map = new HashMap<String, String>();
 		try{
 			map = weiliDisplayDao.queryDisplayById(conn, id);
+		}catch (Exception e) {
+			log.error(e);
+			e.printStackTrace();
+			throw e;
+		}finally{
+			conn.close();
+		}
+		
+		return map;
+	}
+	
+	/**
+	 * 前台展示最新动态三级目录内容详情
+	 * */
+	public Map<String, String> queryNewest(long id) throws Exception{
+		Connection conn = connectionManager.getConnection();
+		
+		Map<String, String> map = new HashMap<String, String>();
+		try{
+			map = weiliDisplayDao.queryNewest(conn, id);
 		}catch (Exception e) {
 			log.error(e);
 			e.printStackTrace();
@@ -400,7 +492,53 @@ public class WeiliDisplayService extends BaseService {
 		
 		return returnId;
 	}
-
+	/**
+	 * 增加最新动态浏览数
+	 * 
+	 * */
+	public long updateNewest(Long id) throws Exception{
+		Connection conn = MySQL.getConnection();
+		
+		long returnId = -1;
+		try{
+			returnId = MySQL.executeNonQuery(conn, "update t_newest set views = views+1 where id = "+id);
+			if(returnId < 0){
+				conn.rollback();
+				return returnId;
+			}
+			
+			conn.commit();
+		}catch (Exception e) {
+			log.error(e);
+			e.printStackTrace();
+			throw e;
+		}finally{
+			conn.close();
+		}
+		
+		return returnId;
+	}
+	
+	/**
+	 * 查询推荐最新动态
+	 * */
+	public Map<String,String> queryRecommendedNewest(Integer isRecommended) throws Exception{
+		Connection conn = connectionManager.getConnection();
+		
+		Map<String,String> map = new HashMap<String, String>();
+		try{
+			map = weiliDisplayDao.queryRecommendedNewest(conn, isRecommended);
+		}catch (Exception e) {
+			log.error(e);
+			e.printStackTrace();
+			throw e;
+		}finally{
+			conn.close();
+		}
+		
+		return map;
+	}
+	
 	/**
 	 * 查询推荐展示内容
 	 * */
@@ -440,6 +578,11 @@ public class WeiliDisplayService extends BaseService {
 		
 		return map;
 	}
+	
+	/**
+	 * 最新动态列表
+	 * 
+	 * */
 	public List<Map<String,Object>> queryWeiliResearchAll(String fieldList,String condition,String order) throws Exception{
 		Connection conn = connectionManager.getConnection();
 		
@@ -485,6 +628,186 @@ public class WeiliDisplayService extends BaseService {
 	}
 
 	
+	/**
+	 * 首页展示最新动态
+	 * */
+
+	public List<Map<String,Object>> queryNewestIndex() throws Exception{
+		Connection conn = connectionManager.getConnection();
+		
+		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
+		
+		StringBuffer condition = new StringBuffer();
+		
+		condition.append("1=1 and status = 1 and isIndex = 1 ");
+		
+		try{
+			list = weiliDisplayDao.queryNewestIndex(conn, "*", condition.toString(), "addTime desc limit 0,4");
+		}catch (Exception e) {
+			log.error(e);
+			e.printStackTrace();
+			throw e;
+		}finally{
+			conn.close();
+		}
+		
+		return list;
+	}
+	
+	/**
+	 * 最新动态二级目录列表
+	 * */
+
+	public List<Map<String,Object>> queryNewest(PageBean<Map<String,Object>> pageBean) throws Exception{
+		Connection conn = connectionManager.getConnection();
+		
+		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
+		
+		StringBuffer condition = new StringBuffer();
+		
+		condition.append(" and  status = 1 and isIndex = 1 ");
+		
+		try{
+			dataPage(conn, pageBean, " t_newest ","*"," order by addTime desc ",condition.toString());
+		}catch (Exception e) {
+			log.error(e);
+			e.printStackTrace();
+			throw e;
+		}finally{
+			conn.close();
+		}
+		
+		return list;
+	}
+	
+	/**
+	 * 根据不同的类型ID查询子类型ID的Map类型
+	 * */
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> queryDisplayIndex(Integer parentId) throws Exception{
+		Connection conn = connectionManager.getConnection();
+		
+		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
+		
+		StringBuffer condition = new StringBuffer();
+		condition.append("where 1=1");
+
+		if(parentId!= null&&parentId > 0){
+			condition.append(" and parentId="+parentId);
+		}
+		try{
+			DataSet ds = MySQL.executeQuery(conn, "select * from t_navigationbar "+condition.toString());
+
+			ds.tables.get(0).rows.genRowsMap();
+			list =  ds.tables.get(0).rows.rowsMap;
+		}catch (Exception e) {
+			log.error(e);
+			e.printStackTrace();
+			throw e;
+		}finally{
+			conn.close();
+		}
+		return list;
+	}
+	
+	/**
+	 * 查询一个父id下的所有子目录文章
+	 * */
+	public void queryDisplayByStringId(PageBean<Map<String,Object>> pageBean,StringBuffer sbid) throws Exception{
+		Connection conn = connectionManager.getConnection();
+		StringBuffer condition = new StringBuffer();
+		try{
+			if(sbid !=null ){
+				condition.append(" and typeId in ("+sbid+") ");
+			}
+			dataPage(conn, pageBean, " t_weili_display ","*"," order by addTime desc ",condition.toString());
+		}catch (Exception e) {
+			log.error(e);
+			e.printStackTrace();
+			throw e;
+		}finally{
+			conn.close();
+		}
+		
+		
+//		Connection conn = connectionManager.getConnection();
+//		
+//		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+//		StringBuffer condition = new StringBuffer();
+//		try{
+//			if(sbid!=null){
+//				condition.append("typeId in ("+sbid+")");
+//			}
+//			list = weiliDisplayDao.queryDisplayByStringId(conn, condition);
+//		}catch (Exception e) {
+//			log.error(e);
+//			e.printStackTrace();
+//			throw e;
+//		}finally{
+//			conn.close();
+//		}
+//		return list;
+	}
+	
+	/**
+	 * 查询一个父id下的首页推荐的前5条记录
+	 * */
+	public List<Map<String, Object>> queryDisplayByRecommendId(StringBuffer condition) throws Exception{
+		Connection conn = connectionManager.getConnection();
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append(" 1=1 and typeId in ("+condition+")  and isIndex = 1 ");
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		try{
+			list = weiliDisplayDao.queryDisplayByRecommendId(conn, sb);
+		}catch (Exception e) {
+			log.error(e);
+			e.printStackTrace();
+			throw e;
+		}finally{
+			conn.close();
+		}
+		return list;
+	}
+	/**
+	 * 查询一个父id下的首页推荐的一条记录
+	 * */
+	public Map<String, String> queryDisplayRecommendById(StringBuffer condition) throws Exception{
+		Connection conn = connectionManager.getConnection();
+		
+		Map<String, String> map = new HashMap<String,String>();
+		try{
+			map = weiliDisplayDao.queryDisplayRecommendById(conn, condition);
+		}catch (Exception e) {
+			log.error(e);
+			e.printStackTrace();
+			throw e;
+		}finally{
+			conn.close();
+		}
+		return map;
+	}
+	
+	/**
+	 * 查询一个标杆案例 父id下的首页推荐的前1条记录
+	 * */
+	public List<Map<String, Object>> queryDisplayByRecommendCase(StringBuffer condition) throws Exception{
+		Connection conn = connectionManager.getConnection();
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append(" 1=1 and typeId in ("+condition+")  and isIndex = 1 ");
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		try{
+			list = weiliDisplayDao.queryDisplayByRecommendCase(conn, sb);
+		}catch (Exception e) {
+			log.error(e);
+			e.printStackTrace();
+			throw e;
+		}finally{
+			conn.close();
+		}
+		return list;
+	}
 	
 	
 	public List<Map<String,Object>> queryWeiliResearchIndex(Integer isIndex) throws Exception{
@@ -517,7 +840,26 @@ public class WeiliDisplayService extends BaseService {
 		return list;
 	}
 	
-	public void queryWeiliResearchPage(PageBean<Map<String,Object>> pageBean,String fieldList,StringBuffer condition,String order,String table) throws Exception{
+	/**
+	 * 分页查询前台最新动态
+	 * */
+	public void queryNewestPage(PageBean<Map<String,Object>> pageBean,String fieldList,StringBuffer condition,String order,String table) throws Exception{
+		Connection conn = connectionManager.getConnection();
+		try{
+			dataPage(conn, pageBean, table, fieldList, order, condition.toString());
+		}catch (Exception e) {
+			log.error(e);
+			e.printStackTrace();
+			throw e;
+		}finally{
+			conn.close();
+		}
+	}
+	
+	/**
+	 * 分页查询前台展示内容
+	 * */
+	public void queryWeiliDisplayPage(PageBean<Map<String,Object>> pageBean,String fieldList,StringBuffer condition,String order,String table) throws Exception{
 		Connection conn = connectionManager.getConnection();
 		try{
 			dataPage(conn, pageBean, table, fieldList, order, condition.toString());

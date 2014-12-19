@@ -73,6 +73,8 @@ public class FrontDownloadAction extends BaseFrontAction {
 		
 		downloadService.queryPreDownload(pageBean, IConstants.STATUS_ON,categoryId);//
 		
+		System.out.println(pageBean.getPage());
+		
 	//	queryDownloadHelp();//下载帮助
 	//	queryAdvertise();//广告片
 		

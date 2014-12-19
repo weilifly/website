@@ -18,6 +18,34 @@ import com.weili.database.Dao.Tables.t_region;
 
 public class WeiliDisplayDao {
 	
+	
+	
+	/**
+	 * 添加最新动态
+	 * */
+	public long addNewest(Connection conn,String title,String source,Long views,String image,
+			String content,Integer status,Integer isRecommended,Integer isIndex,
+			Integer sortIndex,String seoTitle,String seoKeywords,String seoDescription,
+			String addTime) throws SQLException{
+		Dao.Tables.t_newest weiliDisplayes = new Dao().new Tables().new t_newest();
+		
+		weiliDisplayes.title.setValue(title);
+		weiliDisplayes.source.setValue(source);
+		weiliDisplayes.image.setValue(image);
+		weiliDisplayes.content.setValue(content);
+		weiliDisplayes.status.setValue(status);
+		weiliDisplayes.isRecommended.setValue(isRecommended);
+		weiliDisplayes.isIndex.setValue(isIndex);
+		weiliDisplayes.sortIndex.setValue(sortIndex);
+		weiliDisplayes.seoTitle.setValue(seoTitle);
+		weiliDisplayes.seoKeywords.setValue(seoKeywords);
+		weiliDisplayes.seoDescription.setValue(seoDescription);
+		weiliDisplayes.addTime.setValue(addTime);
+		
+		return weiliDisplayes.insert(conn);
+	}
+	
+	
 	/**
 	 * 添加微力展示内容
 	 * */
@@ -48,7 +76,7 @@ public class WeiliDisplayDao {
 	//查询内容类型querySort
 	@SuppressWarnings("unchecked")
 	public List<Map<String,String>> querySort(Connection conn) throws SQLException{
-		Dao.Tables.t_weili_display_type twd = new Dao().new Tables().new t_weili_display_type();
+		Dao.Tables.t_navigationbar twd = new Dao().new Tables().new t_navigationbar();
 		
 		DataSet ds = twd.open(conn, " ", " ", "", -1, -1);
 		ds.tables.get(0).rows.genRowsMap();
@@ -110,7 +138,7 @@ public class WeiliDisplayDao {
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> queryWeiliResearchType(
 			Connection conn,String fieldList,String condition)throws SQLException, DataException {
-		Dao.Tables.t_weili_display_type productCategory = new Dao().new Tables().new t_weili_display_type();
+		Dao.Tables.t_navigationbar productCategory = new Dao().new Tables().new t_navigationbar();
 		
 		DataSet ds = productCategory.open(conn, fieldList, condition,"", -1, -1);
 		
@@ -123,12 +151,18 @@ public class WeiliDisplayDao {
 		
 		return weiliDisplay.delete(conn, " id in("+ids+") ");
 	}
+	//删除Newest
+	public long deleteNewest(Connection conn,String ids) throws SQLException{
+		Dao.Tables.t_newest t_newest = new Dao().new Tables().new t_newest();
+		
+		return t_newest.delete(conn, " id in("+ids+") ");
+	}
 	
 	//通过类型Id查询微力前台展示内容类型Map
-	public Map<String,String> queryDisplayTypeByTypeId(Connection conn,long typeId) throws SQLException, DataException{
-		Dao.Tables.t_weili_display_type weiliDisplay = new Dao().new Tables().new t_weili_display_type();
+	public Map<String,String> queryDisplayTypeByTypeId(Connection conn,long id) throws SQLException, DataException{
+		Dao.Tables.t_navigationbar weiliDisplay = new Dao().new Tables().new t_navigationbar();
 				
-		DataSet ds = weiliDisplay.open(conn, "*", " id = "+typeId, "", -1, -1);
+		DataSet ds = weiliDisplay.open(conn, "*", " id = "+id, "", -1, -1);
 		return BeanMapUtils.dataSetToMap(ds);
 	}
 	
@@ -150,7 +184,59 @@ public class WeiliDisplayDao {
 			DataSet ds = weiliDisplay.open(conn, "*", " id = "+id, "", -1, -1);
 			return BeanMapUtils.dataSetToMap(ds);
 		}
+		
+		//通过类型Id查询前台展示最新动态三级目录内容详情 之数据库处理
+		public Map<String,String> queryNewest(Connection conn,long id) throws SQLException, DataException{
+			Dao.Tables.t_newest weiliDisplay = new Dao().new Tables().new t_newest();
+					
+			DataSet ds = weiliDisplay.open(conn, "*", " id = "+id, "", -1, -1);
+			return BeanMapUtils.dataSetToMap(ds);
+		}
 
+	// 查询一个父id下的所有子目录文章
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> queryDisplayByStringId(Connection conn,StringBuffer condition)throws SQLException, DataException {
+		Dao.Tables.t_weili_display demo = new Dao().new Tables().new t_weili_display();
+		
+		DataSet ds = demo.open(conn, "*", condition.toString()," addTime desc ", -1, -1);
+		ds.tables.get(0).rows.genRowsMap();
+			
+		return ds.tables.get(0).rows.rowsMap;
+	}
+	/**
+	 * 查询一个父id下的首页推荐的前5条记录
+	 * */
+	public List<Map<String, Object>> queryDisplayByRecommendId(Connection conn,StringBuffer condition)throws SQLException, DataException {
+		Dao.Tables.t_weili_display demo = new Dao().new Tables().new t_weili_display();
+		
+		DataSet ds = demo.open(conn, "*", condition.toString()," addTime desc limit 0 ,4 ", -1, -1);
+		ds.tables.get(0).rows.genRowsMap();
+			
+		return ds.tables.get(0).rows.rowsMap;
+	}
+	
+	/**
+	 * 查询一个标杆案例 父id下的首页推荐的前1条记录
+	 * */
+	public List<Map<String, Object>> queryDisplayByRecommendCase(Connection conn,StringBuffer condition)throws SQLException, DataException {
+		Dao.Tables.t_weili_display demo = new Dao().new Tables().new t_weili_display();
+		
+		DataSet ds = demo.open(conn, "*", condition.toString()," addTime desc limit 0 ,1 ", -1, -1);
+		ds.tables.get(0).rows.genRowsMap();
+			
+		return ds.tables.get(0).rows.rowsMap;
+	}
+	
+	/**
+	 * 查询一个 父id下的所有列表页面推荐的1条记录
+	 * */
+	public Map<String, String> queryDisplayRecommendById(Connection conn,StringBuffer condition)throws SQLException, DataException {
+		Dao.Tables.t_weili_display demo = new Dao().new Tables().new t_weili_display();
+		
+		DataSet ds = demo.open(conn, "*", condition.toString()," addTime desc limit 0 ,1 ", -1, -1);
+		return BeanMapUtils.dataSetToMap(ds);
+	}
+	
 	public Map<String,String> queryBrandRecommendedNews(Connection conn,Integer isRecommended) throws SQLException, DataException{
 		Dao.Tables.t_weili_display weiliDisplay = new Dao().new Tables().new t_weili_display();
 		
@@ -167,6 +253,16 @@ public class WeiliDisplayDao {
 		DataSet ds = weiliDisplay.open(conn, "  ", " isRecommended = "+isRecommended, "", -1, -1);
 		return BeanMapUtils.dataSetToMap(ds);
 	}
+	/**
+	 * 查询推荐最新动态
+	 * */
+	public Map<String,String> queryRecommendedNewest(Connection conn,Integer isRecommended) throws SQLException, DataException{
+		Dao.Tables.t_newest weiliDisplay = new Dao().new Tables().new t_newest();
+		
+		DataSet ds = weiliDisplay.open(conn, "  ", " isRecommended = "+isRecommended, "", -1, -1);
+		return BeanMapUtils.dataSetToMap(ds);
+	}
+	
 	
 	/**
 	 * 根据TypeId查询推荐展示内容
@@ -186,7 +282,17 @@ public class WeiliDisplayDao {
 		
 		return ds.tables.get(0).rows.rowsMap;
 	}
-	
+	/**
+	 *首页展示最新动态
+	 */
+	public List<Map<String, Object>> queryNewestIndex(Connection conn,String fieldList,String condition,String order)throws SQLException, DataException {
+		Dao.Tables.t_newest demo = new Dao().new Tables().new t_newest();
+		
+		DataSet ds = demo.open(conn, fieldList, condition,order, -1, -1);
+		ds.tables.get(0).rows.genRowsMap();
+		
+		return ds.tables.get(0).rows.rowsMap;
+	}
 	
 	
 	
@@ -204,8 +310,8 @@ public class WeiliDisplayDao {
 	* @return List<Map<String,Object>>
 	* @throws
 	 */
-	public List<Map<String, Object>> queryDisplayTypeList(Connection conn,  Long parentId, Integer order_num) throws SQLException, DataException{
-		Dao.Tables.t_weili_display_type twdt = new Dao(). new Tables(). new t_weili_display_type();
+	public List<Map<String, Object>> queryDisplayTypeList(Connection conn,  Long parentId) throws SQLException, DataException{
+		Dao.Tables.t_navigationbar twdt = new Dao(). new Tables(). new t_navigationbar();
 		StringBuffer condition = new StringBuffer();
 		condition.append(" 1=1 ");
 //		if (id != null && id > 0) {
@@ -214,10 +320,8 @@ public class WeiliDisplayDao {
 		if (parentId != null && parentId > 0) {
 			condition.append(" AND parentId=" + parentId);
 		}
-		if (order_num != null && order_num > 0) {
-			condition.append(" AND order_num=" + order_num);
-		}
-		DataSet dataSet = twdt.open(conn, "*", condition.toString(), "", -1, -1);
+		condition.append(" AND orderName=" + "'二级'");
+		DataSet dataSet = twdt.open(conn, "id,name", condition.toString(), "", -1, -1);
 		dataSet.tables.get(0).rows.genRowsMap();
 		return dataSet.tables.get(0).rows.rowsMap;
 	}

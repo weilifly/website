@@ -1,6 +1,7 @@
 package com.weili.service;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,13 +22,13 @@ public static Log log = LogFactory.getLog(SeoPageService.class);
 	
 	private SeoPageDao seoPageDao;
 
-	public long addSeoPage(String pageUrl,int columId, String seoTitle, String seoKeyWord,String seoDescription) throws Exception{
+	public long addSeoPage(String pageUrl,int columId, String seoTitle, String seoKeyWord,String seoDescription) throws SQLException, DataException{
 		Connection conn = connectionManager.getConnection();
 		
 		long seoId = -1;
 		try{
 			seoId = seoPageDao.addSeoPage(conn,pageUrl,columId,seoTitle,seoKeyWord,seoDescription);
-		}catch (Exception e) {
+		}catch (SQLException e) {
 			log.error(e);
 			e.printStackTrace();
 			throw e;

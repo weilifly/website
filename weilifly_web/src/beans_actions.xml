@@ -19,7 +19,14 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 		<property name="roleService" ref="roleService" />
 		<property name="roleRightsService" ref="roleRightsService" />
 	</bean>
-	
+	<!-- Menu管理 -->
+	<bean id="navigationBarAction" class="com.weili.action.admin.NavigationBarAction" scope="prototype">
+		<property name="navigationBarService" ref="navigationBarService" />
+	</bean>
+	<!-- 后台模块管理 -->
+	<bean id="moduleAction" class="com.weili.action.admin.ModuleAction" scope="prototype">
+		<property name="moduleService" ref="moduleService" />
+	</bean>
 	<!-- 角色管理 -->
 	<bean id="roleAction" class="com.weili.action.admin.RoleAction" scope="prototype">
 		<property name="rightsService" ref="rightsService" />
@@ -196,9 +203,8 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 	</bean>
 	<!-- 首页 -->
 	<bean id="indexAction" class="com.weili.action.front.IndexAction" scope="prototype" parent="baseFrontAction">
-		<property name="bannerService" ref="bannerService" />
 		<property name="weiliDisplayService" ref="weiliDisplayService" />
-		<property name="productService" ref="productService" />
+		<property name="bannerService" ref="bannerService" />
 	</bean>
 	<!-- 服务 -->
 	<bean id="serviceAction" class="com.weili.action.front.ServiceAction" scope="prototype" parent="baseFrontAction">
@@ -287,7 +293,10 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 		<property name="kydReportService" ref="kydReportService"></property>
 		<property name="recruitService" ref="recruitService"></property>
 	</bean>
-	
+	<!-- 导航菜单 -->
+	<bean id="frontNavigationBarAction" class="com.weili.action.front.FrontNavigationBarAction" scope="prototype">
+		<property name="navigationBarService" ref="navigationBarService" />
+	</bean>
 	<bean id="frontReportsAction" class="com.weili.action.usercenter.FrontReportsAction" scope="prototype" parent="baseFrontAction">
 		<property name="reportService" ref="reportService"></property>
 		<property name="productCategoryService" ref="productCategoryService"></property>

@@ -17,7 +17,7 @@ $(function(){
 	});
 	$("#jt").click(function(){
 	    if(bools){
-	      $('.suspend-box').animate({'right':-78},'slow'); 
+	      $('.suspend-box').animate({'right':-88},'slow'); 
 	        bools=false;
 	 	}else{
 	 	   $('.suspend-box').animate({'right':0},'slow'); 

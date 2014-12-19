@@ -8,9 +8,12 @@
 		<meta name="keywords" content="${paramMap.seoKeywords }" />
 		<meta name="description" content="${paramMap.seoDescription }" />
 		<link href="css/Common.css" type="text/css" rel="stylesheet" />
-		<link href="css/site.css" type="text/css" rel="stylesheet" />
+		<link href="css/site.css" type="text/css" rel="stylesheet" /><%--
 		<script type="text/javascript" src="script/jquery-1.11.0.min.js"></script>
+		--%><script src="script/jquery.min.js"></script>
 		<script src="script/easing.js"></script>
+		<script src="script/navigation.js"></script>
+		
 	</head>
 	<body>
 		<jsp:include page="/include/top.jsp"></jsp:include>
@@ -19,14 +22,8 @@
 			<div class="main-content">
 				<div class="head2 bdnone">
 					<div class="s-block1"></div>
-					<%--<ul class="second-nav">
-						<s:iterator value="#request.weiliDisplayList" var="bean" status="st">
-							<li <s:if test="#bean.id==paramMap.id">class="cur"</s:if>>
-								<a href="brandDetail.do?id=${bean.parentId}">${bean.name}</a>
-							</li>
-						</s:iterator>
-					</ul>--%>
-					<span>${parentMap.type_name }</span>&nbsp;&nbsp;&gt;<span><a style="text-decoration: none" href="queryWeiliDisplay.do?typeId=${paramMap.id}">${paramMap.type_name }</a></span>
+						<span><a style="text-decoration: none" href="queryWeiliDisplayes.do?id=${paramMap.parentId}">${parentMap.name }</a></span>&nbsp;&nbsp;&gt;<span>
+						<a style="text-decoration: none" href="queryWeiliDisplay.do?typeId=${paramMap.id}">${paramMap.name }</a></span>
 					<s:hidden name="paramMap.id"></s:hidden>
 				</div>
 				<!--内页头部导航结束--->
@@ -44,12 +41,8 @@
 									</p>
 									<a href="weiliDisplayDetail.do?id=${newMap.id }&typeId=${paramMap.id}" class="ck-btn">查看详情</a>
 						</s:if>
-						<s:else>
-							
-						</s:else>
 						</div>
 					</div>
-
 					<ul class="pp-info-news">
 						<s:iterator value="pageBean.page" var="bean" status="st">
 							<li>

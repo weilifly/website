@@ -4,11 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author 杨程
- * @version Oct 19, 2011 1:55:18 PM
+ * @author 
+ * @version 2014-12-18
  * @declaration
  */
 public class IConstants {
+	
+	
 	
 	/**
 	 * 排序方式：倒序
@@ -90,6 +92,14 @@ public class IConstants {
 	public static final int RECOMMEND_ON = 1;
 
 	/**
+	 * 一级导航
+	 */
+	public static final int PARENT_BAR = -1;
+	/**
+	 * 导航栏启用
+	 */
+	public static final int ENABEL_ON = 1;
+	/**
 	 * 显示
 	 */
 	public static final int STATUS_ON = 1;
@@ -158,6 +168,23 @@ public class IConstants {
 	 * 品牌资讯ID
 	 */
 	public static final long BRAND_ID_NEWS = 4;
+	
+	/**
+	 * 微力研究院id=2   
+	 * 
+	 * */
+	public static final Integer WEILI_RESEARCH_ID = 2;
+	/**
+	 * 标杆案例    id=4   
+	 * 
+	 * */
+	public static final Integer WEILI_CASE_ID = 4;
+	/**
+	 * o2o兵器库 id=3     
+	 * 
+	 * */
+	public static final Integer WEILI_O2O_ID = 3;
+	
 	
 	/**
 	 * 微力科技报道ID

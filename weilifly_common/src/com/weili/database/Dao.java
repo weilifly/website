@@ -693,6 +693,45 @@ public class Dao {
 					name = "`t_weili_display_type`";
 				}
 			}
+			
+			
+			public class t_newest extends Table {
+				public Field id = new Field(this, "`id`", Types.BIGINT, true);
+				public Field title = new Field(this, "`title`", Types.VARCHAR, false);
+				public Field source = new Field(this, "`source`", Types.VARCHAR, false);
+				public Field views = new Field(this, "`views`", Types.BIGINT, false);
+				public Field image = new Field(this, "`image`", Types.VARCHAR, false);
+				public Field content = new Field(this, "`content`", Types.LONGVARCHAR, false);
+				public Field addTime = new Field(this, "`addTime`", Types.TIMESTAMP, false);
+				public Field status = new Field(this, "`status`", Types.INTEGER, false);
+				public Field isRecommended = new Field(this, "`isRecommended`", Types.INTEGER, false);
+				public Field isIndex = new Field(this, "`isIndex`", Types.INTEGER, false);
+				public Field sortIndex = new Field(this, "`sortIndex`", Types.INTEGER, false);
+				public Field seoTitle = new Field(this, "`seoTitle`", Types.VARCHAR, false);
+				public Field seoKeywords = new Field(this, "`seoKeywords`", Types.VARCHAR, false);
+				public Field seoDescription = new Field(this, "`seoDescription`", Types.VARCHAR, false);
+
+				public t_newest() {
+					name = "`t_newest`";
+				}
+			}
+			//导航菜单栏
+			public class t_navigationbar extends Table {
+				public Field id = new Field(this, "`id`", Types.BIGINT, true);
+				public Field _name = new Field(this, "`name`", Types.VARCHAR, false);
+				public Field orderName = new Field(this, "`orderName`", Types.VARCHAR, false);
+				public Field parentId = new Field(this, "`parentId`", Types.BIGINT, false);
+				public Field enable = new Field(this, "`enable`", Types.INTEGER, false);
+				public Field url = new Field(this, "`url`", Types.VARCHAR, false);
+				public Field type = new Field(this, "`type`", Types.INTEGER, false);
+				public Field sortIndex = new Field(this, "`sortIndex`", Types.INTEGER, false);
+				public Field addTime = new Field(this, "`addTime`", Types.TIMESTAMP, false);
+				public Field mark = new Field(this, "`mark`", Types.VARCHAR, false);
+
+				public t_navigationbar() {
+					name = "`t_navigationbar`";
+				}
+			}
 		}
 
 		public class Views {
@@ -702,7 +741,16 @@ public class Dao {
 					name = "`v_t_admin`";
 				}
 			}
-
+			public class v_t_navigationbar extends View {
+				public v_t_navigationbar() {
+					name = "`v_t_navigationbar`";
+				}
+			}
+			public class v_bt_rights extends View {
+				public v_bt_rights() {
+					name = "`v_bt_rights`";
+				}
+			}
 			public class v_t_attribute_materials extends View {
 				public v_t_attribute_materials() {
 					name = "`v_t_attribute_materials`";

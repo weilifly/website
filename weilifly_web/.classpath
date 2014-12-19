@@ -34,6 +34,7 @@
 	<classpathentry exported="true" kind="lib" path="WebRoot/WEB-INF/lib/struts2-core-2.3.16.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="WebRoot/WEB-INF/lib/struts2-spring-plugin-2.3.16.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="WebRoot/WEB-INF/lib/xwork-core-2.3.16.2.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/struts2-json-plugin-2.1.8.jar"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/weilifly_common"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

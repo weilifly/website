@@ -7,12 +7,12 @@
 	<package name="frontDownload" extends="front-default" namespace="/">
 		<!-- 下载综合-->
 		<action name="downloadIndex" class="frontDownloadAction" method="downloadIndex">
-			<result name="success" >/WEB-INF/page/front/download_index.jsp</result>
+			<result name="success" >/WEB-INF/page/front/download/download_index.jsp</result>
 		</action>
 		
 		<!-- 前台资料下载preDownload开始-->
 		<action name="preDownloadIndex" class="frontDownloadAction" method="preDownloadIndex">
-			<result name="success" >/WEB-INF/page/front/courseware_index.jsp</result>
+			<result name="success" >/WEB-INF/page/front/download/download_son_index.jsp</result>
 		</action>
 		<action name="downloadData" class="frontDownloadAction" method="downloadData">
 		</action>

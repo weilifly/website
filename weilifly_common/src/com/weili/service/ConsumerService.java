@@ -40,17 +40,83 @@ public class ConsumerService extends BaseService {
 	 * @throws SQLException 
 	 * @throws DataException
 	 */
-	public long addConsumers(String cName,String cTelephone,String address,String needContent,Integer needId) throws SQLException{
-		Connection conn = connectionManager.getConnection();
+	public Map<String, Object> addConsumers(String cName,String cTelephone,String address,String needContent,int needId) throws Exception{
+		Connection conn = null;
+
 		long returnId = -1;
+		String error = "发送失败";
+
+		Map<String, Object> map = new HashMap<String, Object>();
+
 		try {
-			returnId = consumerDao.addConsumers(conn,cName,cTelephone,address,needContent,needId);
-			return returnId;
-		} finally{
-			conn.close();
+			Map<String, Object> returnMap = checkConsumersMap(cName,cTelephone,address,needId);
+			returnId = ((Long) returnMap.get("returnId"));
+			if (returnId <= 0) {
+				error = (String) returnMap.get("error");
+				return map;
+			}
+			
+			conn = connectionManager.getConnection();
+			returnId = consumerDao.addConsumers(conn, cName,cTelephone,address,needContent,needId);
+
+			if(returnId>0)
+			error = "发送成功";
+		} catch (Exception e) {
+			log.error(e);
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if (conn != null) {
+				conn.close();
+			}
+			map.put("returnId", returnId);
+			map.put("error", error);
+		}
+		return map;
+		
+	}
+	/**
+	 * 检查信息完整程度
+	 * @param name
+	 * @param enable
+	 * @param type
+	 * @param sortIndex
+	 * @return
+	 */
+	private Map<String, Object> checkConsumersMap(String cName,String cTelephone,String address,int needId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		long returnId = -1;
+		String error = "验证失败！";
+
+		try {
+			if (StringUtils.isBlank(cName)) {
+				error = "姓名/公司名不能为空";
+				return map;
+			}
+			if (StringUtils.isBlank(cTelephone)) {
+				error = "手机号不能为空";
+				return map;
+			}
+			if (StringUtils.isBlank(address)) {
+				error = "地址不能为空";
+				return map;
+			}
+			if (needId < 0) {
+				error = "请选择需求类型";
+				return map;
+			}
+			returnId = 1;
+			error = "验证通过！";
+
+			return map;
+		} catch (Exception e) {
+			returnId = -1;
+			return map;
+		} finally {
+			map.put("returnId", returnId);
+			map.put("error", error);
 		}
 	}
-	
 	/**
 	 * 根据条件分页查询潜在用户
 	 * @param userName 用户名

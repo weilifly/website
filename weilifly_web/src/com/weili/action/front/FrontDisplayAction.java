@@ -5,6 +5,9 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import net.sf.json.JSONObject;
 
 import com.shove.Convert;
@@ -14,6 +17,7 @@ import com.weili.service.BrandAdvertiseService;
 import com.weili.service.BrandService;
 import com.weili.service.ConsumerService;
 import com.weili.service.DevelopmentService;
+import com.weili.service.DownloadService;
 import com.weili.service.KydReportService;
 import com.weili.service.NewspaperService;
 import com.weili.service.WeiliDisplayService;
@@ -30,18 +34,55 @@ public class FrontDisplayAction extends BaseFrontAction {
 	private ConsumerService consumerService;
 	
 	private List<Map<String,Object>> brandList;
+	public static Log log = LogFactory.getLog(FrontDisplayAction.class);
 	
 	
+	/**
+	 *  前台查询展示内容父模块所有内容
+	 * */
+	public String queryWeiliDisplayes() throws Exception{
+		//参数中获取内容父类型id
+		Integer id = Convert.strToInt(request("id"), -1);
+		
+		paramMap = weiliDisplayService.queryDisplayTypeByTypeId(id);
+		
+//		log.info(paramMap);
+		//通过父id查找子类型，再通过子类型查询内容
+		List<Map<String, Object>> typeList = weiliDisplayService.queryDisplayIndex(id);
+		
+		StringBuffer type = new StringBuffer();
+		for(Map<String,Object> map:typeList){
+			type.append(map.get("id")+",");
+		}
+		type.deleteCharAt(type.length()-1);
+		
+		//设置页面显示列表
+		pageBean.setPageSize(15);
+		int pageNum = Convert.strToInt(request("curPage"), 1);
+		pageBean.setPageNum(pageNum);
+		
+		//通过子类型查询内容,点击more+时候显示
+		 weiliDisplayService.queryDisplayByStringId(pageBean,type);
+		
+		//more之后显示的第一个推荐的内容
+		StringBuffer condition = new StringBuffer();
+		condition.append(" 1=1 and typeId in ("+type+") and isIndex = 1 ");
+		Map<String, String> singleRecommendMap = weiliDisplayService.queryDisplayRecommendById(condition);
+		request().setAttribute("singleRecommendMap", singleRecommendMap);
+		
+		return SUCCESS;
+	}
+
 	
 	/**
 	 * 前台查询展示内容子模块详情
 	 * */
 	public String queryWeiliDisplay() throws Exception{
 		//参数中获取内容类型id
-		Integer typeId = Convert.strToInt(request("typeId"), -1);
+		Integer id = Convert.strToInt(request("typeId"), -1);
 		
-		//通过typeId获取该类型的信息
-		paramMap = weiliDisplayService.queryDisplayTypeByTypeId(typeId);
+		//通过typeId获取该类型的信息<层级名称>
+		paramMap = weiliDisplayService.queryDisplayTypeByTypeId(id);
 		//查找父类信息(上一级)
 		Map<String,String> parentMap = weiliDisplayService.queryDisplayTypeByTypeId(Convert.strToInt(paramMap.get("parentId"), -1));
 		request("parentMap",parentMap);
@@ -53,18 +94,12 @@ public class FrontDisplayAction extends BaseFrontAction {
 		pageBean.setPageNum(pageNum);
 		
 		//分页查询typeId的内容
-		weiliDisplayService.queryWeiliDisplayPageFront(pageBean, IConstants.STATUS_ON,typeId);
+		weiliDisplayService.queryWeiliDisplayPageFront(pageBean, IConstants.STATUS_ON,id);
 		
 		//根据typeId查询推荐的内容
-		Map<String,String> newMap = weiliDisplayService.queryRecommendedDisplayByTypeId(IConstants.RECOMMEND_ON,typeId);
-		
+		Map<String,String> newMap = weiliDisplayService.queryRecommendedDisplayByTypeId(IConstants.RECOMMEND_ON,id);
 		request("newMap",newMap);
 		
-		
-		//System.out.println(newMap.get("content")+"   pppppp");
-		
-	//	List<Map<String, String>> weiliDisplayList = weiliDisplayService.queryDisplayByTypeId(typeId);
-	//	request("weiliDisplayList",weiliDisplayList);
 		return SUCCESS;
 	}
 	
@@ -73,6 +108,8 @@ public class FrontDisplayAction extends BaseFrontAction {
 	 * 前台展示内容子模块内容详情
 	 * */
 	public String weiliDisplayDetail() throws Exception{
+		
+		//weiliDisplayDetail.do?id=${singleRecommendMap.id }&typeId=${paramMap.id}
 		
 		Integer typeId = Convert.strToInt(request("typeId"),-1);
 		//通过typeId获取该类型的信息
@@ -107,8 +144,39 @@ public class FrontDisplayAction extends BaseFrontAction {
 	
 	
 	
+	/**
+	 * 最新动态二级目录列表
+	 * */
+	public String queryNewest() throws Exception{
+		
+		//推荐查询
+		Map<String,String> NewestMap = weiliDisplayService.queryRecommendedNewest(IConstants.RECOMMEND_ON);
+		request("NewestMap",NewestMap);
+		
+		
+		//详细列表查询
+		pageBean.setPageSize(15);
+		int pageNum = Convert.strToInt(request("curPage"), 1);
+		pageBean.setPageNum(pageNum);
+		
+		this.weiliDisplayService.queryNewest(this.pageBean);
+		
+		return SUCCESS;
+	}
 	
-	
+	/**
+	 * 最新动态三级目录内容详情
+	 * */
+	public String NewestDetail() throws Exception{
+		
+		Long id = Convert.strToLong(request("id"), -1);
+		weiliDisplayService.updateNewest(id);//增加浏览数
+		
+		Map<String,String> displayDetail = weiliDisplayService.queryNewest(id);
+		
+		request("displayDetail",displayDetail);
+		return SUCCESS;
+	}
 	
 	public String brandDetail() throws Exception{
 		List<Map<String,Object>> bList = getBrandList();
@@ -231,28 +299,24 @@ public class FrontDisplayAction extends BaseFrontAction {
 		return null;
 	}
 	
+	public String sendToUsInit(){
+		return SUCCESS;
+	}
+	
 	/*
 	 * sendToUs
 	 * */
 	public String sendToUs() throws Exception{
+		String cName = paramMap.get("cName");
+		String cTelephone = paramMap.get("cTelephone");
+		String address = paramMap.get("address");
+		String needContent = paramMap.get("needContent");
+		int needId = Convert.strToInt(paramMap.get("needId"),-1);
+		
 		JSONObject obj = new JSONObject();
-		
-		String cName = request("cName"); //paramMap.get
-		String cTelephone = request("cTelephone");
-		String address = request("address");
-		String needContent = request("needContent");
-		Integer needId = Convert.strToInt(request("needId"), -1);
-		
-		long returnId =-1;
-		returnId = consumerService.addConsumers(cName,cTelephone,address,needContent,needId);//增加潜在用户
-		
-		//obj.putAll(consumerService.addConsumers(cName,cTelephone,address,needContent,needId));//增加潜在用户
-		
-		obj.put("returnId", returnId);
+		obj.putAll(consumerService.addConsumers(cName,cTelephone,address,needContent,needId));		
 		JSONUtils.printObject(obj);
-		
-		//return null;
-		return SUCCESS;
+		return null;
 	}
 
 	public void setBrandService(BrandService brandService) {

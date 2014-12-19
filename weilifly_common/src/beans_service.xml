@@ -178,9 +178,17 @@
    	<bean id="weiliDisplayService" class="com.weili.service.WeiliDisplayService" parent="baseService">
    	   <property name="weiliDisplayDao" ref="weiliDisplayDao"/>
    	</bean> 
-   		<!--Banner管理 -->
+   	<!--Banner管理 -->
    	<bean id="bannerService" class="com.weili.service.BannerService" parent="baseService">
    	   <property name="bannerDao" ref="bannerDao"/>
+   	</bean>
+   	<!--ModuleService管理 -->
+   	<bean id="moduleService" class="com.weili.service.ModuleService" parent="baseService">
+   	   <property name="moduleDao" ref="moduleDao"/>
+   	</bean>
+   	<!--NavigationBarService管理 -->
+   	<bean id="navigationBarService" class="com.weili.service.NavigationBarService" parent="baseService">
+   	   <property name="navigationBarDao" ref="navigationBarDao"/>
    	</bean>
    	<!--SEO管理 -->
    	<bean id="seoPageService" class="com.weili.service.SeoPageService" parent="baseService">

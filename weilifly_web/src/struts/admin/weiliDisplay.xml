@@ -5,28 +5,59 @@
 <struts>
 	<package name="weiliDisplay" extends="admin-default" namespace="/admin">
 	
+		<!-- 最新动态初始化 -->
+		<action name="queryNewestInit" class="weiliDisplayAction" method="queryNewestInit">
+			<result name="success">/WEB-INF/page/admin/weiliDisplay/newest_index.jsp</result>
+		</action>
+		<!-- 最新动态 -->
+		<action name="queryNewestInfo" class="weiliDisplayAction" method="queryNewestInfo">
+			<result name="success">/WEB-INF/page/admin/weiliDisplay/newest_index_info.jsp</result>
+		</action>
+	
+		<!-- 添加最新动态初始化 -->
+		<action name="addNewestInit" class="weiliDisplayAction" method="addNewestInit">
+			<result name="success">/WEB-INF/page/admin/weiliDisplay/newest_add.jsp</result>
+		</action>
+		
+		<!-- 添加最新动态 -->
+		<action name="addNewest" class="weiliDisplayAction" method="addNewest">
+		</action>
+	
+		<!-- 删除最新动态 -->
+		<action name="deleteNewest" class="weiliDisplayAction" method="deleteNewest">
+		</action>
+	
+	
+	
+		<!-- 展示内容初始化 -->
 		<action name="queryDisplayInit" class="weiliDisplayAction" method="queryDisplayInit">
 			<result name="success">/WEB-INF/page/admin/weiliDisplay/weili_display_index.jsp</result>
 		</action>
 		
+		<!-- 展示内容 -->
 		<action name="queryDisplayInfo" class="weiliDisplayAction" method="queryDisplayInfo">
 			<result name="success">/WEB-INF/page/admin/weiliDisplay/weili_display_index_info.jsp</result>
 		</action>
 		
+		<!-- 添加展示内容初始化 -->
 		<action name="addDisplayInit" class="weiliDisplayAction" method="addDisplayInit">
 			<result name="success">/WEB-INF/page/admin/weiliDisplay/weili_display_add.jsp</result>
 		</action>
 		
+		<!-- 添加展示内容 -->
 		<action name="addDisplay" class="weiliDisplayAction" method="addDisplay">
 		</action>
 		
+		<!-- 修改展示内容初始化 -->
 		<action name="updateDisplayInit" class="weiliDisplayAction" method="updateDisplayInit">
 			<result name="success">/WEB-INF/page/admin/weiliDisplay/weili_display_update.jsp</result>
 		</action>
 		
+		<!-- 修改展示内容 -->
 		<action name="updateDisplay" class="weiliDisplayAction" method="updateDisplay">
 		</action>
 		
+		<!-- 删除展示内容 -->
 		<action name="deleteDisplay" class="weiliDisplayAction" method="deleteDisplay">
 		</action>
 		

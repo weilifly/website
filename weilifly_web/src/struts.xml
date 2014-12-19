@@ -54,6 +54,8 @@
 	<include file="struts/admin/imgList.xml" />
 	<include file="struts/admin/webDistributeType.xml" />
 	<include file="struts/admin/recruitType.xml" />
+	<include file="struts/admin/navigationBar.xml" />
+	<include file="struts/admin/module.xml" />
 	
 	<!-- 前台 -->
 	<include file="struts/front/index.xml" />
@@ -72,6 +74,7 @@
  	<include file="struts/front/frontDownload.xml" />
 	<include file="struts/front/frontWebsiteMap.xml" />
 	<include file="struts/front/search.xml"/>
+ 	<include file="struts/front/frontNavigationBar.xml" />
  	
 	<!-- 代理商 -->
 	

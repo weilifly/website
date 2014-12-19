@@ -1,7 +1,9 @@
 package com.weili.action.admin;
 
+import java.sql.SQLException;
 import java.util.Map;
 import com.shove.Convert;
+import com.shove.data.DataException;
 import com.shove.web.action.BasePageAction;
 import com.weili.service.SeoPageService;
 
@@ -10,6 +12,32 @@ public class SeoPageAction extends BasePageAction<Map<String, Object>> {
     private	SeoPageService seoPageService;
 	
     
+    /**
+   	 * 添加SEO初始化
+   	 * @return
+   	 */
+   	public String addSeoPageInit(){
+   		return SUCCESS;
+   	}
+   	/**
+   	 * 添加SEO
+   	 * @return
+   	 * @throws SQLException
+   	 * @throws DataException 
+   	 */
+   	public String addSeoPage() throws SQLException, DataException{		
+   		String pageUrl = paramMap.get("pageUrl");
+   		String seoTitle = paramMap.get("seoTitle");
+   		String seoKeyWord = paramMap.get("seoKeyWord");
+   		String seoDescription = paramMap.get("seoDescription");
+   		
+   		Long result=seoPageService.addSeoPage(pageUrl,-1,seoTitle,seoKeyWord,seoDescription);
+   		if(result<0){
+   			this.addFieldError("errorMessage","添加失败");
+   			return INPUT;
+   		}
+   		return SUCCESS;
+   	}
     /**
      * 修改seo初始化
      * @return

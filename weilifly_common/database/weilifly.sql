@@ -19,7 +19,6 @@ SET FOREIGN_KEY_CHECKS=0;
 -- Table structure for bt_config
 -- ----------------------------
 DROP TABLE IF EXISTS `bt_config`;
-CREATE TABLE `bt_config` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `type` int(11) DEFAULT NULL COMMENT '类型 1，积分设置 3，购物车定时',
   `name` varchar(255) DEFAULT NULL COMMENT '名称（描述）',

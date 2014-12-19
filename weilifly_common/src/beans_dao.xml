@@ -22,6 +22,8 @@
    <bean id="attributeDao" class="com.weili.dao.AttributeDao" />
    <bean id="materialsDao" class="com.weili.dao.MaterialsDao" />
    <bean id="materialsAttributeDao" class="com.weili.dao.MaterialsAttributeDao" />
+   <bean id="moduleDao" class="com.weili.dao.ModuleDao" />
+   <bean id="navigationBarDao" class="com.weili.dao.NavigationBarDao" />
    <bean id="downloadDao" class="com.weili.dao.DownloadDao" />
    <bean id="downloadHelpDao" class="com.weili.dao.DownloadHelpDao" />
    <bean id="webDistributeDao" class="com.weili.dao.WebDistributeDao" />

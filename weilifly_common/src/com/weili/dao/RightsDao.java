@@ -25,22 +25,6 @@ public class RightsDao {
 	 */
 	public Long importRights(Connection conn,String [][] data) throws SQLException
 	{
-		/* Dao.Tables.bt_rights bt_rights = new Dao().new Tables().new bt_rights();
-		 Long returnIdLong =-1L;
-		 for (int i = 0; i < data.length; i++) {
-			 bt_rights._name.setValue(data[i][0].toString().trim());
-			 bt_rights.action.setValue(data[i][1].toString().trim());
-			 bt_rights.description.setValue(data[i][2].toString().trim());
-			 Long menuId=null;
-			 if (StringUtils.isNotBlank(data[i][3].toString().trim())) {
-				 menuId = Long.parseLong(data[i][3].toString().trim());
-				 bt_rights.menuId.setValue(menuId);
-			}else {
-				bt_rights.menuId.setValue(menuId);
-			}
-		 returnIdLong =  bt_rights.insert(conn);
-		}
-		return returnIdLong;*/
 		return 1L;
 	}
 	
@@ -55,7 +39,7 @@ public class RightsDao {
 	 */
 	public List<Map<String,Object>> queryRightsList(Connection conn) throws SQLException, DataException{
 		Dao.Tables.bt_rights rights = new Dao().new Tables().new bt_rights();
-		DataSet dataSet = rights.open(conn, "", " isIntercept = 1  ", " indexs ASC", -1, -1);
+		DataSet dataSet = rights.open(conn, "", " isIntercept = 1 and isQuery = 1 ", " indexs ASC", -1, -1);
 		dataSet.tables.get(0).rows.genRowsMap();
 		return dataSet.tables.get(0).rows.rowsMap;
 	}
@@ -69,7 +53,7 @@ public class RightsDao {
 	 */
 	public List<Map<String,Object>> queryRightsMenuList(Connection conn) throws SQLException, DataException{
 		Dao.Tables.bt_rights rights = new Dao().new Tables().new bt_rights();
-		DataSet dataSet = rights.open(conn, "", " id<0 or parentId<0  ", "", -1, -1);
+		DataSet dataSet = rights.open(conn, "", " isQuery==1 ", "", -1, -1);
 		dataSet.tables.get(0).rows.genRowsMap();
 		return dataSet.tables.get(0).rows.rowsMap;
 	}

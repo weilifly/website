@@ -10,8 +10,9 @@
 <link href="css/Common.css" type="text/css" rel="stylesheet" />
 		<script src="script/jquery.min.js"></script>
 		<script src="script/slider.js"></script>
-		<script type="text/javascript"
-			src="kindeditor/plugins/jwplayer/jwplayer.js"></script>
+		<script type="text/javascript" src="script/jquery.shove-1.0.js"></script>
+		<%--<script src="script/navigation.js"></script>--%>
+		<script type="text/javascript" src="kindeditor/plugins/jwplayer/jwplayer.js"></script>
 		<script src="script/easing.js"></script>
 		<script src="script/commom.js"></script>
 
@@ -121,37 +122,42 @@
 
 	<!--头部外围盒子结束 head-box-->
 	<!-- banner图开始 -->
-	<div class="banner-box" style="height: 470px;">
-		<!--   <div class="roll-arrows1"></div>  -->
-		<div class="banner" id="slider">
-			<ul class="DB_bgSet">
-				<s:iterator value="#request.bannerList" var="bean" status="st">
-					<li
-						style="background: url('${bean.imgPath}') no-repeat center center;">
-						<a href="${bean.url}" target="_blank"
-						style='display: block; height: 470px;'></a></li>
-				</s:iterator>
-			</ul>
-			<ul class="DB_imgSet">
-				<s:iterator value="#request.bannerList" var="bean" status="st">
-					<li><a href="${bean.url}" target="_blank"
-						style='display: block; width: 600px; float: left; height: 100%'></a>
-						<a href="${bean.url}" target="_blank" style='display: block;'><img
-							class="DB_1_1" src="${bean.imgUrl}" /> </a> <a href="${bean.urlTwo}"
-						target="_blank"><img class="DB_1_2" src="${bean.imgFont}" />
-					</a></li>
-				</s:iterator>
-			</ul>
-			<div class="DB_menuWrap">
-				<ul class="DB_menuSet">
+		<div class="banner-box" style="height: 470px;">
+			<div class="roll-arrows1"></div>
+			<div class="banner" id="slider">
+				<ul class="DB_bgSet">
 					<s:iterator value="#request.bannerList" var="bean" status="st">
-						<li></li>
+						<li
+							style="background: url('${bean.imgPath}') no-repeat center center;">
+							<a href="${bean.url}" target="_blank"
+								style='display: block; height: 470px;'></a>
+						</li>
 					</s:iterator>
 				</ul>
+				<ul class="DB_imgSet">
+					<s:iterator value="#request.bannerList" var="bean" status="st">
+						<li>
+							<a href="${bean.url}" target="_blank" 
+								style='display: block; width: 600px; float: left; height: 100%'></a>
+							<a href="${bean.url}" target="_blank" style='display: block;'><img
+									class="DB_1_1" src="${bean.imgUrl}" />
+							</a>
+							<a href="${bean.urlTwo}" target="_blank"><img class="DB_1_2"
+									src="${bean.imgFont}" />
+							</a>
+						</li>
+					</s:iterator>
+				</ul>
+				<div class="DB_menuWrap">
+					<ul class="DB_menuSet">
+						<s:iterator value="#request.bannerList" var="bean" status="st">
+							<li></li>
+						</s:iterator>
+					</ul>
+				</div>
 			</div>
 		</div>
-	</div>
-	<!-- banner结束 -->
+		<!-- banner结束 -->
 
 	<!--3D滚动外层盒子-->
 	<script src="script/jquery.roundabout2.js"></script>
@@ -159,7 +165,7 @@
 			$(document).ready(function() {
 				$('ul.abc').roundabout();
 			});
-		</script>
+	</script>
 	<!-- 第一组模块 -->
 	<div class="main-box">
 		<div class="main">
@@ -168,21 +174,21 @@
 			<div class="zx-box" style="height: 448px;">
 				<div class="inner">
 					<h3>
-						<a href="QueryWeiliDisplay.do?type=1">more+</a><span>微力研究院</span>
+						<a href="queryWeiliDisplayes.do?id=2">more+</a><span>微力研究院</span>
 					</h3>
-					<s:iterator value="#request.newList" var="bean" status="st">
+					<s:iterator value="#request.researchList" var="bean" status="st">
 						<dl class="zx-list">
 							<dt>
 								<!--内容缩略图 -->
-								<a href="weiliDisplayesDetail.do?id=${bean.id}"><img
+								<a href="weiliDisplayDetail.do?id=${bean.id}&typeId=1"><img
 									src="${bean.image}" /> </a>
 							</dt>
 							<dd>
 								<div style="height: 55px; overflow: hidden;">
 									<!--内容标题 -->
-									<a href="weiliDisplayesDetail.do?id=${bean.id}" class="title">${bean.title}</a>
+									<a href="weiliDisplayDetail.do?id=${bean.id}&typeId=1" class="title">${bean.title}</a>
 								</div>
-								<a href="weiliDisplayesDetail.do?id=${bean.id}" class="btn"></a>
+								<a href="weiliDisplayDetail.do?id=${bean.id}&typeId=1" class="btn"></a>
 							</dd>
 						</dl>
 					</s:iterator>
@@ -193,31 +199,24 @@
 			<div class=" zx-box rd-box" style="height: 448px;">
 				<div class="inner">
 					<h3>
-						<a href="brandDetail.do?id=4">more+</a><span>O2O兵器库</span>
+						<a href="queryWeiliDisplayes.do?id=3">more+</a><span>O2O兵器库</span>
 					</h3>
-					<s:iterator value="#request.newList" var="bean" status="st">
+					<s:iterator value="#request.o2OList" var="bean" status="st">
 						<dl class="zx-list">
 							<dt>
 								<!--内容缩略图 -->
-								<a href="weiliDisplayesDetail.do?id=${bean.id}"><img
+								<a href="weiliDisplayDetail.do?id=${bean.id}&typeId=3"><img
 									src="${bean.image}" /> </a>
 							</dt>
 							<dd>
 								<div style="height: 55px; overflow: hidden;">
 									<!--内容标题 -->
-									<a href="weiliDisplayesDetail.do?id=${bean.id}" class="title">${bean.title}</a>
+									<a href="weiliDisplayDetail.do?id=${bean.id}&typeId=3" class="title">${bean.title}</a>
 								</div>
-								<a href="weiliDisplayesDetail.do?id=${bean.id}" class="btn"></a>
+								<a href="weiliDisplayDetail.do?id=${bean.id}&typeId=3" class="btn"></a>
 							</dd>
 						</dl>
 					</s:iterator>
-					<%--
-						<script type="text/javascript"
-							src="http://bbs.kyd2002.com/api.php?mod=js&bid=4"></script>
-						<br /><br />
-						<script type="text/javascript"
-							src="http://bbs.kyd2002.com/api.php?mod=js&bid=3"></script>
-					--%>
 				</div>
 			</div>
 			<!--标杆案例-->
@@ -225,12 +224,12 @@
 			<div class="sp-box" style="height: 448px;">
 				<div class="inner">
 					<h3>
-						<a href="brandDetail.do?id=5">more+</a><span>标杆案例</span>
+						<a href="queryWeiliDisplayes.do?id=4">more+</a><span>标杆案例</span>
 					</h3>
-					<a href="javascript:;" class="aj"><img src="${paramMap.image}" /><span>播放</span>
-					</a>
-					<div class="spjs" title="${paramMap.title}">
-						${paramMap.title}</div>
+					<s:iterator value="#request.caseList" var="bean" status="st">
+								<a href="weiliDisplayDetail.do?id=${bean.id}&typeId=2" class="aj"><img src="${bean.image}" /></a>
+								<div class="spjs" title="${bean.title}"><a href="weiliDisplayDetail.do?id=${bean.id}&typeId=2" class="title"> ${bean.title} </a></div>
+					</s:iterator>
 				</div>
 			</div>
 		</div>
@@ -241,19 +240,19 @@
 			<div class="nx-box" style="height: 448px;">
 				<div class="inner">
 					<h3>
-						<a href="brandDetail.do?id=4">more+</a><span>最新动态</span>
+						<a href="queryNewest.do">more+</a><span>最新动态</span>
 					</h3>
-					<s:iterator value="#request.newList" var="bean" status="st">
+					<s:iterator value="#request.newestList" var="bean" status="st">
 						<dl class="zx-list">
 							<dt>
-								<a href="weiliDisplayesDetail.do?id=${bean.id}"><img
+								<a href="NewestDetail.do?id=${bean.id}"><img
 									src="${bean.image}" /> </a>
 							</dt>
 							<dd>
 								<div style="height: 55px; overflow: hidden;">
-									<a href="weiliDisplayesDetail.do?id=${bean.id}" class="title">${bean.title}</a>
+									<a href="NewestDetail.do?id=${bean.id}" class="title">${bean.title}</a>
 								</div>
-								<a href="weiliDisplayesDetail.do?id=${bean.id}" class="btn"></a>
+								<a href="NewestDetail.do?id=${bean.id}" class="btn"></a>
 							</dd>
 						</dl>
 					</s:iterator>
