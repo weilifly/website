@@ -1,4 +1,4 @@
-newest<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/include/taglib.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -60,6 +60,32 @@ newest<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 			});
 			
 			
+			
+			$(function(){
+				//提交表单
+				$("#btn_save").click(function(){
+					$(this).hide();
+					$("#addDisplay").submit();
+					return false;
+				});	
+			});
+			function change(){
+				var radio = $('#pId').val();
+				var parentId = '${displaySonList}';
+				//alert(parentId);
+
+				for(var i=0;i<parentId.length;i++){ //循环遍历   
+					alert(parentId.get[i].parentId);
+				}
+				
+				if(radio.value == parentId){
+					document.getElementById("displaySonId").disabled='';
+				}
+				else{
+					document.getElementById("displaySonId").disabled='true';
+				}
+			}
+			/*
 			$(function(){
 				init();
 				//提交表单
@@ -128,11 +154,11 @@ newest<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 					var typeId ='${paramMap.typeId}';
 					$("#typeId").val(typeId);
 				});
-			}
+			}*/
 		</script>
 	</head>
 	<body>
-		<form id="addDemo" name="addDemo" action="addDemo.do" method="post">
+		<form id="addDisplay" name="addDisplay" action="addDisplay.do" method="post">
 			<div id="right"
 				style="background-image: url(../images/admin/right_bg_top.jpg); background-position: top; background-repeat: repeat-x;">
 				<div style="padding: 15px 10px 0px 10px;">
@@ -196,12 +222,14 @@ newest<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 								<td style="width: 100px; height: 25px;" align="right"
 									class="blue12">
 									文章属类：
-								<s:select id="parentId" name="paramMap.parentId" 
+								<s:select id="pId" name="paramMap.parentId" 
 										list="parentTypeList" listKey="id"
-										listValue="name" headerKey="-1" headerValue="--请选择--" />
-								<s:select name="paramMap.typeId" id="typeId" list="#{'-1':'-请选择-'}"><%--
-										  list="typeList" listKey="id" listValue="type_name" headerKey="-1" headerValue="-请选择-">
-								--%></s:select>
+										listValue="name" headerKey="-1" headerValue="--请选择--" onchange="change();"/>
+								<span style="color: red;">*<s:fielderror fieldName="paramMap.parentId" /></span>		
+								
+								<s:select id="displaySonId" list="displaySonList" name="paramMap.displaySonId" listKey="id" listValue="name" 
+										headerKey="-1" headerValue="--请选择--" disabled="true"></s:select>
+									<span style="color: red;">*<s:fielderror fieldName="paramMap.displaySonId" /></span>
 								</td>
 							</tr>
 							<tr>

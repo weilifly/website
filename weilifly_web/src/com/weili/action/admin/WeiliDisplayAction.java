@@ -29,6 +29,8 @@ public class WeiliDisplayAction extends BasePageAction
   private List<Map<String,Object>> parentTypeList;
   private List<Map<String,Object>> needsTypeList;
   
+  private List<Map<String,String>> displaySonList;
+  
   
   /**
    * 查询潜在用户初始化
@@ -204,7 +206,7 @@ public class WeiliDisplayAction extends BasePageAction
 	  public String addNewestInit()
 	    throws Exception
 	  {
-	    List<?> sortList = this.weiliDisplayService.querySort();
+	    List<?> sortList = this.weiliDisplayService.queryTypeList();
 	    request().setAttribute("sortList", sortList);
 	
 	    return "success";
@@ -330,7 +332,7 @@ public class WeiliDisplayAction extends BasePageAction
 	  public String addDisplayInit()
 	    throws Exception
 	  {
-	    List sortList = this.weiliDisplayService.querySort();
+	    List sortList = this.weiliDisplayService.queryTypeList();
 	    request().setAttribute("sortList", sortList);
 	
 	    return "success";
@@ -507,6 +509,17 @@ public class WeiliDisplayAction extends BasePageAction
 		  }
 		  return needsTypeList;
 	  }
+	  //获取类型list
+	public List<Map<String, String>> getDisplaySonList() throws Exception {
+		if(displaySonList == null){
+			displaySonList = 	this.weiliDisplayService.queryTypeList();
+		}
+		return displaySonList;
+	}
+	public void setDisplaySonList(List<Map<String, String>> displaySonList) {
+		this.displaySonList = displaySonList;
+	}
+	  
 	  
 }
 

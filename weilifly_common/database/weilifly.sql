@@ -245,10 +245,10 @@ CREATE TABLE `t_admin` (
 INSERT INTO `t_admin` VALUES ('1', 'admin', '4GV5XUIGJwbJe/9PnpHhf7Njd1xJVCBUyCn4Qvuk1xqDVkA5SlQnVw==', '1', '2014-12-16 21:01:42', '127.0.0.1', '-1');
 
 -- ----------------------------
--- Table structure for t_advertisement
+-- Table structure for t_appadv
 -- ----------------------------
-DROP TABLE IF EXISTS `t_advertisement`;
-CREATE TABLE `t_advertisement` (
+DROP TABLE IF EXISTS `t_appadv`;
+CREATE TABLE `t_appadv` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL COMMENT '广告名称',
   `image` varchar(100) DEFAULT NULL COMMENT '图片',
@@ -264,10 +264,10 @@ CREATE TABLE `t_advertisement` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of t_advertisement
+-- Records of t_appadv
 -- ----------------------------
-INSERT INTO `t_advertisement` VALUES ('1', '家教智能机视频11', 'upload/image/admin/2014/20140801/201408011122047442.jpg', 'upload/file/admin/2014/20140716/201407161811335231.txt', '1', '2014-07-16 18:11:52', '-1', '1', null, null, null);
-INSERT INTO `t_advertisement` VALUES ('2', '阿斯蒂芬', 'upload/image/admin/2014/20140802/201408020858056927.jpg', 'upload/media/admin/2014/20140802/201408020857303663.flv', '1', '2014-07-21 08:54:41', '-1', '1', null, null, null);
+INSERT INTO `t_appadv` VALUES ('1', '家教智能机视频11', 'upload/image/admin/2014/20140801/201408011122047442.jpg', 'upload/file/admin/2014/20140716/201407161811335231.txt', '1', '2014-07-16 18:11:52', '-1', '1', null, null, null);
+INSERT INTO `t_appadv` VALUES ('2', '阿斯蒂芬', 'upload/image/admin/2014/20140802/201408020858056927.jpg', 'upload/media/admin/2014/20140802/201408020857303663.flv', '1', '2014-07-21 08:54:41', '-1', '1', null, null, null);
 
 -- ----------------------------
 -- Table structure for t_attribute

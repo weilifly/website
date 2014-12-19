@@ -101,9 +101,9 @@ public class MaterialsDao {
 		return ds.tables.get(0).rows.rowsMap;
 	} 
 	public List<Map<String, Object>> queryAdvertisementAll(Connection conn,String fieldList,String condition,String order)throws SQLException, DataException {
-		Dao.Tables.t_advertisement t_advertisement = new Dao().new Tables().new t_advertisement();
+		Dao.Tables.t_appadv t_appadv = new Dao().new Tables().new t_appadv();
 		
-		DataSet ds = t_advertisement.open(conn, fieldList, condition,order, -1, -1);
+		DataSet ds = t_appadv.open(conn, fieldList, condition,order, -1, -1);
 		
 		ds.tables.get(0).rows.genRowsMap();
 		return ds.tables.get(0).rows.rowsMap;

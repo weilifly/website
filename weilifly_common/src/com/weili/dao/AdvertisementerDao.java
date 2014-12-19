@@ -17,7 +17,7 @@ import com.weili.database.Dao.Tables;
 public class AdvertisementerDao {
 	
 	public long addAdvertisement(Connection conn,String name,String image,String androidPath,Integer isRecommended,Integer sortIndex,Integer status,String seoTitle,String seoKeywords,String seoDescription,String iosPath) throws SQLException{
-		Dao.Tables.t_advertisement advertisement = new Dao().new Tables().new t_advertisement();
+		Dao.Tables.t_appadv advertisement = new Dao().new Tables().new t_appadv();
 		
 		advertisement._name.setValue(name);
 		advertisement.image.setValue(image);
@@ -35,7 +35,7 @@ public class AdvertisementerDao {
 	}
 	
 	public long updateAdvertisement(Connection conn,long id,String name,String image,String androidPath,Integer isRecommended,Integer sortIndex,Integer status,String seoTitle,String seoKeywords,String seoDescription,String iosPath) throws SQLException{
-		Dao.Tables.t_advertisement advertisement = new Dao().new Tables().new t_advertisement();
+		Dao.Tables.t_appadv advertisement = new Dao().new Tables().new t_appadv();
 		
 		if(StringUtils.isNotBlank(name)){
 			advertisement._name.setValue(name);
@@ -73,20 +73,20 @@ public class AdvertisementerDao {
 	}
 	
 	public long deleteAdvertisement(Connection conn,String ids) throws SQLException{
-		Dao.Tables.t_advertisement advertisement = new Dao().new Tables().new t_advertisement();
+		Dao.Tables.t_appadv advertisement = new Dao().new Tables().new t_appadv();
 		
 		return advertisement.delete(conn, " id in("+ids+") ");
 	}
 	
 	public Map<String,String> queryAdvertisementById(Connection conn,long id) throws SQLException, DataException{
-		Dao.Tables.t_advertisement advertisement = new Dao().new Tables().new t_advertisement();
+		Dao.Tables.t_appadv advertisement = new Dao().new Tables().new t_appadv();
 		
 		DataSet ds = advertisement.open(conn, "  ", " id = "+id, "", -1, -1);
 		return BeanMapUtils.dataSetToMap(ds);
 	}
 	
 	public List<Map<String, Object>> queryAdvertisementAll(Connection conn,String fieldList,String condition,String order)throws SQLException, DataException {
-		Dao.Tables.t_advertisement advertisement = new Dao().new Tables().new t_advertisement();
+		Dao.Tables.t_appadv advertisement = new Dao().new Tables().new t_appadv();
 		
 		DataSet ds = advertisement.open(conn, fieldList, condition,order, -1, -1);
 		

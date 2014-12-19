@@ -1,7 +1,5 @@
 package com.weili.action.front;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -9,13 +7,11 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.ServletActionContext;
 
 import com.shove.Convert;
-import com.shove.data.DataException;
 import com.shove.util.StringCommon;
 import com.shove.web.util.FileUtils;
 import com.weili.constants.IConstants;
 import com.weili.service.AdvertisementService;
 import com.weili.service.AttributeService;
-import com.weili.service.ConfigService;
 import com.weili.service.DownloadHelpService;
 import com.weili.service.MaterialsService;
 import com.weili.service.ProductCategoryService;
@@ -25,6 +21,7 @@ import com.weili.service.DownloadService;
 
 public class FrontDownloadAction extends BaseFrontAction {
 
+	private static final long serialVersionUID = 1L;
 	private ProductCategoryService productCategoryService;
 	private ProductService productService;
 	private DownloadService downloadService;
@@ -34,21 +31,18 @@ public class FrontDownloadAction extends BaseFrontAction {
 	private MaterialsService materialsService;
 
 
-	
-
 	/**
 	 * 下载综合
 	 * @return
 	 * @throws Exception
 	 */
 	public String downloadIndex() throws Exception{
-		queryProductCategory();//产品系列
-		queryDownloadHelp();//下载帮助
+		queryProductCategory();//行业报告
 		List<Map<String,Object>> productList = productService.queryProductAll("*", "1=1 and `status` = "+IConstants.STATUS_ON, " sortIndex asc");//产品型号
 		
-		queryCourseware();//升级程序，最新的前五个
+		queryCourseware();//精品课件
 		
-		queryAdvertise();//广告片
+		queryAdvertise();//案例下载
 		
 		request("productList",productList);
 		Map<String,String> seoMap = getSeoMap("downloadIndex.do");//seo

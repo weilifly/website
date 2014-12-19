@@ -65,17 +65,17 @@ public class WeiliDisplayService extends BaseService {
 	}
 	
 	/**
-	 * 查询微力研究院内容属类表querySort()
+	 * 查询微力研究院内容属类表queryTypeList()
 	 * 
 	 * */
-	public List<Map<String,String>> querySort() throws Exception{
+	public List<Map<String,String>> queryTypeList() throws Exception{
 	Connection conn = null;
 		
 		List<Map<String,String>> map = new ArrayList<Map<String,String>>();
 		try{
 			conn = MySQL.getConnection();
 
-			map = weiliDisplayDao.querySort(conn);
+			map = weiliDisplayDao.queryTypeList(conn);
 			conn.commit();
 		}catch (Exception e) {
 			if(conn != null){

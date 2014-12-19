@@ -64,21 +64,24 @@ public class Dao {
 				}
 			}
 
-			public class t_advertisement extends Table {
+			public class t_appadv extends Table {
 				public Field id = new Field(this, "`id`", Types.BIGINT, true);
 				public Field _name = new Field(this, "`name`", Types.VARCHAR, false);
 				public Field image = new Field(this, "`image`", Types.VARCHAR, false);
-				public Field path = new Field(this, "`path`", Types.VARCHAR, false);
+				public Field apkImage = new Field(this, "`apkImage`", Types.VARCHAR, false);
+				public Field isoImage = new Field(this, "`isoImage`", Types.VARCHAR, false);
+				public Field pathApk = new Field(this, "`pathApk`", Types.VARCHAR, false);
+				public Field pathIso = new Field(this, "`pathIso`", Types.VARCHAR, false);
 				public Field isRecommended = new Field(this, "`isRecommended`", Types.INTEGER, false);
-				public Field addTime = new Field(this, "`addTime`", Types.TIMESTAMP, false);
 				public Field sortIndex = new Field(this, "`sortIndex`", Types.INTEGER, false);
 				public Field status = new Field(this, "`status`", Types.INTEGER, false);
+				public Field addTime = new Field(this, "`addTime`", Types.TIMESTAMP, false);
 				public Field seoTitle = new Field(this, "`seoTitle`", Types.VARCHAR, false);
 				public Field seoKeywords = new Field(this, "`seoKeywords`", Types.VARCHAR, false);
 				public Field seoDescription = new Field(this, "`seoDescription`", Types.VARCHAR, false);
 
-				public t_advertisement() {
-					name = "`t_advertisement`";
+				public t_appadv() {
+					name = "`t_appadv`";
 				}
 			}
 

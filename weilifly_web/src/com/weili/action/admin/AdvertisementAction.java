@@ -34,7 +34,7 @@ public class AdvertisementAction extends BasePageAction {
 		
 		String fieldList = "*";
 		String order = "order by addTime desc";
-		String table = "t_advertisement";
+		String table = "t_appadv";
 		
 		StringBuffer condition = new StringBuffer();
 		

@@ -45,7 +45,7 @@
 					
 					<!-- 下载专区《行业报告》开始 -->
 					<div class="m-s-ban m-s-ban-1">
-						<a href="preDownloadIndex.do">more+</a>下载专区《行业报告》
+						<a href="preDownloadIndex.do">more+</a>《行业报告》
 					</div>
 					<ul class="down-list">
 						<s:iterator value="#request.coursewareList" var="bean" status="st">
@@ -62,7 +62,7 @@
 					
 					<!-- 下载专区《精品课件》开始 -->
 					<div class="m-s-ban m-s-ban-1">
-						<a href="preDownloadIndex.do">more+</a>下载专区《精品课件》
+						<a href="preDownloadIndex.do">more+</a>《精品课件》
 					</div>
 					<ul class="down-list">
 						<s:iterator value="#request.coursewareList" var="bean" status="st">
@@ -80,25 +80,9 @@
 				
 				<!---左侧列表结束--->
 				<div class="right-box">
-					<%--<div class="m-s-ban" style="border: 1px solid #e1e1e1;">
-						<a href="queryDownloadHelpInit.do">more+</a>下载帮助
-					</div>
-					
-					<s:iterator value="#request.downloadHelpList" var="bean" status="st">
-						<div class="down-item-list">
-							<!-- <dt>
-								<a href="queryDownloadHelpInit.do?id=${bean.id}"><img src="${bean.image }" alt="${bean.title}" style="width:57px;height:57px;" /></a>
-							</dt>
-							<dd>
-								适用机型：
-								<span title="${bean.fit}">${bean.fit}</span>
-							</dd> -->
-							<a href="queryDownloadHelpInit.do?id=${bean.id}"><img src="${bean.image }" alt="${bean.title}" style="width:264px;height:73px;" /></a>
-						</div>
-					</s:iterator>--%>
 					<!-- 下载专区《案例下载》开始 -->
 					<div class="m-s-ban m-s-ban-1">
-						<a href="advertiseIndex.do">more+</a>App专区《案例下载》
+						<a href="advertiseIndex.do">more+</a>《案例下载》
 					</div>
 					<s:iterator value="#request.advertiseList" var="bean" status="st">
 						<div class="ad-video">
@@ -115,98 +99,8 @@
 							</div>
 					</s:iterator>
 					<!-- 下载专区《案例下载》结束 -->
-					
-					
-					
-				<!-- 下面代码是表单 -->
-				<%--<div id="container">
-	<script type="text/javascript">
-		$(function(){$("#b_send").click(function(param) {
-								//提交表单
-								//alert("jjjjjjjjjjjjjjjjjjjj");
-								param["paramMap.cName"] = $("#cName").val();
-								param["paramMap.cTelephone"] = $("#cTelephone").val();
-								param["paramMap.address"] = $("#address").val();
-								param["paramMap.needId"] = $("#needId").val();
-								param["paramMap.needContent"] = $("#needContent").val();
-								
-								sendToUs(param);
-								/*$.shovePost("sendToUs.do",param,function(data) {
-													alert("jjjjjjjjjjjjjjjjjjjj");
-													if (data.returnId > 0) {
-														alert("恭喜发送成功，我们将会及时的为你提出解决方案！");
-														return;
-													}
-												});*/
-								//return false;
-							});
-		
-		function sendToUs(param){
-		
-			alert($("#cName").val() + "~"
-					+ $("#cTelephone").val() + "~"
-					+ $("#address").val() + "~"
-					+ $("#needId").val());
-			/*debugger;
-			$.shovePost("sendToUs.do",param,function(data) {
-				alert("jjjjjjjjjjjjjjjjjjjj");
-				if (data.returnId > 0) {
-					alert("恭喜发送成功，我们将会及时的为你提出解决方案！");
-					return;
-				}
-			});*/
-			$("#form3").submit();
-		}
-		
-		});
-	</script>
-	<form id="form3" action="sendToUs.do" method="post">
-		<h3>
-			<span>联系我们</span>
-		</h3>
-		<fieldset>
-			<p class="first">
-				<label for="cName">姓名/公司名：</label> <input type="text" name="cName"
-					id="cName" size="30" />
-			</p>
-			<p>
-				<label for="cTelephone">手机号：</label> <input type="text"
-					name="cTelephone" id="cTelephone" size="30" />
-			</p>
-			<p>
-				<label for="address">地址：</label> <input type="text" name="address"
-					id="address" size="30" />
-			</p>
-			<p>
-				<label for=“needId”>需求类型：</label>
-				<s:select list="needId" name="paramMap.needId" listKey="id" listValue="needs_name" headerKey="-2" headerValue="--请选择--"></s:select>
-		
-				<s:select name="needId" id="needId" theme="simple"
-					list="#{-1:'-请选择-',1:'O2O网站',2:'O2O商城','3':'App','4':'其他'}"
-					value="-1">
-				</s:select>
-			</p>
-			<p>
-				<label for="needContent">需求描述：</label>
-				<textarea name="needContent" id="needContent" cols="30" rows="10"></textarea>
-			</p>
-			<p class="submit">
-				<button id="b_send" type="submit">
-					<img src="images/form3/form_button.gif" />
-				</button>
-			</p>
-		</fieldset>
-
-	</form>
-</div>
-				
-				
-				
-				
-				--%></div>
-
-
 			</div>
+		</div>
 			<!--内容区域main-content 结束-->
 		</div>
 		<!--内容区域结束-->
@@ -218,7 +112,7 @@
 		  		$(".nav li:eq(2)").addClass("cur");
 		  		$.sideLi(".nav",".sliding-block");
 		  		$.sideLi(".n-s-nav-1",".s-block","click");
-		  })
+		  });
 		</script>
 	    <script >
 $(function(){

@@ -218,7 +218,7 @@ public class AdvertisementService extends BaseService {
 		
 		
 		try{
-			DataSet ds = MySQL.executeQuery(conn, "select * from t_advertisement "+condition.toString()+" ORDER BY addTime desc LIMIT 2");
+			DataSet ds = MySQL.executeQuery(conn, "select * from t_appadv "+condition.toString()+" ORDER BY addTime desc LIMIT 2");
 			ds.tables.get(0).rows.genRowsMap();
 			
 			list =  ds.tables.get(0).rows.rowsMap;
@@ -254,7 +254,7 @@ public class AdvertisementService extends BaseService {
 			condition.append(" and `status` = "+status);
 		}
 		try{
-			dataPage(conn, pageBean, "t_advertisement", "*", "order by addTime desc", condition.toString());
+			dataPage(conn, pageBean, "t_appadv", "*", "order by addTime desc", condition.toString());
 		}catch (Exception e) {
 			log.error(e);
 			e.printStackTrace();

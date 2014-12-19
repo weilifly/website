@@ -75,7 +75,7 @@ public class WeiliDisplayDao {
 	
 	//查询内容类型querySort
 	@SuppressWarnings("unchecked")
-	public List<Map<String,String>> querySort(Connection conn) throws SQLException{
+	public List<Map<String,String>> queryTypeList(Connection conn) throws SQLException{
 		Dao.Tables.t_navigationbar twd = new Dao().new Tables().new t_navigationbar();
 		
 		DataSet ds = twd.open(conn, " ", " ", "", -1, -1);

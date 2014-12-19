@@ -139,8 +139,8 @@ public class DownloadHelpDao {
 	 */
 	public List<Map<String, Object>> queryAdvertList(Connection conn,String advertName,String advertImage
 			 ) {
-		Dao.Tables.t_advertisement t_advertisement = new Dao().new Tables().new t_advertisement();
-		DataSet ds = t_advertisement.open(conn, "*", " isRecommended=1 ", "addTime desc", -1, -1);
+		Dao.Tables.t_appadv t_appadv = new Dao().new Tables().new t_appadv();
+		DataSet ds = t_appadv.open(conn, "*", " isRecommended=1 ", "addTime desc", -1, -1);
 		ds.tables.get(0).rows.genRowsMap();
 		return ds.tables.get(0).rows.rowsMap;
 
